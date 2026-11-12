@@ -1,0 +1,227 @@
+# Seed patterns so the pipeline runs end to end.
+# Each points to the collection it was drawn from, not to one specific case.
+# Replace or extend them with cards that link to a concrete case (verified: true).
+
+- id: inbound-request-to-quote
+  title: Unstructured customer requests turned into draft quotes
+  source_name: n8n workflow library
+  source_url: https://n8n.io/workflows/
+  verified: false
+  pattern: Customers or dealers send requests by email or PDF in free form. Someone re-types items into the ERP and builds a quote.
+  ai_does: Extracts products, quantities, and dates from the email or PDF, matches them to the catalog, and drafts the quote for a salesperson to approve.
+  process_types: [sales, order intake, B2B quoting]
+  needs: [shared inbox, product catalog with prices, ERP or quoting tool with an API or import]
+  sme_fit: High when requests are frequent and similar, and the catalog is maintained.
+  money_lever: volume
+  typical_effect: Faster response time and more quotes per salesperson.
+  approach: quick win
+
+- id: email-triage-and-routing
+  title: Shared inbox triage and routing
+  source_name: n8n workflow library
+  source_url: https://n8n.io/workflows/
+  verified: false
+  pattern: One shared inbox receives orders, complaints, supplier mail, and applications. People sort it by hand.
+  ai_does: Classifies each message, extracts key fields, routes it to the right team or system, and drafts a reply for routine cases.
+  process_types: [customer service, back office, order intake]
+  needs: [shared inbox, clear categories and owners, ticket or CRM tool]
+  sme_fit: High. Low error cost and little data preparation.
+  money_lever: unit_cost
+  typical_effect: Less time sorting mail, fewer lost requests.
+  approach: quick win
+
+- id: customer-support-assistant
+  title: First-line customer support assistant with escalation
+  source_name: Anthropic customer stories
+  source_url: https://www.anthropic.com/customers
+  verified: false
+  pattern: Customers ask repeated questions about products, delivery, warranty, and returns by chat or email.
+  ai_does: Answers from the company's own help content and order data, and hands over to a person with a summary when unsure or when the case is sensitive.
+  process_types: [customer service, after-sales, e-commerce]
+  needs: [up-to-date FAQ and policy documents, order status lookup, support tool with handover]
+  sme_fit: Medium to high. Needs clean help content and a clear escalation rule.
+  money_lever: unit_cost
+  typical_effect: Lower cost per ticket and faster answers outside business hours.
+  approach: quick win
+
+- id: product-content-generation
+  title: Product descriptions and listings from structured data
+  source_name: Google Cloud, real-world generative AI use cases
+  source_url: https://cloud.google.com/transform/101-real-world-generative-ai-use-cases-from-industry-leaders
+  verified: false
+  pattern: New products need descriptions, translations, and marketplace listings, written by hand from spec sheets.
+  ai_does: Drafts descriptions, SEO texts, and translations from product attributes in the company's tone, for a person to approve.
+  process_types: [e-commerce, marketing, product management]
+  needs: [product data with attributes, style guide, shop or PIM system]
+  sme_fit: High. Low error cost, explicit inputs.
+  money_lever: volume
+  typical_effect: More products online faster, in more languages.
+  approach: quick win
+
+- id: dealer-partner-knowledge-assistant
+  title: Knowledge assistant for dealers, partners, or field staff
+  source_name: Anthropic customer stories
+  source_url: https://www.anthropic.com/customers
+  verified: false
+  pattern: Dealers, installers, or service staff call or email the company with technical questions answered from manuals and service bulletins.
+  ai_does: Answers technical questions from manuals, spare-part lists, and service notes with references, and logs questions it could not answer.
+  process_types: [dealer support, technical service, after-sales]
+  needs: [manuals and service documents in digital form, a portal or chat channel, an owner who keeps documents current]
+  sme_fit: Medium. Value grows with the number of partners and products.
+  money_lever: unit_cost
+  typical_effect: Fewer support calls and faster repairs at the partner.
+  approach: redesign then automate
+
+- id: warranty-claims-intake
+  title: Warranty and complaint claim intake with photo and document checks
+  source_name: Google Cloud, real-world generative AI use cases
+  source_url: https://cloud.google.com/transform/101-real-world-generative-ai-use-cases-from-industry-leaders
+  verified: false
+  pattern: Claims arrive with photos, invoices, and serial numbers in different formats and are checked by hand.
+  ai_does: Extracts claim data, checks completeness against warranty rules, classifies the defect from photos and text, and prepares a decision proposal.
+  process_types: [after-sales, quality, warranty]
+  needs: [warranty rules written down, claim history, a ticket or ERP step for claims]
+  sme_fit: Medium. The person decides, the AI prepares.
+  money_lever: risk
+  typical_effect: Faster claim handling and defect patterns visible to quality.
+  approach: redesign then automate
+
+- id: invoice-and-document-processing
+  title: Supplier invoices and delivery notes into accounting
+  source_name: n8n workflow library
+  source_url: https://n8n.io/workflows/
+  verified: false
+  pattern: Supplier invoices and delivery notes arrive as PDFs and are typed or checked manually against orders.
+  ai_does: Reads invoices, matches them to purchase orders and goods receipts, flags differences, and posts clean ones to accounting.
+  process_types: [finance, procurement, accounts payable]
+  needs: [accounting software such as DATEV or similar, purchase orders in a system, a person for exceptions]
+  sme_fit: High. Common, well-understood, many off-the-shelf options.
+  money_lever: unit_cost
+  typical_effect: Less manual entry and fewer overpayments.
+  approach: quick win
+
+- id: demand-forecasting
+  title: Demand forecasting for purchasing and production planning
+  source_name: Plattform Lernende Systeme, KI-Landkarte
+  source_url: https://www.plattform-lernende-systeme.de/ki-landkarte.html
+  verified: false
+  pattern: Purchasing and production plans are based on last year's numbers and spreadsheets. Stock-outs and overstock both happen.
+  ai_does: Forecasts demand per product and channel from sales history, seasonality, and order backlog, and proposes order quantities.
+  process_types: [supply chain, purchasing, production planning]
+  needs: [at least two years of clean sales history, stock data, an owner in planning]
+  sme_fit: Medium. Needs data discipline, high value with long lead times.
+  money_lever: unit_cost
+  typical_effect: Less tied-up capital and fewer missed sales.
+  approach: strategic bet
+
+- id: production-visual-inspection
+  title: Visual quality inspection in production or goods receipt
+  source_name: Plattform Lernende Systeme, KI-Landkarte
+  source_url: https://www.plattform-lernende-systeme.de/ki-landkarte.html
+  verified: false
+  pattern: Workers inspect parts or finished products by eye. Defects slip through or are found late.
+  ai_does: Camera images are checked for defects at a station, and borderline cases are shown to a worker.
+  process_types: [production, quality, assembly]
+  needs: [stable lighting and camera position, labeled defect examples, a station where products pass one by one]
+  sme_fit: Medium. Hardware and labeling effort, strong value for high volumes.
+  money_lever: risk
+  typical_effect: Fewer defects reaching customers and lower rework cost.
+  approach: strategic bet
+
+- id: recruiting-screening-and-scheduling
+  title: Applicant pre-screening and interview scheduling
+  source_name: n8n workflow library
+  source_url: https://n8n.io/workflows/
+  verified: false
+  pattern: Applications arrive by email or applicant tool. HR reads every CV and coordinates interviews by email.
+  ai_does: Summarizes each application against the job's must-haves and schedules interviews automatically. A person makes every decision.
+  process_types: [HR, recruiting]
+  needs: [applicant tracking tool or inbox, clear role requirements, calendar access]
+  sme_fit: Medium. Personal data, so GDPR and EU AI Act checks are mandatory. The person decides.
+  money_lever: unit_cost
+  typical_effect: Faster time to hire for frequent roles.
+  approach: quick win
+
+- id: sales-lead-research-and-outreach
+  title: Lead research and personalized first outreach
+  source_name: n8n workflow library
+  source_url: https://n8n.io/workflows/
+  verified: false
+  pattern: Sales staff research prospects, dealers, or partners by hand before writing to them.
+  ai_does: Collects public information on each prospect, scores fit, and drafts a personalized first message for a salesperson to send.
+  process_types: [sales, business development, dealer acquisition]
+  needs: [CRM, clear ideal-customer profile, a person who reviews before sending]
+  sme_fit: High for B2B sellers with a defined target list.
+  money_lever: volume
+  typical_effect: More qualified conversations per salesperson.
+  approach: quick win
+
+- id: internal-knowledge-assistant
+  title: Internal knowledge assistant over company documents
+  source_name: OpenAI, identifying and scaling AI use cases
+  source_url: https://openai.com/business/learn/identifying-and-scaling-ai-use-cases/
+  verified: false
+  pattern: Staff search drives and ask colleagues for procedures, specs, and past decisions. Experts become a bottleneck.
+  ai_does: Answers staff questions from approved internal documents with links to the source.
+  process_types: [operations, onboarding, engineering, service]
+  needs: [documents in a shared drive or wiki, access rights that are clean, an owner per knowledge area]
+  sme_fit: High once documents are reasonably organized.
+  money_lever: unit_cost
+  typical_effect: Less interruption of experts and faster onboarding.
+  approach: redesign then automate
+
+- id: customer-feedback-analysis
+  title: Customer feedback and review analysis for product decisions
+  source_name: OpenAI, identifying and scaling AI use cases
+  source_url: https://openai.com/business/learn/identifying-and-scaling-ai-use-cases/
+  verified: false
+  pattern: Reviews, support tickets, and survey answers pile up but are rarely analyzed together.
+  ai_does: Groups feedback into themes, tracks them over time, and links them to products for the product and quality teams.
+  process_types: [product management, quality, marketing]
+  needs: [access to tickets and reviews, a regular review meeting that acts on it]
+  sme_fit: High. Low error cost, fast to start.
+  money_lever: price
+  typical_effect: Better products and fewer repeat complaints.
+  approach: quick win
+
+- id: marketing-campaign-assets
+  title: Campaign variants and creative drafts for performance marketing
+  source_name: Google Cloud, real-world generative AI use cases
+  source_url: https://cloud.google.com/transform/101-real-world-generative-ai-use-cases-from-industry-leaders
+  verified: false
+  pattern: Marketing needs many ad, email, and social variants per channel and market, produced by a small team.
+  ai_does: Drafts copy and image variants on brief and within brand rules, for a marketer to choose and test.
+  process_types: [marketing, performance marketing, e-commerce]
+  needs: [brand guidelines, past campaign results, an approval step]
+  sme_fit: High. Creative catalyst work with low error cost.
+  money_lever: volume
+  typical_effect: More tests per budget and faster campaigns.
+  approach: quick win
+
+- id: order-status-and-delivery-updates
+  title: Proactive order status and delivery updates
+  source_name: n8n workflow library
+  source_url: https://n8n.io/workflows/
+  verified: false
+  pattern: Customers and dealers ask "where is my order?" by phone or email. Staff look up the ERP and the carrier.
+  ai_does: Watches order and shipping status, sends proactive updates, and answers status questions automatically.
+  process_types: [order fulfillment, logistics, customer service]
+  needs: [order data in ERP or shop, carrier tracking, a messaging channel]
+  sme_fit: High. Mostly integration work, low risk.
+  money_lever: unit_cost
+  typical_effect: Fewer status calls and happier customers.
+  approach: quick win
+
+- id: service-and-repair-scheduling
+  title: Service request intake and appointment scheduling
+  source_name: Anthropic customer stories
+  source_url: https://www.anthropic.com/customers
+  verified: false
+  pattern: Service or repair requests come by phone and email. Booking slots and checking parts is manual.
+  ai_does: Takes the request, asks the missing questions, checks part availability, and proposes slots in the workshop calendar.
+  process_types: [service, after-sales, field service]
+  needs: [workshop calendar, parts stock data, defined service types and durations]
+  sme_fit: Medium. Needs a clean calendar and service catalog.
+  money_lever: volume
+  typical_effect: More jobs per workshop and fewer no-shows.
+  approach: redesign then automate

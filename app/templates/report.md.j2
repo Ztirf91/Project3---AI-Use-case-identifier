@@ -1,0 +1,96 @@
+# AI Use Case Brief: {{ s.company_name }}
+
+{{ date }} · [{{ s.company_url }}]({{ s.company_url }})
+
+> Prepared from public sources before a first conversation. Statements marked *documented* link to their source. Statements marked *assumption* describe what companies of this kind usually do. They are hypotheses for the meeting, not facts about {{ s.company_name }}.
+
+## 1. The company
+
+{% if m %}**{{ m.company_type }}**
+
+### Business model
+
+{% for c in m.business_model %}- {{ c.text }} {{ tag(c) }}
+{% endfor %}
+### Unit economics
+
+{% for c in m.unit_economics %}- {{ c.text }} {{ tag(c) }}
+{% endfor %}
+### Current process map
+
+| # | Step | Data in | Data out | Likely system | Basis |
+|---|------|---------|----------|---------------|-------|
+{% for p in m.process_map %}| {{ loop.index }} | {{ cell(p.name) }} | {{ cell(p.data_input) }} | {{ cell(p.data_output) }} | {{ cell(p.likely_system) }} | {{ tag(p) }} |
+{% endfor %}
+{% else %}_The business could not be modeled from the available research._
+{% endif %}
+{% if picks %}### Where AI fits in this business
+
+{{ picks.ai_approach }}
+
+{% if picks.leave_alone %}**Leave alone for now**
+
+{% for item in picks.leave_alone %}- {{ item }}
+{% endfor %}{% endif %}
+
+## 2. Three use cases
+
+{% for u in picks.use_cases %}{% set card = cards.get(u.source_card) %}
+### {{ loop.index }}. {{ u.title }}
+
+**Process step:** {{ u.process_step }} · **Approach:** {{ u.approach }} · **Lever:** {{ levers[u.money_lever] }}
+
+{{ u.what_changes }}
+
+**Money effect.** {{ u.money_effect }}
+
+**Why it fits.** {{ u.framework_reasoning }}
+
+{% if card %}**Frontier pattern.** Adapted from "{{ card.title }}" ([{{ card.source_name }}]({{ card.source_url }})){% if not card.verified %}, a generic pattern from that collection{% endif %}.
+{% endif %}
+**What has to be in place**
+
+{% for p in u.prerequisites %}- {{ p }}
+{% endfor %}
+{% endfor %}
+## 3. Questions for the first meeting
+
+{% for u in picks.use_cases %}### {{ loop.index }}. {{ u.title }}
+
+**Assumptions to test**
+
+{% for q in u.questions_assumptions %}- {{ q }}
+{% endfor %}
+**Do you have this?**
+
+{% for q in u.questions_prerequisites %}- {{ q }}
+{% endfor %}
+**To decide whether this is the right use case**
+
+{% for q in u.questions_decision %}- {{ q }}
+{% endfor %}
+{% endfor %}{% else %}
+_No use cases could be selected. See the research gaps below._
+{% endif %}
+{% if m and m.open_numbers %}### Numbers to ask for
+
+{% for n in m.open_numbers %}- {{ n }}
+{% endfor %}{% endif %}
+{% if s.notes %}### Gaps in the public research
+
+{% for n in s.notes %}- {{ n }}
+{% endfor %}{% endif %}
+
+## 4. How these use cases were chosen
+
+Every process step was rated against a rubric drawn from public frameworks: the money lever it touches, error cost and type of knowledge (HBR), whether the task is repetitive, a bottleneck, or ambiguous (OpenAI, Taylor Radey), the full cost including human review (MIT Sloan), and feasibility in data, systems, and know-how (appliedAI). The most promising steps were matched against a library of AI use cases already running elsewhere, and three were adapted to this company.
+
+{% for f in frameworks %}- [{{ f.name }}]({{ f.url }})
+{% endfor %}
+## 5. Sources
+
+{% for p in s.site_pages %}- [{{ p.title }}]({{ p.url }})
+{% endfor %}{% for j in s.job_postings %}- Job posting: [{{ j.title }}]({{ j.url }})
+{% endfor %}{% for n in s.news %}- News: [{{ n.title }}]({{ n.url }})
+{% endfor %}{% for r in s.register_hits %}- Register: [{{ r.title }}]({{ r.url }})
+{% endfor %}
