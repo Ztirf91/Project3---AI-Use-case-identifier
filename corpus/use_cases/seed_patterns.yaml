@@ -1,227 +1,525 @@
-# Seed patterns so the pipeline runs end to end.
-# Each points to the collection it was drawn from, not to one specific case.
-# Replace or extend them with cards that link to a concrete case (verified: true).
-
-- id: inbound-request-to-quote
-  title: Unstructured customer requests turned into draft quotes
-  source_name: n8n workflow library
-  source_url: https://n8n.io/workflows/
-  verified: false
-  pattern: Customers or dealers send requests by email or PDF in free form. Someone re-types items into the ERP and builds a quote.
-  ai_does: Extracts products, quantities, and dates from the email or PDF, matches them to the catalog, and drafts the quote for a salesperson to approve.
-  process_types: [sales, order intake, B2B quoting]
-  needs: [shared inbox, product catalog with prices, ERP or quoting tool with an API or import]
-  sme_fit: High when requests are frequent and similar, and the catalog is maintained.
-  money_lever: volume
-  typical_effect: Faster response time and more quotes per salesperson.
-  approach: quick win
+# Curated use cases; summaries in our own words.
+# verified means the cited source was checked, not independent validation of vendor claims.
+# Templates are implementation examples, not proven customer deployments.
+# pattern, ai_does, needs, sme_fit and pilot_metrics are editorial SME adaptations.
+# typical_effect contains publisher-reported results only; null means no quantified result captured.
 
 - id: email-triage-and-routing
-  title: Shared inbox triage and routing
-  source_name: n8n workflow library
-  source_url: https://n8n.io/workflows/
-  verified: false
-  pattern: One shared inbox receives orders, complaints, supplier mail, and applications. People sort it by hand.
-  ai_does: Classifies each message, extracts key fields, routes it to the right team or system, and drafts a reply for routine cases.
-  process_types: [customer service, back office, order intake]
-  needs: [shared inbox, clear categories and owners, ticket or CRM tool]
-  sme_fit: High. Low error cost and little data preparation.
+  title: Shared inbox classification and routing
+  source_name: n8n
+  source_url: https://n8n.io/workflows/9157-ai-powered-email-triage-and-auto-response-system-with-openai-agents-and-gmail/
+  source_type: workflow template
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Template classifies incoming mail and routes it to specialist agents.
+  pattern: Messages wait in a shared inbox for manual sorting.
+  ai_does: Classifies messages and drafts replies; staff approve outbound messages.
+  process_types:
+  - customer service
+  - back office
+  needs:
+  - shared inbox
+  - category owners
+  - review queue
+  sme_fit: High with stable categories.
   money_lever: unit_cost
-  typical_effect: Less time sorting mail, fewer lost requests.
+  typical_effect: null
   approach: quick win
-
-- id: customer-support-assistant
-  title: First-line customer support assistant with escalation
-  source_name: Anthropic customer stories
-  source_url: https://www.anthropic.com/customers
-  verified: false
-  pattern: Customers ask repeated questions about products, delivery, warranty, and returns by chat or email.
-  ai_does: Answers from the company's own help content and order data, and hands over to a person with a summary when unsure or when the case is sensitive.
-  process_types: [customer service, after-sales, e-commerce]
-  needs: [up-to-date FAQ and policy documents, order status lookup, support tool with handover]
-  sme_fit: Medium to high. Needs clean help content and a clear escalation rule.
-  money_lever: unit_cost
-  typical_effect: Lower cost per ticket and faster answers outside business hours.
-  approach: quick win
-
-- id: product-content-generation
-  title: Product descriptions and listings from structured data
-  source_name: Google Cloud, real-world generative AI use cases
-  source_url: https://cloud.google.com/transform/101-real-world-generative-ai-use-cases-from-industry-leaders
-  verified: false
-  pattern: New products need descriptions, translations, and marketplace listings, written by hand from spec sheets.
-  ai_does: Drafts descriptions, SEO texts, and translations from product attributes in the company's tone, for a person to approve.
-  process_types: [e-commerce, marketing, product management]
-  needs: [product data with attributes, style guide, shop or PIM system]
-  sme_fit: High. Low error cost, explicit inputs.
-  money_lever: volume
-  typical_effect: More products online faster, in more languages.
-  approach: quick win
-
-- id: dealer-partner-knowledge-assistant
-  title: Knowledge assistant for dealers, partners, or field staff
-  source_name: Anthropic customer stories
-  source_url: https://www.anthropic.com/customers
-  verified: false
-  pattern: Dealers, installers, or service staff call or email the company with technical questions answered from manuals and service bulletins.
-  ai_does: Answers technical questions from manuals, spare-part lists, and service notes with references, and logs questions it could not answer.
-  process_types: [dealer support, technical service, after-sales]
-  needs: [manuals and service documents in digital form, a portal or chat channel, an owner who keeps documents current]
-  sme_fit: Medium. Value grows with the number of partners and products.
-  money_lever: unit_cost
-  typical_effect: Fewer support calls and faster repairs at the partner.
-  approach: redesign then automate
-
-- id: warranty-claims-intake
-  title: Warranty and complaint claim intake with photo and document checks
-  source_name: Google Cloud, real-world generative AI use cases
-  source_url: https://cloud.google.com/transform/101-real-world-generative-ai-use-cases-from-industry-leaders
-  verified: false
-  pattern: Claims arrive with photos, invoices, and serial numbers in different formats and are checked by hand.
-  ai_does: Extracts claim data, checks completeness against warranty rules, classifies the defect from photos and text, and prepares a decision proposal.
-  process_types: [after-sales, quality, warranty]
-  needs: [warranty rules written down, claim history, a ticket or ERP step for claims]
-  sme_fit: Medium. The person decides, the AI prepares.
-  money_lever: risk
-  typical_effect: Faster claim handling and defect patterns visible to quality.
-  approach: redesign then automate
-
+  pilot_metrics:
+  - Minutes per message
+  - routing accuracy
+  human_role: A named process owner validates outputs and approves consequential actions.
 - id: invoice-and-document-processing
-  title: Supplier invoices and delivery notes into accounting
-  source_name: n8n workflow library
-  source_url: https://n8n.io/workflows/
-  verified: false
-  pattern: Supplier invoices and delivery notes arrive as PDFs and are typed or checked manually against orders.
-  ai_does: Reads invoices, matches them to purchase orders and goods receipts, flags differences, and posts clean ones to accounting.
-  process_types: [finance, procurement, accounts payable]
-  needs: [accounting software such as DATEV or similar, purchase orders in a system, a person for exceptions]
-  sme_fit: High. Common, well-understood, many off-the-shelf options.
+  title: Extract supplier invoices into a review ledger
+  source_name: n8n
+  source_url: https://n8n.io/workflows/12173-extract-and-organize-email-invoices-with-gmail-drive-and-openai-gpt/
+  source_type: workflow template
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Template detects invoice emails, extracts fields, archives files and writes a Sheets ledger.
+  pattern: Finance retypes invoice fields from PDFs.
+  ai_does: Extracts invoice fields for validation before accounting entry; does not authorize payments.
+  process_types:
+  - finance
+  - accounts payable
+  needs:
+  - invoice mailbox
+  - document archive
+  - duplicate and amount checks
+  sme_fit: High for repeatable invoice formats.
   money_lever: unit_cost
-  typical_effect: Less manual entry and fewer overpayments.
+  typical_effect: null
   approach: quick win
-
-- id: demand-forecasting
-  title: Demand forecasting for purchasing and production planning
-  source_name: Plattform Lernende Systeme, KI-Landkarte
-  source_url: https://www.plattform-lernende-systeme.de/ki-landkarte.html
-  verified: false
-  pattern: Purchasing and production plans are based on last year's numbers and spreadsheets. Stock-outs and overstock both happen.
-  ai_does: Forecasts demand per product and channel from sales history, seasonality, and order backlog, and proposes order quantities.
-  process_types: [supply chain, purchasing, production planning]
-  needs: [at least two years of clean sales history, stock data, an owner in planning]
-  sme_fit: Medium. Needs data discipline, high value with long lead times.
+  pilot_metrics:
+  - Field accuracy
+  - minutes per invoice
+  human_role: A named process owner validates outputs and approves consequential actions.
+- id: customer-support-assistant
+  title: Draft FAQ answers from approved support content
+  source_name: n8n
+  source_url: https://n8n.io/workflows/4279-automated-email-sorting-and-drafting-for-customer-support-with-ai/
+  source_type: workflow template
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Template categorizes support email and saves FAQ responses as Gmail drafts for review.
+  pattern: Staff repeatedly answer delivery and product questions.
+  ai_does: Finds approved answers and prepares a response; unsupported cases go to a person.
+  process_types:
+  - customer service
+  - e-commerce
+  needs:
+  - approved FAQ
+  - mailbox
+  - review owner
+  sme_fit: High when help content is current.
   money_lever: unit_cost
-  typical_effect: Less tied-up capital and fewer missed sales.
-  approach: strategic bet
-
-- id: production-visual-inspection
-  title: Visual quality inspection in production or goods receipt
-  source_name: Plattform Lernende Systeme, KI-Landkarte
-  source_url: https://www.plattform-lernende-systeme.de/ki-landkarte.html
-  verified: false
-  pattern: Workers inspect parts or finished products by eye. Defects slip through or are found late.
-  ai_does: Camera images are checked for defects at a station, and borderline cases are shown to a worker.
-  process_types: [production, quality, assembly]
-  needs: [stable lighting and camera position, labeled defect examples, a station where products pass one by one]
-  sme_fit: Medium. Hardware and labeling effort, strong value for high volumes.
-  money_lever: risk
-  typical_effect: Fewer defects reaching customers and lower rework cost.
-  approach: strategic bet
-
-- id: recruiting-screening-and-scheduling
-  title: Applicant pre-screening and interview scheduling
-  source_name: n8n workflow library
-  source_url: https://n8n.io/workflows/
-  verified: false
-  pattern: Applications arrive by email or applicant tool. HR reads every CV and coordinates interviews by email.
-  ai_does: Summarizes each application against the job's must-haves and schedules interviews automatically. A person makes every decision.
-  process_types: [HR, recruiting]
-  needs: [applicant tracking tool or inbox, clear role requirements, calendar access]
-  sme_fit: Medium. Personal data, so GDPR and EU AI Act checks are mandatory. The person decides.
-  money_lever: unit_cost
-  typical_effect: Faster time to hire for frequent roles.
+  typical_effect: null
   approach: quick win
-
-- id: sales-lead-research-and-outreach
-  title: Lead research and personalized first outreach
-  source_name: n8n workflow library
-  source_url: https://n8n.io/workflows/
-  verified: false
-  pattern: Sales staff research prospects, dealers, or partners by hand before writing to them.
-  ai_does: Collects public information on each prospect, scores fit, and drafts a personalized first message for a salesperson to send.
-  process_types: [sales, business development, dealer acquisition]
-  needs: [CRM, clear ideal-customer profile, a person who reviews before sending]
-  sme_fit: High for B2B sellers with a defined target list.
+  pilot_metrics:
+  - Handling time
+  - factual accuracy
+  human_role: A named process owner validates outputs and approves consequential actions.
+- id: product-content-generation
+  title: Draft and localize product listings
+  source_name: n8n
+  source_url: https://n8n.io/workflows/13673-generate-e-commerce-product-descriptions-from-a-form-with-google-gemini/
+  source_type: workflow template
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Template generates listings from product form data and optionally translates them.
+  pattern: New products wait for descriptions and translations.
+  ai_does: Drafts listing copy from verified attributes; product staff approve factual and food-related claims.
+  process_types:
+  - e-commerce
+  - product management
+  needs:
+  - product attributes
+  - brand guide
+  - approval step
+  sme_fit: High for KoRo-like assortments; never infer allergens.
   money_lever: volume
-  typical_effect: More qualified conversations per salesperson.
+  typical_effect: null
   approach: quick win
-
-- id: internal-knowledge-assistant
-  title: Internal knowledge assistant over company documents
-  source_name: OpenAI, identifying and scaling AI use cases
-  source_url: https://openai.com/business/learn/identifying-and-scaling-ai-use-cases/
-  verified: false
-  pattern: Staff search drives and ask colleagues for procedures, specs, and past decisions. Experts become a bottleneck.
-  ai_does: Answers staff questions from approved internal documents with links to the source.
-  process_types: [operations, onboarding, engineering, service]
-  needs: [documents in a shared drive or wiki, access rights that are clean, an owner per knowledge area]
-  sme_fit: High once documents are reasonably organized.
+  pilot_metrics:
+  - Approved listings per hour
+  - correction rate
+  human_role: A named process owner validates outputs and approves consequential actions.
+- id: sales-meeting-scheduling
+  title: Schedule lead meetings from CRM data
+  source_name: n8n
+  source_url: https://n8n.io/workflows/11600-automate-lead-meeting-scheduling-with-zoho-crm-google-calendar-and-gemini-ai/
+  source_type: workflow template
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Template checks calendars, creates Zoom meetings and logs the meeting in Zoho CRM.
+  pattern: Sales coordinates appointments through repeated emails.
+  ai_does: Proposes available slots and creates confirmed appointments under explicit booking rules.
+  process_types:
+  - sales
+  - appointment coordination
+  needs:
+  - CRM
+  - calendar access
+  - booking rules
+  sme_fit: High with a maintained calendar.
   money_lever: unit_cost
-  typical_effect: Less interruption of experts and faster onboarding.
-  approach: redesign then automate
-
-- id: customer-feedback-analysis
-  title: Customer feedback and review analysis for product decisions
-  source_name: OpenAI, identifying and scaling AI use cases
-  source_url: https://openai.com/business/learn/identifying-and-scaling-ai-use-cases/
-  verified: false
-  pattern: Reviews, support tickets, and survey answers pile up but are rarely analyzed together.
-  ai_does: Groups feedback into themes, tracks them over time, and links them to products for the product and quality teams.
-  process_types: [product management, quality, marketing]
-  needs: [access to tickets and reviews, a regular review meeting that acts on it]
-  sme_fit: High. Low error cost, fast to start.
-  money_lever: price
-  typical_effect: Better products and fewer repeat complaints.
+  typical_effect: null
   approach: quick win
-
+  pilot_metrics:
+  - Messages per booking
+  - booking errors
+  human_role: A named process owner validates outputs and approves consequential actions.
+- id: sales-meeting-preparation
+  title: Research customer context before sales meetings
+  source_name: n8n
+  source_url: https://n8n.io/workflows/7968-ai-powered-meeting-research-and-daily-agenda-with-google-calendar-attio-crm-and-slack/
+  source_type: workflow template
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Template prepares daily attendee and company briefs from calendar and CRM context.
+  pattern: Salespeople gather account context manually.
+  ai_does: Compiles a source-linked briefing for review before a dealer or customer meeting.
+  process_types:
+  - sales
+  - dealer acquisition
+  needs:
+  - calendar
+  - CRM
+  - company research access
+  sme_fit: High for account-based selling.
+  money_lever: volume
+  typical_effect: null
+  approach: quick win
+  pilot_metrics:
+  - Preparation minutes
+  - verified facts per brief
+  human_role: A named process owner validates outputs and approves consequential actions.
+- id: meeting-notes-to-crm
+  title: Turn meeting recordings into notes and CRM tasks
+  source_name: n8n
+  source_url: https://n8n.io/workflows/18984-summarize-meetings-and-sync-action-items-with-whisper-claude-hubspot-gmail-and-slack/
+  source_type: workflow template
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Template transcribes recordings, extracts action items and updates HubSpot.
+  pattern: Sales notes and next steps are entered after calls.
+  ai_does: Drafts notes and tasks; attendees validate commitments before CRM updates or sending follow-ups.
+  process_types:
+  - sales
+  - account management
+  needs:
+  - permitted recordings
+  - CRM
+  - review step
+  sme_fit: High with reliable transcription and clear data handling.
+  money_lever: unit_cost
+  typical_effect: null
+  approach: quick win
+  pilot_metrics:
+  - Documentation time
+  - action-item accuracy
+  human_role: A named process owner validates outputs and approves consequential actions.
 - id: marketing-campaign-assets
-  title: Campaign variants and creative drafts for performance marketing
-  source_name: Google Cloud, real-world generative AI use cases
-  source_url: https://cloud.google.com/transform/101-real-world-generative-ai-use-cases-from-industry-leaders
-  verified: false
-  pattern: Marketing needs many ad, email, and social variants per channel and market, produced by a small team.
-  ai_does: Drafts copy and image variants on brief and within brand rules, for a marketer to choose and test.
-  process_types: [marketing, performance marketing, e-commerce]
-  needs: [brand guidelines, past campaign results, an approval step]
-  sme_fit: High. Creative catalyst work with low error cost.
+  title: Generate ad copy and calls to action
+  source_name: n8n
+  source_url: https://n8n.io/workflows/4372-generate-product-ad-copy-and-ctas-with-gpt-4-for-slack-and-airtable/
+  source_type: workflow template
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Template generates advertising copy from product information for Slack or Airtable.
+  pattern: Marketing needs multiple copy variants from the same brief.
+  ai_does: Drafts variants for a marketer to approve and test.
+  process_types:
+  - marketing
+  - e-commerce
+  needs:
+  - product facts
+  - brand rules
+  - creative approval
+  sme_fit: High for KoRo-like campaign teams.
   money_lever: volume
-  typical_effect: More tests per budget and faster campaigns.
+  typical_effect: null
   approach: quick win
-
-- id: order-status-and-delivery-updates
-  title: Proactive order status and delivery updates
-  source_name: n8n workflow library
-  source_url: https://n8n.io/workflows/
-  verified: false
-  pattern: Customers and dealers ask "where is my order?" by phone or email. Staff look up the ERP and the carrier.
-  ai_does: Watches order and shipping status, sends proactive updates, and answers status questions automatically.
-  process_types: [order fulfillment, logistics, customer service]
-  needs: [order data in ERP or shop, carrier tracking, a messaging channel]
-  sme_fit: High. Mostly integration work, low risk.
+  pilot_metrics:
+  - Approved variants per hour
+  - conversion in controlled tests
+  human_role: A named process owner validates outputs and approves consequential actions.
+- id: warranty-claims-intake
+  title: Coordinate warranty and return exceptions
+  source_name: Anthropic / Zendesk
+  source_url: https://claude.com/customers/zendesk
+  source_type: customer case study
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Zendesk describes custom agents for service exceptions including warranty and return cases.
+  pattern: Claims require document checks and handoffs between support and service.
+  ai_does: Collects missing information and prepares a policy-based recommendation; a person approves exceptions.
+  process_types:
+  - warranty
+  - after-sales
+  - returns
+  needs:
+  - written policies
+  - claim documents
+  - ticket actions and approval roles
+  sme_fit: Medium; define exception ownership before integration.
   money_lever: unit_cost
-  typical_effect: Fewer status calls and happier customers.
-  approach: quick win
-
-- id: service-and-repair-scheduling
-  title: Service request intake and appointment scheduling
-  source_name: Anthropic customer stories
-  source_url: https://www.anthropic.com/customers
-  verified: false
-  pattern: Service or repair requests come by phone and email. Booking slots and checking parts is manual.
-  ai_does: Takes the request, asks the missing questions, checks part availability, and proposes slots in the workshop calendar.
-  process_types: [service, after-sales, field service]
-  needs: [workshop calendar, parts stock data, defined service types and durations]
-  sme_fit: Medium. Needs a clean calendar and service catalog.
-  money_lever: volume
-  typical_effect: More jobs per workshop and fewer no-shows.
+  typical_effect: null
   approach: redesign then automate
+  pilot_metrics:
+  - Handling time
+  - incorrect claim recommendations
+  human_role: A named process owner validates outputs and approves consequential actions.
+- id: contract-review
+  title: Review supplier and dealer contracts against a playbook
+  source_name: Anthropic / Spellbook
+  source_url: https://claude.com/customers/spellbook
+  source_type: customer case study
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Spellbook reports agreement turnaround falling from about ten lawyer-hours to one.
+  pattern: Legal reviewers compare lengthy contracts with standard terms.
+  ai_does: Flags clause deviations and drafts edits for qualified legal review.
+  process_types:
+  - legal
+  - procurement
+  - dealer management
+  needs:
+  - contract playbook
+  - secure document access
+  - legal reviewer
+  sme_fit: Medium when contract volume justifies review tooling.
+  money_lever: risk
+  typical_effect: null
+  approach: redesign then automate
+  pilot_metrics:
+  - Review time
+  - missed material deviations
+  human_role: A named process owner validates outputs and approves consequential actions.
+- id: recruiting-job-descriptions
+  title: Draft job descriptions from hiring requirements
+  source_name: Anthropic / Braintrust
+  source_url: https://claude.com/customers/braintrust
+  source_type: customer case study
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Braintrust reports 25% more applicants for clients using Claude-powered job descriptions.
+  pattern: Hiring managers repeatedly turn role requirements into job advertisements.
+  ai_does: Drafts descriptions for HR review; this adaptation excludes applicant scoring.
+  process_types:
+  - HR
+  - recruiting
+  needs:
+  - role requirements
+  - approved language
+  - HR approval
+  sme_fit: High for drafting; validate job requirements and wording.
+  money_lever: unit_cost
+  typical_effect: Braintrust reports 25% more applicants for clients using Claude-powered job descriptions.
+  approach: quick win
+  pilot_metrics:
+  - Drafting time
+  - qualified applications per role
+  human_role: A named process owner validates outputs and approves consequential actions.
+- id: claims-document-drafting
+  title: Prepare evidence-linked claim documents
+  source_name: Anthropic / EvenUp
+  source_url: https://claude.com/customers/evenup
+  source_type: customer case study
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: EvenUp reports document drafting in minutes instead of eight to fifteen hours in personal-injury
+    work.
+  pattern: A specialist assembles a claim chronology from scattered records.
+  ai_does: Builds a cited chronology and document draft for expert review; adapting to warranty claims requires
+    new evaluation.
+  process_types:
+  - claims
+  - after-sales
+  - document review
+  needs:
+  - source records
+  - document template
+  - expert reviewer
+  sme_fit: Medium; source is legal work and transfer is unproven.
+  money_lever: unit_cost
+  typical_effect: null
+  approach: redesign then automate
+  pilot_metrics:
+  - Preparation time
+  - citation accuracy
+  - missing evidence
+  human_role: A named process owner validates outputs and approves consequential actions.
+- id: inbound-request-to-quote
+  title: Interpret emailed orders and quotation requests
+  source_name: Google Cloud / Danfoss
+  source_url: https://cloud.google.com/customers/danfoss?hl=zh-TW
+  source_type: customer case study
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Danfoss reports 50% less processing time and about five minutes saved per order.
+  pattern: Dealer requests arrive as mixed text and attachments.
+  ai_does: Extracts order details and proposes ERP actions; staff resolve price and product exceptions.
+  process_types:
+  - order intake
+  - B2B quoting
+  - dealer support
+  needs:
+  - catalog
+  - ERP connector
+  - exception owner
+  sme_fit: Medium; integration and master data are substantial.
+  money_lever: unit_cost
+  typical_effect: Danfoss reports 50% less processing time and about five minutes saved per order.
+  approach: redesign then automate
+  pilot_metrics:
+  - Minutes per order
+  - erroneous order entries
+  human_role: A named process owner validates outputs and approves consequential actions.
+- id: technical-quote-preparation
+  title: Estimate technical requirements for draft offers
+  source_name: Google Cloud / dida / Enpal
+  source_url: https://cloud.google.com/blog/topics/customers/dida-creates-a-custom-ai-solution-with-google-cloud
+  source_type: customer case study
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Enpal reports 87.5% less time on the supported solar quotation preparation task.
+  pattern: Sales manually measures inputs before preparing a technical offer.
+  ai_does: Estimates technical quantities from images for salesperson validation; transfer requires domain-specific
+    models.
+  process_types:
+  - sales
+  - technical quoting
+  needs:
+  - representative images
+  - validated sizing rules
+  - technical reviewer
+  sme_fit: Medium for repeatable technical configuration, limited for standard retail.
+  money_lever: volume
+  typical_effect: Enpal reports 87.5% less time on the supported solar quotation preparation task.
+  approach: strategic bet
+  pilot_metrics:
+  - Preparation time
+  - estimation error
+  human_role: A named process owner validates outputs and approves consequential actions.
+- id: customer-feedback-analysis
+  title: Analyze multilingual reviews for product improvements
+  source_name: Google Cloud / Panasonic
+  source_url: https://cloud.google.com/customers/intl/ja-jp/panasonic?hl=ja
+  source_type: customer case study
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Panasonic describes translation and analysis of app reviews across more than seventy countries.
+  pattern: Reviews accumulate without a consistent product feedback loop.
+  ai_does: Translates and groups feedback for product owners to validate and prioritize.
+  process_types:
+  - product management
+  - quality
+  - e-commerce
+  needs:
+  - review exports
+  - product identifiers
+  - feedback owner
+  sme_fit: High for online shops with enough review volume.
+  money_lever: unit_cost
+  typical_effect: null
+  approach: quick win
+  pilot_metrics:
+  - Analysis time
+  - theme accuracy
+  - issues acted on
+  human_role: A named process owner validates outputs and approves consequential actions.
+- id: internal-knowledge-assistant
+  title: Search internal knowledge while preserving access rights
+  source_name: Google Cloud / Glean
+  source_url: https://cloud.google.com/blog/products/data-analytics/glean-uses-bigquery-and-google-ai-to-enhance-enterprise-search/
+  source_type: customer case study
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Glean describes permission-aware semantic search across workplace applications.
+  pattern: Employees search several systems or interrupt experts.
+  ai_does: Retrieves relevant approved documents; any generated answer must link to supporting passages.
+  process_types:
+  - operations
+  - onboarding
+  - technical service
+  needs:
+  - maintained documents
+  - source access controls
+  - knowledge owners
+  sme_fit: High after document ownership and permissions are resolved.
+  money_lever: unit_cost
+  typical_effect: null
+  approach: redesign then automate
+  pilot_metrics:
+  - Search time
+  - answer grounding
+  - unauthorized retrievals
+  human_role: A named process owner validates outputs and approves consequential actions.
+  blueprint_url: https://docs.cloud.google.com/architecture/rag-reference-architectures
+  blueprint_note: Optional RAG extension; not evidence that Glean uses this exact architecture.
+- id: predictive-maintenance
+  title: Detect maintenance needs from machine acoustics
+  source_name: Plattform Lernende Systeme / INDIA-DREUSICKE
+  source_url: https://www.plattform-lernende-systeme.de/booklet-include-elemente.html
+  source_type: customer case study
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: INDIA-DREUSICKE uses acoustic machine signals to identify maintenance needs.
+  pattern: Fixed service intervals interrupt production or miss wear.
+  ai_does: Detects abnormal sound patterns and alerts maintenance staff.
+  process_types:
+  - production
+  - maintenance
+  needs:
+  - acoustic sensors
+  - labeled machine states
+  - maintenance owner
+  sme_fit: Medium for manufacturers with costly downtime.
+  money_lever: unit_cost
+  typical_effect: null
+  approach: strategic bet
+  pilot_metrics:
+  - Unplanned downtime
+  - false alarms
+  human_role: A named process owner validates outputs and approves consequential actions.
+- id: warehouse-picking-optimization
+  title: Improve picking routes and warehouse layout
+  source_name: Plattform Lernende Systeme / META-Regalbau
+  source_url: https://www.plattform-lernende-systeme.de/booklet-include-elemente.html
+  source_type: customer case study
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: META-Regalbau reports about EUR 22000 annual savings from layout and logistics improvements.
+  pattern: Long routes and waiting slow warehouse picking.
+  ai_does: Analyzes movement patterns to propose layout and process changes.
+  process_types:
+  - logistics
+  - warehousing
+  - order fulfillment
+  needs:
+  - movement data
+  - warehouse layout
+  - worker involvement and data controls
+  sme_fit: Medium for busy warehouses; agree measurement scope with staff.
+  money_lever: unit_cost
+  typical_effect: META-Regalbau reports about EUR 22000 annual savings from layout and logistics improvements.
+  approach: redesign then automate
+  pilot_metrics:
+  - Travel time per pick
+  - throughput
+  human_role: A named process owner validates outputs and approves consequential actions.
+- id: demand-forecasting
+  title: Forecast daily demand for perishable products
+  source_name: Plattform Lernende Systeme / meteolytix
+  source_url: https://www.plattform-lernende-systeme.de/best-practice.html?AID=702
+  source_type: customer case study
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: meteolytix supports bakery sales planning using historical sales and external factors.
+  pattern: Overproduction creates waste while stock-outs lose sales.
+  ai_does: Forecasts demand for planner review; adapt from fresh bakery goods to the target assortment.
+  process_types:
+  - purchasing
+  - production planning
+  - food retail
+  needs:
+  - sales history
+  - stock-out and waste records
+  - calendar and weather data
+  sme_fit: Medium; validate against a seasonal baseline.
+  money_lever: unit_cost
+  typical_effect: null
+  approach: strategic bet
+  pilot_metrics:
+  - Forecast error
+  - waste
+  - stock-outs
+  human_role: A named process owner validates outputs and approves consequential actions.
+- id: production-visual-inspection
+  title: Inspect manufactured surfaces with computer vision
+  source_name: Plattform Lernende Systeme / elunic
+  source_url: https://www.plattform-lernende-systeme.de/best-practice.html?AID=959
+  source_type: documented solution
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: The AI.SEE example describes detecting surface flaws with computer vision.
+  pattern: Manual inspection misses small defects on complex surfaces.
+  ai_does: Flags suspected defects for quality staff to confirm.
+  process_types:
+  - production
+  - quality
+  - goods receipt
+  needs:
+  - stable imaging
+  - representative defect examples
+  - quality acceptance rules
+  sme_fit: Medium; camera setup and defect coverage drive effort.
+  money_lever: risk
+  typical_effect: null
+  approach: strategic bet
+  pilot_metrics:
+  - Missed-defect rate
+  - false rejects
+  - inspection time
+  human_role: A named process owner validates outputs and approves consequential actions.

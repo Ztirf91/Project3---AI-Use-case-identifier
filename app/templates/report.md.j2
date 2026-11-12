@@ -46,9 +46,16 @@
 
 **Why it fits.** {{ u.framework_reasoning }}
 
-{% if card %}**Frontier pattern.** Adapted from "{{ card.title }}" ([{{ card.source_name }}]({{ card.source_url }})){% if not card.verified %}, a generic pattern from that collection{% endif %}.{% if card.verified and card.typical_effect %} Result there: {{ card.typical_effect }}{% endif %}
-{% if card.blueprint_url %}
+{% if card %}**Reference pattern.** Adapted from "{{ card.title }}" ([{{ card.source_name }}]({{ card.source_url }})); {{ card.source_type | default('generic pattern') }}.{% if not card.verified %} Source not yet checked.{% endif %}
+{% if card.get('source_summary') %}
+**Source evidence.** {{ card.source_summary }} Publisher-reported; this does not establish the same outcome for this company.
+{% endif %}
+{% if card.get('pilot_metrics') %}
+**Pilot measures.** {{ card.pilot_metrics | join('; ') }}.
+{% endif %}
+{% if card.get('blueprint_url') %}
 **How it could be built.** [Reference architecture]({{ card.blueprint_url }})
+{% if card.get('blueprint_note') %}{{ card.blueprint_note }}{% endif %}
 {% endif %}{% endif %}
 **What has to be in place**
 
@@ -85,7 +92,7 @@ _No use cases could be selected. See the research gaps below._
 
 ## 4. How these use cases were chosen
 
-Every process step was rated against a rubric drawn from public frameworks: the money lever it touches, error cost and type of knowledge (HBR), whether the task is repetitive, a bottleneck, or ambiguous (OpenAI, Taylor Radey), the full cost including human review (MIT Sloan), and feasibility in data, systems, and know-how (appliedAI). The most promising steps were matched against a library of AI use cases already running elsewhere, and three were adapted to this company.
+Every process step was rated against a rubric drawn from public frameworks: the money lever it touches, error cost and type of knowledge (HBR), whether the task is repetitive, a bottleneck, or ambiguous (OpenAI, Taylor Radey), the full cost including human review (MIT Sloan), and feasibility in data, systems, and know-how (appliedAI). The most promising steps were matched against a curated library of customer cases, documented solutions, and workflow templates, and three were adapted to this company.
 
 {% for f in frameworks %}- [{{ f.name }}]({{ f.url }})
 {% endfor %}

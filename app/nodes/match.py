@@ -27,6 +27,7 @@ Rules:
 - questions_prerequisites are concrete "Do you have ...?" questions taken from the card's needs and this company's context.
 - questions_decision help decide whether this use case is the right one (volumes, owners, current pain, error cost).
 - framework_reasoning uses rubric terms (e.g. No regrets, Quality control, repetitive task, skill bottleneck) and says why they apply here.
+- source_type distinguishes customer case studies, documented solutions, and workflow templates. Templates do not prove customer results. source_summary and typical_effect are publisher claims, not guaranteed outcomes for this company. SME adaptations require a pilot.
 - If the use case touches personal data, add a prerequisite about GDPR and, where relevant, the EU AI Act.
 - ai_approach: the right overall approach for this company in three to five sentences, given its business model and maturity.
 - leave_alone: steps that should not be automated now, each with a short reason.
@@ -41,7 +42,7 @@ def _model_json(state: RunState) -> str:
 
 
 def _card_view(card: dict) -> dict:
-    keys = ("id", "title", "source_name", "pattern", "ai_does", "needs", "sme_fit", "money_lever", "approach", "similarity")
+    keys = ("id", "title", "source_name", "source_type", "source_summary", "typical_effect", "pattern", "ai_does", "needs", "sme_fit", "money_lever", "approach", "pilot_metrics", "human_role", "similarity")
     return {k: card.get(k) for k in keys}
 
 
