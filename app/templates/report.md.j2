@@ -46,8 +46,10 @@
 
 **Why it fits.** {{ u.framework_reasoning }}
 
-{% if card %}**Frontier pattern.** Adapted from "{{ card.title }}" ([{{ card.source_name }}]({{ card.source_url }})){% if not card.verified %}, a generic pattern from that collection{% endif %}.
-{% endif %}
+{% if card %}**Frontier pattern.** Adapted from "{{ card.title }}" ([{{ card.source_name }}]({{ card.source_url }})){% if not card.verified %}, a generic pattern from that collection{% endif %}.{% if card.verified and card.typical_effect %} Result there: {{ card.typical_effect }}{% endif %}
+{% if card.blueprint_url %}
+**How it could be built.** [Reference architecture]({{ card.blueprint_url }})
+{% endif %}{% endif %}
 **What has to be in place**
 
 {% for p in u.prerequisites %}- {{ p }}

@@ -4,7 +4,7 @@ import os
 import sys
 import time
 
-from app.config import CHROMA_DIR, OUTPUTS_DIR
+from app.config import OUTPUTS_DIR
 from app.graph import build_graph
 from app.nodes.report import slugify
 from app.state import RunState
@@ -19,11 +19,9 @@ def main() -> None:
     parser.add_argument("--city")
     args = parser.parse_args()
 
-    missing = [k for k in ("OPENAI_API_KEY", "TAVILY_API_KEY") if not os.getenv(k)]
+    missing = [k for k in ("OPENAI_API_KEY", "TAVILY_API_KEY", "PINECONE_API_KEY") if not os.getenv(k)]
     if missing:
         sys.exit(f"Missing in .env: {', '.join(missing)}")
-    if not CHROMA_DIR.exists():
-        sys.exit("Use-case index not found. Run: python -m app.library")
 
     start = time.time()
     graph = build_graph()

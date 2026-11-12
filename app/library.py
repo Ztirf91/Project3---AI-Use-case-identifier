@@ -1,13 +1,14 @@
-"""Use-case library: YAML cards embedded in a local Chroma collection."""
+"""Use-case library: YAML cards embedded with OpenAI and stored in a Pinecone index."""
 
 import os
 import sys
+import time
 
-import chromadb
 import yaml
-from chromadb.utils.embedding_functions import OpenAIEmbeddingFunction
+from langchain_openai import OpenAIEmbeddings
+from pinecone import Pinecone, ServerlessSpec
 
-from app.config import CHROMA_DIR, COLLECTION, EMBEDDING_MODEL, USE_CASES_DIR
+from app.config import EMBEDDING_DIMENSION, EMBEDDING_MODEL, PINECONE_INDEX, PINECONE_NAMESPACE, USE_CASES_DIR
 
 REQUIRED = ("id", "title", "source_url", "pattern", "ai_does")
 
@@ -42,34 +43,54 @@ def card_text(card: dict) -> str:
     )
 
 
-def _collection(client: chromadb.ClientAPI):
-    embed = OpenAIEmbeddingFunction(api_key=os.environ["OPENAI_API_KEY"], model_name=EMBEDDING_MODEL)
-    return client.get_or_create_collection(COLLECTION, embedding_function=embed, metadata={"hnsw:space": "cosine"})
+def _embeddings() -> OpenAIEmbeddings:
+    return OpenAIEmbeddings(model=EMBEDDING_MODEL)
+
+
+def _index(create: bool = False):
+    pc = Pinecone(api_key=os.environ["PINECONE_API_KEY"])
+    if not pc.has_index(PINECONE_INDEX):
+        if not create:
+            raise RuntimeError(f"Pinecone index '{PINECONE_INDEX}' not found. Run: python -m app.library")
+        pc.create_index(
+            name=PINECONE_INDEX,
+            dimension=EMBEDDING_DIMENSION,
+            metric="cosine",
+            spec=ServerlessSpec(cloud="aws", region="us-east-1"),
+        )
+    return pc.Index(PINECONE_INDEX)
 
 
 def build_index() -> int:
-    client = chromadb.PersistentClient(path=str(CHROMA_DIR))
-    if COLLECTION in [c.name for c in client.list_collections()]:
-        client.delete_collection(COLLECTION)
     cards = load_cards()
-    _collection(client).add(
-        ids=[c["id"] for c in cards],
-        documents=[card_text(c) for c in cards],
-        metadatas=[{"title": c["title"], "file": c["file"]} for c in cards],
+    index = _index(create=True)
+    if PINECONE_NAMESPACE in (index.describe_index_stats().namespaces or {}):
+        index.delete(delete_all=True, namespace=PINECONE_NAMESPACE)
+
+    vectors = _embeddings().embed_documents([card_text(c) for c in cards])
+    index.upsert(
+        vectors=[
+            {"id": c["id"], "values": v, "metadata": {"title": c["title"], "file": c["file"]}}
+            for c, v in zip(cards, vectors)
+        ],
+        namespace=PINECONE_NAMESPACE,
     )
+
+    for _ in range(30):
+        namespace = (index.describe_index_stats().namespaces or {}).get(PINECONE_NAMESPACE)
+        if namespace and namespace.vector_count == len(cards):
+            break
+        time.sleep(1)
     return len(cards)
 
 
 def search(query: str, n: int = 3) -> list[dict]:
-    client = chromadb.PersistentClient(path=str(CHROMA_DIR))
-    result = _collection(client).query(query_texts=[query], n_results=n)
+    vector = _embeddings().embed_query(query)
+    result = _index().query(vector=vector, top_k=n, namespace=PINECONE_NAMESPACE)
     by_id = {c["id"]: c for c in load_cards()}
-    hits = []
-    for card_id, distance in zip(result["ids"][0], result["distances"][0]):
-        if card_id in by_id:
-            hits.append({**by_id[card_id], "similarity": round(1 - distance, 3)})
-    return hits
+    return [{**by_id[m.id], "similarity": round(m.score, 3)} for m in result.matches if m.id in by_id]
 
 
 if __name__ == "__main__":
-    print(f"Indexed {build_index()} use-case cards into {CHROMA_DIR}")
+    count = build_index()
+    print(f"Indexed {count} use-case cards into Pinecone index '{PINECONE_INDEX}' (namespace '{PINECONE_NAMESPACE}')")

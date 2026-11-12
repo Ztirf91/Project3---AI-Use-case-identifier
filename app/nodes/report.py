@@ -18,6 +18,8 @@ LEVERS = {
 }
 
 FRAMEWORKS = [
+    {"name": "APQC, How Can Organizations Identify And Prioritize Valuable AI Use Cases?", "url": "https://www.apqc.org/How-Can-Organizations-Identify-And-Prioritize-Valuable-AI-Use-Cases"},
+    {"name": "AWS, Taxonomy of agentic primitives in Amazon Quick (2026)", "url": "https://aws.amazon.com/blogs/machine-learning/taxonomy-of-agentic-primitives-in-amazon-quick/"},
     {"name": "Anand and Wu, The Gen AI Playbook for Organizations, HBR (2025)", "url": "https://hbr.org/2025/11/the-gen-ai-playbook-for-organizations"},
     {"name": "OpenAI, Identifying and scaling AI use cases", "url": "https://openai.com/business/learn/identifying-and-scaling-ai-use-cases/"},
     {"name": "appliedAI, How to find and prioritize AI use cases (2020)", "url": "https://www.appliedai.de/uploads/files/Whitepapers/appliedAI-Whitepaper-Applying-AI-How-to-find-and-prioritize-AI-use-cases-2020-EN.pdf"},

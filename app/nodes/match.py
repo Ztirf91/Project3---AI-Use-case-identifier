@@ -64,6 +64,13 @@ def _check(picks: UseCasePicks, allowed_ids: set[str]) -> list[str]:
 
 
 def match_use_cases(state: RunState) -> dict:
+    try:
+        return _match(state)
+    except Exception as exc:
+        return {"notes": state.notes + [f"Use-case matching failed ({exc.__class__.__name__}: {exc})."]}
+
+
+def _match(state: RunState) -> dict:
     notes = list(state.notes)
     rubric = RUBRIC_PATH.read_text(encoding="utf-8")
     model = state.model

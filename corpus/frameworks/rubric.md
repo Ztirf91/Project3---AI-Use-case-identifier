@@ -78,3 +78,19 @@ In most knowledge work the person sets up the task, the AI executes it, and the 
 Check: Who sets the task up, and who signs off the result?
 
 Source: Taylor Radey (2025), link above
+
+## 10. Prove value in a focused pilot before scaling
+
+Start with a business problem and map the affected workflow with its owner and users. Record today's performance, the desired outcome, and a success measure before proposing AI. Compare candidates consistently on value, process and data readiness, governance, workforce impact, and time to measurable results. A working prototype alone does not justify scaling: a focused pilot must show reliable output, useful performance gains, workable handoffs, and user adoption. Name the accountable owner and the conditions for broader rollout.
+
+Check: What baseline and success measure will the pilot use, who owns it, and what evidence would justify scaling?
+
+Source: APQC, *How Can Organizations Identify And Prioritize Valuable AI Use Cases?*, https://www.apqc.org/How-Can-Organizations-Identify-And-Prioritize-Valuable-AI-Use-Cases
+
+## 11. Define when, what, who, and how for agentic work
+
+For an agentic use case, separate the trigger and task from the actor and its capabilities. Work can begin with a human request, delegation, a schedule, or an external event. In AWS's taxonomy, an agent carries instructions, capabilities, and learned context; tools perform individual operations, skills provide reusable guidance with room for judgment, and workflows fix coordination and control flow in code. Choose the simplest arrangement that meets the required consistency and oversight. A recurring task may only need a new trigger for an existing agent. Use deterministic workflows where fixed ordering, error handling, and auditability matter.
+
+Check: What starts this task, what must it achieve, who performs it, and which tools, guidance, or fixed workflow provide the required control?
+
+Source: AWS, Thomas Delteil, Adi Kalyanpur, and Ron Litman, *Taxonomy of agentic primitives in Amazon Quick* (6 November 2026), https://aws.amazon.com/blogs/machine-learning/taxonomy-of-agentic-primitives-in-amazon-quick/

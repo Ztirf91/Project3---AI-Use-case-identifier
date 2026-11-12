@@ -33,11 +33,18 @@ def get_html(url: str) -> tuple[str, str]:
         return str(response.url), response.text
 
 
+BOILERPLATE = re.compile(r"cookie|consent|gdpr|banner|modal|popup|newsletter|navigation|navbar|menu|breadcrumb|region-select", re.I)
+
+
 def page_text(html: str, limit: int = 6000) -> str:
     soup = BeautifulSoup(html, "html.parser")
-    for tag in soup(["script", "style", "noscript", "svg", "iframe"]):
+    for tag in soup(["script", "style", "noscript", "svg", "iframe", "header", "nav", "footer", "form"]):
         tag.decompose()
-    text = re.sub(r"\s+", " ", soup.get_text(" ")).strip()
+    for tag in soup.find_all(attrs={"id": BOILERPLATE}) + soup.find_all(attrs={"class": BOILERPLATE}):
+        if not tag.decomposed and tag.name not in ("html", "body", "main"):
+            tag.decompose()
+    root = soup.find("main") or soup.find(attrs={"role": "main"}) or soup.body or soup
+    text = re.sub(r"\s+", " ", root.get_text(" ")).strip()
     return text[:limit]
 
 

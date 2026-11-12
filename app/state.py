@@ -18,10 +18,13 @@ class JobPosting(BaseModel):
     text: str = ""
 
 
+EVIDENCE_HELP = "Source id such as 'S3' for 'belegt'. 'industry' for 'abgeleitet'."
+
+
 class Claim(BaseModel):
     text: str
     status: Status
-    evidence: str = Field(description="Source URL for 'belegt', or 'typical industry knowledge' for 'abgeleitet'")
+    evidence: str = Field(description=EVIDENCE_HELP)
 
 
 class ProcessStep(BaseModel):
@@ -30,7 +33,7 @@ class ProcessStep(BaseModel):
     data_output: str
     likely_system: str = Field(description="System the step most likely runs in, or 'unknown'")
     status: Status
-    evidence: str
+    evidence: str = Field(description=EVIDENCE_HELP)
 
 
 class BusinessModel(BaseModel):
@@ -80,7 +83,6 @@ class UseCasePicks(BaseModel):
 class RunState(BaseModel):
     company_name: str
     company_url: str
-    site_text: str = ""
     site_pages: list[Source] = []
     job_postings: list[JobPosting] = []
     news: list[Source] = []

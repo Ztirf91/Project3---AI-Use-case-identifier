@@ -16,7 +16,6 @@ from app.tools.fetch import (
 def read_site(state: RunState) -> dict:
     notes = list(state.notes)
     pages: list[Source] = []
-    texts: list[str] = []
     jobs: list[JobPosting] = []
 
     try:
@@ -25,15 +24,13 @@ def read_site(state: RunState) -> dict:
         notes.append(f"Homepage could not be read ({exc.__class__.__name__}). Research relies on search only.")
         return {"notes": notes}
 
-    pages.append(Source(title=page_title(home_html) or "Homepage", url=home_url))
-    texts.append(f"[Homepage {home_url}]\n{page_text(home_html, 5000)}")
+    pages.append(Source(title=page_title(home_html) or "Homepage", url=home_url, snippet=page_text(home_html, 5000)))
 
     about_url = find_link(home_html, home_url, ABOUT_HINTS)
     if about_url:
         try:
             final_url, html = get_html(about_url)
-            pages.append(Source(title=page_title(html) or "About", url=final_url))
-            texts.append(f"[About page {final_url}]\n{page_text(html, 4000)}")
+            pages.append(Source(title=page_title(html) or "About", url=final_url, snippet=page_text(html, 5000)))
         except httpx.HTTPError:
             notes.append(f"About page {about_url} could not be read.")
 
@@ -41,7 +38,7 @@ def read_site(state: RunState) -> dict:
     if career_url:
         try:
             final_url, career_html = get_html(career_url)
-            pages.append(Source(title=page_title(career_html) or "Careers", url=final_url))
+            pages.append(Source(title=page_title(career_html) or "Careers", url=final_url, snippet=page_text(career_html, 2000)))
             for label, href in collect_job_links(career_html, final_url):
                 try:
                     _, job_html = get_html(href)
@@ -53,7 +50,7 @@ def read_site(state: RunState) -> dict:
     else:
         notes.append("No careers page linked from the homepage.")
 
-    return {"site_text": "\n\n".join(texts), "site_pages": pages, "job_postings": jobs, "notes": notes}
+    return {"site_pages": pages, "job_postings": jobs, "notes": notes}
 
 
 def search_news_register(state: RunState) -> dict:
