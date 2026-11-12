@@ -53,7 +53,18 @@ Keys in `.env`:
 | `TAVILY_API_KEY` | tavily.com (free tier) |
 | `PINECONE_API_KEY` | app.pinecone.io (free starter tier) |
 
-Optional: `MODEL`, `REASONING_MODEL`, `EMBEDDING_MODEL`, `IMAGE_MODEL`, `PINECONE_INDEX` — see [.env.example](.env.example).
+Optional: `MODEL`, `REASONING_MODEL`, `EMBEDDING_MODEL`, `IMAGE_MODEL`, `PINECONE_INDEX` — see [.env.example](.env.example). **Never commit `.env` or real keys.**
+
+### Tools / APIs
+
+| Tool | Role |
+|---|---|
+| OpenAI (chat + embeddings) | Research filtering, business model, rubric rating, use-case selection, company-fit rerank |
+| OpenAI Image API (`OPENAI_KEY2`) | Process-map PNG illustration |
+| Tavily | News, register/size, and job search |
+| Pinecone | Vector index for the use-case library (RAG) |
+
+Three core services for the autonomous path (OpenAI text, Tavily, Pinecone), plus a separate image key for the map.
 
 Build the use-case index once, and again after adding or changing cards:
 
@@ -78,6 +89,12 @@ Add cards under `corpus/use_cases/` (own words, verified source links), then:
 ```bash
 python -m app.library
 ```
+
+## Demo
+
+- **Live demo:** run the CLI (or open a saved sample if APIs are slow). Backup reports: [samples/riese-mueller.md](samples/riese-mueller.md), [samples/koro.md](samples/koro.md), [samples/ankerstein.md](samples/ankerstein.md).
+- **Recording:** _add an unlisted Loom / YouTube / Drive link here before submission_ (must open without login).
+- **Slides:** [presentation/project3_slides.pdf](presentation/project3_slides.pdf) (also `.pptx` in the same folder).
 
 ## Limits
 
