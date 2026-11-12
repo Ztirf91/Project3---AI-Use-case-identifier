@@ -2,7 +2,7 @@
 
 An autonomous research agent for AI consulting with small and mid-sized companies. Give it a company name and website. It reads public sources, works out how the company runs and earns money, judges every process step against established AI frameworks, matches the best steps against a library of AI use cases already running elsewhere, and writes a brief with three use cases and the questions for the first meeting.
 
-**Report user:** an AI consultant preparing a first conversation with an SME. Later, the same brief can be offered to companies in exchange for their contact details (see [gtm_future_sprints.md](gtm_future_sprints.md)).
+**Report user:** an AI consultant using the full brief as a thinking aid for first conversations. Later, a lighter public report can work as a web lead magnet (three use cases for email and phone) — see [gtm_future_sprints.md](gtm_future_sprints.md).
 
 ## What a report contains
 

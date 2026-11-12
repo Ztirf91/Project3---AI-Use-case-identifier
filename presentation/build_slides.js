@@ -60,7 +60,7 @@ async function main() {
     s.addText("The user", {
       x: 7.0, y: 1.7, w: 5, h: 0.4, fontSize: 18, bold: true, color: C.light, margin: 0, isTextBox: true,
     });
-    s.addText("An AI consultant preparing a first conversation with a German SME — later the same brief can be a lead magnet for owners and MDs.", {
+    s.addText("An AI consultant using the full brief as a thinking aid for first meetings. Later: a lighter public report as a web lead magnet (three use cases for email + phone) — not sold to other agencies.", {
       x: 7.0, y: 2.3, w: 5, h: 2.8, fontSize: 16, color: C.text, margin: 0, isTextBox: true,
     });
   }
@@ -161,9 +161,9 @@ async function main() {
       fontSize: 28, bold: true, color: C.text, margin: 0, isTextBox: true,
     });
     const sprints = [
-      { n: "1", t: "Brief for email", m: "30 requests · 25% book a call" },
-      { n: "2", t: "Validate questions", m: "7/10 calls decide on a use case" },
-      { n: "3", t: "Vertical workshop", m: "2 paid workshops booked" },
+      { n: "1", t: "Thinking aid in calls", m: "7/10 calls decide on a use case" },
+      { n: "2", t: "Paid workshop offer", m: "2 paid workshops booked" },
+      { n: "3", t: "Web lead magnet (light report)", m: "25 requests · 20% follow-up" },
     ];
     sprints.forEach((sp, i) => {
       const x = 0.8 + i * 4.0;
