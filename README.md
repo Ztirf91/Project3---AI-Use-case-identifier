@@ -66,7 +66,7 @@ python -m app.run --company "Riese & Müller" --url "https://www.r-m.de"
 
 The report is written to `outputs/<company>/report.md`, the full state to `state.json`, and an image-model-generated process map to `process-map.png` (using the separate `OPENAI_KEY2`). Optional `--contact-name`, `--contact-email`, and `--city` are stored in `lead.json` only.
 
-Research and selection use the configured text models, embedding queries, and Tavily searches. Process-map generation makes an additional paid Image API call with `OPENAI_KEY2` and `IMAGE_MODEL` (default: `gpt-image-2`). Image generation adds latency and cost. The structured process table remains the reference for labels, sources and assumptions; inspect the generated illustration before sharing. If image generation fails or its key is missing, the report still includes the process table and a diagnostic note.
+Research and selection use the configured text models, embedding queries, and Tavily searches. Matching retrieves the top library cards from Pinecone, then reranks by company fit (70%) and similarity (30%). Process-map generation makes an additional paid Image API call with `OPENAI_KEY2` and `IMAGE_MODEL` (default: `gpt-image-2`). Image generation adds latency and cost; inspect the illustration before sharing. If image generation fails or its key is missing, the report continues without the image and adds a diagnostic note.
 
 ## Adding use cases
 

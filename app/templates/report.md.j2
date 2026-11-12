@@ -22,8 +22,8 @@ Working hypothesis from public sources; validate with the company.
 
 {% if process_image %}![Process map for {{ s.company_name }}]({{ process_image }})
 
-{% endif %}{% for p in m.process_map %}- **{{ loop.index }}. {{ p.name }}** · {{ p.likely_system }} · {{ tag(p) }}
-{% endfor %}
+{% elif m.process_map %}_Process map image missing; steps are in the research state only._
+{% endif %}
 {% else %}_The business could not be modeled from the available research._
 {% endif %}
 {% if picks %}### Where AI fits in this business
