@@ -1,5 +1,7 @@
 import httpx
+from pydantic import BaseModel, Field
 
+from app.config import llm
 from app.state import JobPosting, RunState, Source
 from app.tools import search
 from app.tools.fetch import (
@@ -53,6 +55,31 @@ def read_site(state: RunState) -> dict:
     return {"site_pages": pages, "job_postings": jobs, "notes": notes}
 
 
+class Relevant(BaseModel):
+    keep: list[int] = Field(description="Numbers of the results that are about this exact company")
+
+
+def _relevant(state: RunState, hits: list[Source]) -> list[Source]:
+    """Drop search hits about a different company, product, or person with the same name."""
+    if not hits:
+        return hits
+    company = f"{state.company_name}, website {state.company_url}"
+    if state.site_pages:
+        company += f', homepage title "{state.site_pages[0].title}"'
+    listing = "\n".join(f"{i}. {h.title} ({h.url}): {h.snippet[:200]}" for i, h in enumerate(hits))
+    try:
+        result = llm(temperature=0).with_structured_output(Relevant).invoke(
+            [
+                ("system", "Return the numbers of the search results that are about this exact company. "
+                 "Drop results about other companies, products, places, or people that share the name."),
+                ("human", f"Company: {company}\n\nResults:\n{listing}"),
+            ]
+        )
+    except Exception:
+        return hits
+    return [h for i, h in enumerate(hits) if i in set(result.keep)]
+
+
 def search_news_register(state: RunState) -> dict:
     notes = list(state.notes)
     news: list[Source] = []
@@ -67,14 +94,21 @@ def search_news_register(state: RunState) -> dict:
         register = search.search_register(state.company_name)
     except Exception as exc:
         notes.append(f"Register search failed ({exc.__class__.__name__}).")
+    job_hits: list[Source] = []
     if not jobs:
         try:
-            for hit in search.search_jobs(state.company_name):
-                jobs.append(JobPosting(title=hit.title, url=hit.url, text=hit.snippet))
-            if jobs:
-                notes.append("Job postings come from web search, not from the company's own careers page.")
+            job_hits = search.search_jobs(state.company_name)
         except Exception as exc:
             notes.append(f"Job search failed ({exc.__class__.__name__}).")
+
+    kept = _relevant(state, news + register + job_hits)
+    news = [h for h in news if h in kept]
+    register = [h for h in register if h in kept]
+    for hit in job_hits:
+        if hit in kept and "tavily.com" not in hit.url:
+            jobs.append(JobPosting(title=hit.title, url=hit.url, text=hit.snippet))
+    if job_hits and jobs:
+        notes.append("Job postings come from web search, not from the company's own careers page.")
 
     if not news:
         notes.append("No recent news found.")

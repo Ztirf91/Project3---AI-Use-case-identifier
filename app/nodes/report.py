@@ -28,8 +28,17 @@ FRAMEWORKS = [
 ]
 
 
+ZONES = {
+    "No regrets": "AI runs it",
+    "Creative catalyst": "AI proposes, a person chooses",
+    "Quality control": "AI produces, a person verifies",
+    "Human first": "a person leads, AI assists",
+}
+
+
 def slugify(name: str) -> str:
-    return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
+    folded = name.lower().replace("ä", "ae").replace("ö", "oe").replace("ü", "ue").replace("ß", "ss")
+    return re.sub(r"[^a-z0-9]+", "-", folded).strip("-")
 
 
 def _tag(item) -> str:
@@ -53,6 +62,7 @@ def render_report(state: RunState) -> dict:
         picks=state.picks,
         cards={c["id"]: c for c in library.load_cards()},
         levers=LEVERS,
+        zones=ZONES,
         frameworks=FRAMEWORKS,
         date=date.today().strftime("%d %B %Y"),
     )

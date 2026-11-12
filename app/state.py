@@ -59,23 +59,32 @@ class StepRatings(BaseModel):
     ratings: list[StepRating]
 
 
+HbrZone = Literal["No regrets", "Creative catalyst", "Quality control", "Human first"]
+
+
 class UseCase(BaseModel):
     title: str
     process_step: str
     approach: Literal["quick win", "redesign then automate", "strategic bet"]
-    what_changes: str = Field(description="How the work looks afterwards, concretely")
+    hbr_zone: HbrZone = Field(description="From error cost and type of knowledge; must match the human's role")
+    process_change: str = Field(description="What to change, remove, or standardize in the process itself, before or alongside AI")
+    what_changes: str = Field(description="How the work runs afterwards: trigger, what AI does, what people do")
     money_lever: MoneyLever
-    money_effect: str = Field(description="How it moves the unit economics")
+    money_effect: str = Field(description="How it moves this company's unit economics")
     source_card: str = Field(description="The id of the library card this is adapted from")
-    framework_reasoning: str = Field(description="One or two sentences using the rubric's terms")
-    prerequisites: list[str]
-    questions_assumptions: list[str] = Field(description="Assumptions to test in the meeting")
-    questions_prerequisites: list[str] = Field(description="'Do you have ...?' questions")
+    framework_reasoning: str = Field(description="Two or three sentences applying the rubric to this step at this company")
+    prerequisites: list[str] = Field(description="Statements of what must exist, not questions")
+    pilot: str = Field(description="Baseline to record, success measure, accountable owner, and the condition for scaling")
+    questions_assumptions: list[str] = Field(description="Assumptions to test, riskiest first")
+    questions_prerequisites: list[str] = Field(description="'Do you have ...?' questions specific to this company")
     questions_decision: list[str] = Field(description="What to learn to decide if this is the right use case")
 
 
 class UseCasePicks(BaseModel):
-    ai_approach: str = Field(description="Three to five sentences: the right AI approach for this company overall")
+    ai_approach: str = Field(
+        description="Four to six sentences: the right AI approach for this company now, tied to its business model, "
+        "unit economics, and current situation in the news"
+    )
     leave_alone: list[str] = Field(description="Steps not worth automating now, each with a short reason")
     use_cases: list[UseCase]
 

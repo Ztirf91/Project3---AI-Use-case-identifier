@@ -65,7 +65,7 @@ python -m app.run --company "Riese & Müller" --url "https://www.r-m.de"
 
 The report is written to `outputs/<company>/report.md`, the full state to `state.json`. Optional `--contact-name`, `--contact-email`, and `--city` are stored in `lead.json` only.
 
-A run takes one to two minutes and costs a few cents: about four `gpt-4o-mini` calls, a few embedding queries, and two to three Tavily searches.
+A run takes about one minute and costs a few cents: `gpt-4o-mini` for research and modeling, `gpt-5.4-mini` (or your `REASONING_MODEL`) for use-case selection, a few embedding queries, and two to three Tavily searches.
 
 ## Adding use cases
 

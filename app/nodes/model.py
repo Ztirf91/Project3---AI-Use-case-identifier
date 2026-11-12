@@ -1,6 +1,6 @@
 import re
 
-from app.config import llm
+from app.config import REASONING_MODEL, llm
 from app.state import BusinessModel, RunState
 
 INDUSTRY = "typical industry knowledge"
@@ -24,8 +24,11 @@ Use numbers only when a source states them. List the numbers that matter but wer
 Process map: the operational value chain, as many steps as the business really has (usually 8 to 12), one line each.
 Cover the whole chain where it applies: product development, procurement, production or service delivery,
 sales and channel management, order handling, logistics, after-sales and warranty, marketing, and support functions.
-Concrete steps, not department names: "Dealer places reorder via B2B portal", not "Sales".
+Name each step as an activity with an actor and an object, for example "Purchasing orders components from suppliers"
+or "Service team processes warranty claims from dealers". Never a bare department name like "Procurement" or "Logistics".
 Each step has a data input, a data output, and the system it most likely runs in.
+likely_system is a system category (ERP, CRM, PLM, WMS, shop system, ticketing, spreadsheets) as a reasonable guess.
+Name a specific product or channel (a portal, email, a software brand) only if a source shows it.
 For every step, go through the sources and check whether one shows that this step exists at this company.
 A job posting for a warehouse, assembly, marketing, or service role proves the matching step. A website statement
 such as "we assemble in Germany" proves production. In those cases the step is "belegt" with that source id.
@@ -41,7 +44,10 @@ def _sources(state: RunState) -> list[tuple[str, str, str, str]]:
     for job in state.job_postings:
         items.append((job.url, f"Job posting: {job.title}", job.text[:1500]))
     for hit in state.news:
-        items.append((hit.url, f"News: {hit.title}", hit.snippet))
+        label = f"News: {hit.title}"
+        if AGGREGATORS.search(hit.url):
+            label = f"Company profile: {hit.title} [estimate]"
+        items.append((hit.url, label, hit.snippet))
     for hit in state.register_hits:
         label = f"Register or company profile: {hit.title}"
         if AGGREGATORS.search(hit.url):
@@ -72,7 +78,7 @@ def model_business(state: RunState) -> dict:
     if not sources:
         return {"notes": state.notes + ["No research material, so the business could not be modeled."]}
     try:
-        result = llm().with_structured_output(BusinessModel).invoke(
+        result = llm(model=REASONING_MODEL).with_structured_output(BusinessModel).invoke(
             [("system", SYSTEM), ("human", _digest(state, sources))]
         )
     except Exception as exc:

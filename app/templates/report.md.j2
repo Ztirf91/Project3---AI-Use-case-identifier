@@ -38,9 +38,11 @@
 {% for u in picks.use_cases %}{% set card = cards.get(u.source_card) %}
 ### {{ loop.index }}. {{ u.title }}
 
-**Process step:** {{ u.process_step }} · **Approach:** {{ u.approach }} · **Lever:** {{ levers[u.money_lever] }}
+**Process step:** {{ u.process_step }} · **Approach:** {{ u.approach }} · **Lever:** {{ levers[u.money_lever] }} · **Human role:** {{ u.hbr_zone }} ({{ zones[u.hbr_zone] }})
 
-{{ u.what_changes }}
+**Change the process first.** {{ u.process_change }}
+
+**How the work runs afterwards.** {{ u.what_changes }}
 
 **Money effect.** {{ u.money_effect }}
 
@@ -50,9 +52,6 @@
 {% if card.get('source_summary') %}
 **Source evidence.** {{ card.source_summary }} Publisher-reported; this does not establish the same outcome for this company.
 {% endif %}
-{% if card.get('pilot_metrics') %}
-**Pilot measures.** {{ card.pilot_metrics | join('; ') }}.
-{% endif %}
 {% if card.get('blueprint_url') %}
 **How it could be built.** [Reference architecture]({{ card.blueprint_url }})
 {% if card.get('blueprint_note') %}{{ card.blueprint_note }}{% endif %}
@@ -61,6 +60,8 @@
 
 {% for p in u.prerequisites %}- {{ p }}
 {% endfor %}
+**Pilot.** {{ u.pilot }}
+
 {% endfor %}
 ## 3. Questions for the first meeting
 
