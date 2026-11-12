@@ -6,13 +6,14 @@ An autonomous research agent for AI consulting with small and mid-sized companie
 
 ## What a report contains
 
-1. **The company:** business model, unit economics, and the current process map. Every statement is marked *documented* with a link, or *assumption* (typical for companies of this kind).
-2. **Where AI fits:** the overall approach for this company, and the steps to leave alone for now.
-3. **Three use cases:** the process step, what changes in the work, which unit-economics lever it moves, the framework reasoning, the frontier pattern it is adapted from, and the prerequisites.
-4. **Questions for the first meeting:** assumptions to test, "do you have this?" questions, and what to learn to decide between the use cases, plus the numbers to ask for and the gaps in the public research.
-5. **Sources.**
+1. **The company:** business model, unit economics, and a process-map image from public research. Claims are marked *documented* or *assumption*.
+2. **Where AI fits:** overall approach for this company, and steps to leave alone for now.
+3. **Three use cases:** process step, process change before AI, how work runs afterwards, money effect, reference pattern, and pilot.
+4. **Redesign the work, then apply AI:** redesign-before-automation stance, Option A (substitute) vs Option B (augment), plus one speculative Option-B case.
+5. **Questions for the first meeting:** how to approach the conversation, general discovery questions, use-case questions, and numbers to ask for.
+6. **Sources.**
 
-Sample reports are in [samples/](samples/).
+Sample reports are in [samples/](samples/) (`riese-mueller`, `koro`, `ankerstein`), each with a matching `*-process-map.png`.
 
 ## How it works
 
@@ -20,16 +21,16 @@ Sample reports are in [samples/](samples/).
 flowchart LR
   site[Website and job postings] --> search[News and register]
   search --> model[Business model and process map]
-  model --> match[Rubric and use-case library]
-  match --> report[Report]
+  model --> match[Rubric, RAG, rerank, three use cases]
+  match --> report[Report plus process-map image]
 ```
 
 Five LangGraph nodes share one typed state. Details are in [docs/architecture.md](docs/architecture.md). The reasons for LangGraph over n8n are in [stack_decision.md](stack_decision.md).
 
 **Grounding** has two layers:
 
-- [corpus/frameworks/rubric.md](corpus/frameworks/rubric.md): how to think about AI in a company, written in our own words from HBR, OpenAI, appliedAI, MIT Sloan, and Taylor Radey, with links. No articles are copied into the repo.
-- [corpus/use_cases/](corpus/use_cases/): use-case cards from n8n, Anthropic, OpenAI, Google Cloud, and the KI-Landkarte, embedded in Pinecone (RAG).
+- [corpus/frameworks/](corpus/frameworks/): `rubric.md` (how to judge AI opportunities), `process_redesign.md` (redesign before automation; augment vs substitute), `discovery.md` (what to learn in the first meeting). Written in our own words with source links; articles are not copied into the repo.
+- [corpus/use_cases/](corpus/use_cases/): curated YAML cards (seed patterns + extensions), embedded in Pinecone (RAG). At match time the top retrieval hits are reranked by company fit (70%) and similarity (30%).
 
 ## Setup
 
@@ -47,10 +48,12 @@ Keys in `.env`:
 
 | Key | Where to get it |
 |---|---|
-| `OPENAI_API_KEY` | platform.openai.com |
-| `OPENAI_KEY2` | Separate OpenAI API key with image-model access, used only for the process-map image |
+| `OPENAI_API_KEY` | platform.openai.com (research, modeling, matching) |
+| `OPENAI_KEY2` | Separate OpenAI key with image-model access (process-map PNG only) |
 | `TAVILY_API_KEY` | tavily.com (free tier) |
 | `PINECONE_API_KEY` | app.pinecone.io (free starter tier) |
+
+Optional: `MODEL`, `REASONING_MODEL`, `EMBEDDING_MODEL`, `IMAGE_MODEL`, `PINECONE_INDEX` — see [.env.example](.env.example).
 
 Build the use-case index once, and again after adding or changing cards:
 
@@ -64,32 +67,17 @@ python -m app.library
 python -m app.run --company "Riese & Müller" --url "https://www.r-m.de"
 ```
 
-The report is written to `outputs/<company>/report.md`, the full state to `state.json`, and an image-model-generated process map to `process-map.png` (using the separate `OPENAI_KEY2`). Optional `--contact-name`, `--contact-email`, and `--city` are stored in `lead.json` only.
+Writes `outputs/<company>/report.md`, `state.json`, and `process-map.png`. Optional `--contact-name`, `--contact-email`, and `--city` go to `lead.json` only.
 
-Research and selection use the configured text models, embedding queries, and Tavily searches. Matching retrieves the top library cards from Pinecone, then reranks by company fit (70%) and similarity (30%). Process-map generation makes an additional paid Image API call with `OPENAI_KEY2` and `IMAGE_MODEL` (default: `gpt-image-2`). Image generation adds latency and cost; inspect the illustration before sharing. If image generation fails or its key is missing, the report continues without the image and adds a diagnostic note.
+A full run uses text models, embeddings, Tavily, Pinecone retrieval + company-fit rerank, and one Image API call via `OPENAI_KEY2` / `IMAGE_MODEL` (default `gpt-image-2`). If image generation fails, the report still completes with a note and without the PNG.
 
 ## Adding use cases
 
-Add a YAML file to `corpus/use_cases/`, one card per concrete case, written in your own words:
+Add cards under `corpus/use_cases/` (own words, verified source links), then:
 
-```yaml
-id: n8n-invoice-datev
-title: Supplier invoices from email into DATEV
-source_name: n8n workflow template
-source_url: https://n8n.io/workflows/...
-verified: true
-pattern: What the process looked like before.
-ai_does: What the AI does in that process.
-process_types: [finance, accounts payable]
-needs: [email inbox, DATEV, purchase orders in a system]
-sme_fit: When this fits an SME.
-money_lever: unit_cost          # volume | price | unit_cost | risk
-typical_effect: The result, with a number if the source gives one.
-approach: quick win             # quick win | redesign then automate | strategic bet
-blueprint_url: https://...      # optional: reference architecture
+```bash
+python -m app.library
 ```
-
-Then run `python -m app.library` again.
 
 ## Limits
 
@@ -106,14 +94,15 @@ app/
   graph.py          LangGraph wiring
   state.py          Pydantic state and output schemas
   library.py        Use-case cards and the Pinecone index
+  process_map.py    Process-map image generation
   nodes/            research, model, match, report
   tools/            website fetch, Tavily search
   templates/        report template
 corpus/
-  frameworks/       rubric.md
+  frameworks/       rubric, process redesign, discovery
   use_cases/        YAML cards
 docs/architecture.md
-samples/            committed example reports
+samples/            example reports and process-map PNGs
 stack_decision.md
 gtm_future_sprints.md
 ```
