@@ -39,6 +39,7 @@ def card_text(card: dict) -> str:
             f"AI does: {card['ai_does']}",
             f"Process types: {', '.join(card.get('process_types', []))}",
             f"Needs: {', '.join(card.get('needs', []))}",
+            f"Task scope: {card.get('task_scope', '')}",
         ]
     )
 

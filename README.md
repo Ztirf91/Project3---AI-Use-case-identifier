@@ -48,6 +48,7 @@ Keys in `.env`:
 | Key | Where to get it |
 |---|---|
 | `OPENAI_API_KEY` | platform.openai.com |
+| `OPENAI_KEY2` | Separate OpenAI API key with image-model access, used only for the process-map image |
 | `TAVILY_API_KEY` | tavily.com (free tier) |
 | `PINECONE_API_KEY` | app.pinecone.io (free starter tier) |
 
@@ -63,9 +64,9 @@ python -m app.library
 python -m app.run --company "Riese & Müller" --url "https://www.r-m.de"
 ```
 
-The report is written to `outputs/<company>/report.md`, the full state to `state.json`. Optional `--contact-name`, `--contact-email`, and `--city` are stored in `lead.json` only.
+The report is written to `outputs/<company>/report.md`, the full state to `state.json`, and an image-model-generated process map to `process-map.png` (using the separate `OPENAI_KEY2`). Optional `--contact-name`, `--contact-email`, and `--city` are stored in `lead.json` only.
 
-A run takes about one minute and costs a few cents: `gpt-4o-mini` for research and modeling, `gpt-5.4-mini` (or your `REASONING_MODEL`) for use-case selection, a few embedding queries, and two to three Tavily searches.
+Research and selection use the configured text models, embedding queries, and Tavily searches. Process-map generation makes an additional paid Image API call with `OPENAI_KEY2` and `IMAGE_MODEL` (default: `gpt-image-2`). Image generation adds latency and cost. The structured process table remains the reference for labels, sources and assumptions; inspect the generated illustration before sharing. If image generation fails or its key is missing, the report still includes the process table and a diagnostic note.
 
 ## Adding use cases
 

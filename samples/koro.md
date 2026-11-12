@@ -6,209 +6,170 @@
 
 ## 1. The company
 
-**KoRo is a Berlin-based omnichannel food retailer and brand selling natural foods, snacks, superfoods, and related grocery/drogerie items in Europe.**
+**Consumer-facing natural foods and household essentials retailer, selling mainly via its own online shop and also through supermarkets/retail channels.**
 
 ### Business model
 
-- Customers pay KoRo for packaged food products sold via the online shop and, increasingly, through supermarkets and other offline retail channels. *([documented](https://www.korodrogerie.de))*
-- KoRo also sells to B2B trade customers in addition to consumers, as it wanted to expand into B2B and now runs key account roles for retail trade. *([documented](https://www.microsoft.com/en/customers/story/27081-koro-handels-dynamics-365-business-central))*
-- KoRo serves customers across Europe; the company states it supplies 14 European countries. *([documented](https://www.korodrogerie.de/career))*
-- KoRo’s channel mix is omnichannel: direct-to-consumer delivery and supermarket/offline presence. *([documented](https://www.korodrogerie.de/career))*
-- The company aims to sell high-quality innovative foods in bulk packaging, which is its core value proposition to buyers. *([documented](https://www.korodrogerie.de))*
-- The company also uses a physical warehouse sale after the warehouse move, indicating an offline sales touchpoint tied to inventory and logistics. *([documented](https://www.korodrogerie.de/b/lieferverzoegerungen-nach-lagerumzug))*
+- Customers pay KoRo for food, snacks, superfoods, and everyday consumer goods sold in the online shop and, according to the company, also available in supermarkets nearby. *([documented](https://www.korodrogerie.de))*
+- KoRo sells directly to consumers across Europe and is also expanding into B2B, so revenue comes from both D2C and business customers. *([documented](https://www.microsoft.com/en/customers/story/27081-koro-handels-dynamics-365-business-central))*
+- The company operates in 14 European countries with food supply from its Berlin-based organization. *([documented](https://www.korodrogerie.de/career))*
+- KoRo’s legal purpose is the trade of drugstore items and everyday consumer goods, indicating retail/trading as the core monetization model. *([documented](https://www.northdata.de/KoRo%20Handels%20GmbH,%20Berlin/Amtsgericht%20Charlottenburg%20(Berlin)%20HRB%20156598%20B))*
 
 ### Unit economics
 
-- The earning unit is the packaged food order / product basket, with margin driven by purchase price, packaging size, inventory handling, and logistics efficiency. *(assumption)*
-- KoRo’s margins are likely improved by bypassing trading layers and operating an efficient direct or near-direct supply chain, which is consistent with its founding goal to skip intermediaries. *([documented](https://portfoliojobs.partechpartners.com/companies/koro/jobs/45595998-talent-acquisition-manager-m-w-d))*
-- Order volume matters materially because the company had to scale operations to 15,000 orders per day and moved to a larger warehouse to handle more demand. *([documented](https://www.microsoft.com/en/customers/story/27081-koro-handels-dynamics-365-business-central))*
-- Cost per order and fulfillment speed are margin drivers because logistics and warehouse teams were under pressure to ship orders on time after the warehouse move. *([documented](https://www.korodrogerie.de/b/lieferverzoegerungen-nach-lagerumzug))*
-- Price sensitivity is likely moderated by bulk formats and value positioning, but exact gross margin, basket size, and fulfillment cost per order were not disclosed. *(assumption)*
+- The earning unit is the individual order, with margin driven by basket value, product mix, and fulfillment efficiency in large-pack ecommerce. *(assumption)*
+- Gross margin is likely sensitive to sourcing cost, inventory handling, and shipping cost per order, especially because KoRo emphasizes large packs and logistics efficiency. *(assumption)*
+- Order throughput matters: KoRo says it can now process more orders after moving to a larger warehouse, showing fulfillment capacity is a key margin lever. *([documented](https://www.korodrogerie.de/b/lieferverzoegerungen-nach-lagerumzug))*
 
-### Current process map
+### Preliminary process overview
 
-| # | Step | Data in | Data out | Likely system | Basis |
-|---|------|---------|----------|---------------|-------|
-| 1 | Product team develops new food products and assortments | Consumer trends, product ideas, supplier capabilities, quality requirements | New SKUs, product specifications, launch plans | PLM | *([documented](https://www.korodrogerie.de/career))* |
-| 2 | Purchasing team sources food and drogerie goods from suppliers | Approved product specs, demand forecasts, supplier quotes | Purchase orders, inbound supply schedules | ERP | *([documented](https://www.northdata.de/KoRo%20Handels%20GmbH,%20Berlin/Amtsgericht%20Charlottenburg%20(Berlin)%20HRB%20156598%20B))* |
-| 3 | Operations team plans inventory and fulfillment capacity | Sales forecasts, stock levels, order volumes | Replenishment plans, warehouse capacity plans | ERP | *([documented](https://www.microsoft.com/en/customers/story/27081-koro-handels-dynamics-365-business-central))* |
-| 4 | Warehouse team receives and stores inbound goods | Incoming shipments, packing lists, storage rules | Put-away confirmations, available inventory | WMS | *([documented](https://www.korodrogerie.de/b/lieferverzoegerungen-nach-lagerumzug))* |
-| 5 | E-commerce team publishes products in the online shop | Product content, pricing, inventory availability | Live product listings and offers | shop system | *([documented](https://www.korodrogerie.de))* |
-| 6 | Sales team manages retail and B2B accounts | Account leads, buyer inquiries, product catalog | Customer accounts, trade orders, account plans | CRM | *([documented](https://www.xing.com/pages/korohandelsgmbh/jobs))* |
-| 7 | Customer orders are captured through the online shop and routed to operations | Customer carts, payment confirmation, shipping addresses | Order records for fulfillment | shop system | *([documented](https://www.korodrogerie.de))* |
-| 8 | Warehouse team picks, packs, and ships customer orders | Order records, inventory positions, packing instructions | Packed parcels, shipment confirmations, tracking data | WMS | *([documented](https://www.korodrogerie.de/b/lieferverzoegerungen-nach-lagerumzug))* |
-| 9 | Logistics team coordinates deliveries and communicates delays | Shipment status, carrier updates, exception signals | Customer delay notifications, delivery status updates | ERP | *([documented](https://www.korodrogerie.de/b/lieferverzoegerungen-nach-lagerumzug))* |
-| 10 | Customer service team handles post-order updates and support | Delivery exceptions, customer inquiries, order status | Support responses, proactive email updates | ticketing | *([documented](https://www.korodrogerie.de/b/lieferverzoegerungen-nach-lagerumzug))* |
-| 11 | People and finance teams support hiring, reporting, and control | Headcount plans, financial transactions, performance data | Hires, management reports, financial control outputs | spreadsheets | *([documented](https://www.korodrogerie.de/career))* |
+Working hypothesis from public sources; validate with the company.
+
+![Process map for KoRo](koro-process-map.png)
+
+- **1. Customers browse and place orders in the online shop or through retail/B2B channels** · shop cart / online shop · *([documented](https://www.korodrogerie.de))*
+- **2. Order data is managed centrally and used to plan inventory and production** · spreadsheets / ERP · *([documented](https://www.microsoft.com/en/customers/story/27081-koro-handels-dynamics-365-business-central))*
+- **3. KoRo sources, produces, and holds inventory for food and snack products** · ERP · *([documented](https://www.microsoft.com/en/customers/story/27081-koro-handels-dynamics-365-business-central))*
+- **4. Warehouse teams receive inbound goods and put stock away after the warehouse move** · WMS · *([documented](https://www.korodrogerie.de/b/lieferverzoegerungen-nach-lagerumzug))*
+- **5. Warehouse and logistics teams pick, pack, and ship customer orders** · WMS · *([documented](https://www.korodrogerie.de/b/lieferverzoegerungen-nach-lagerumzug))*
+- **6. Customers receive shipping updates when delays occur and orders are dispatched** · email · *([documented](https://www.korodrogerie.de/b/lieferverzoegerungen-nach-lagerumzug))*
+- **7. KoRo sells through supermarkets/retail partners and supports B2B growth** · email / ERP · *([documented](https://www.korodrogerie.de))*
+- **8. The company hires for operations, quality, and AI transformation to improve scale and compliance** · ticketing / HR systems · *([documented](https://www.remotely.de/firma/koro-handels-gmbh))*
 
 ### Where AI fits in this business
 
-KoRo should focus AI on high-volume, repeatable work that affects order handling, assortment publishing, and warehouse efficiency, while keeping high-stakes commercial judgment with people. The company is scaling orders and B2B activity after moving beyond spreadsheet-driven operations, so the near-term goal is not broad automation but fewer manual touches per order and faster time-to-list for products. That means using AI where data is already structured or can be standardized, and where a human reviewer can still catch exceptions. Because fulfillment speed and cost per order matter directly to margin, the first pilots should sit close to the core operating path, not in peripheral admin work. KoRo should avoid strategic, data-heavy forecasting bets until the operating data is cleaner and the first workflow automations are stable.
+KoRo should use AI first where it can reduce operating cost per order, shorten repetitive coordination work, and improve scale after the warehouse move, while keeping humans on high-risk inventory and commercial decisions. The company’s core economics depend on order throughput, fulfillment efficiency, and avoiding waste or stock errors across multiple countries and channels. That makes process redesign more important than isolated automation: KoRo should standardize inputs, define owners, and then let AI draft, classify, or optimize within those rules. In the near term, the best value is in warehouse execution and master-data cleanup, because those are close to the core margin levers and have proven patterns. More strategic forecasting work can follow once the underlying data is cleaner and the operating baseline is stable.
 
 **Leave alone for now**
 
-- Product team develops new food products and assortments — high tacit judgment and high error cost; this is not a safe place for early automation.
-- Purchasing team sources food and drogerie goods from suppliers — sourcing choices and supplier tradeoffs are high-stakes, and the current process should be improved manually first.
-- Sales team manages retail and B2B accounts — relationship-led, high-tacit work where AI can assist, but not replace the account owner now.
-- Customer service team handles post-order updates and support — the company should first stabilize operational exceptions upstream so support does not become a substitute for process fixes.
+- Customers receive shipping updates when delays occur and orders are dispatched — low direct economic leverage, and KoRo already uses this as a communication step rather than a margin lever.
+- The company hires for operations, quality, and AI transformation to improve scale and compliance — high judgment and tacit knowledge; not a good first automation target.
+- Customers browse and place orders in the online shop or through retail/B2B channels — already well suited to standard ecommerce automation; the stronger immediate opportunities are downstream in operations and data quality.
 
 ## 2. Three use cases
 
-### 1. Draft and localize product listings from verified product data
+### 1. Clean inventory and master-data exports before planning
 
-**Process step:** E-commerce team publishes products in the online shop · **Approach:** quick win · **Lever:** more units sold · **Human role:** Quality control (AI produces, a person verifies)
+**Process step:** Order data is managed centrally and used to plan inventory and production · **Approach:** quick win · **Lever:** lower cost per unit · **Human role:** Quality control (AI produces, a person verifies)
 
-**Change the process first.** Standardize a product-attribute intake form and require one approval gate before publication; do not let free-text inputs bypass the checklist.
+**Change the process first.** Define one owner for planning exports, remove duplicate spreadsheet copies, and standardize the field names and merge rules before AI touches the data. Then let AI normalize formats, flag duplicates, and produce a change log for review.
 
-**How the work runs afterwards.** When a new SKU is ready, the content team triggers the workflow from the approved product sheet. AI drafts the listing copy and local-language variants from verified attributes and brand rules, and flags missing fields or risky claims. A product owner reviews the draft, corrects food/legal wording, and approves publication in the shop.
+**How the work runs afterwards.** Each day or planning cycle, the export lands in one approved location. AI cleans dates, categories, and duplicates, then a planner validates exceptions and signs off the final dataset before it feeds inventory and production planning.
 
-**Money effect.** Faster listing creation increases the rate at which new and replenished products go live, which supports more sellable assortment without adding proportional headcount.
+**Money effect.** At roughly 20–40 recurring exports per week (assumption) and about 15 minutes of manual cleanup per export (assumption), this frees about 5–10 hours/week and reduces rework in planning.
 
-**Why it fits.** This step is repetitive and already runs on explicit product data, so AI can remove blank-page work without touching the core product decision. The error cost is manageable if a person verifies claims before publication, which fits a quality-control setup. KoRo is scaling assortment and omnichannel reach, so faster publishing helps revenue volume directly.
+**Reference.** Adapted from "Clean inconsistent spreadsheet and master-data exports" ([OpenAI / ChatGPT use cases](https://learn.chatgpt.com/use-cases/clean-messy-data)); workflow guide.
 
-**Reference pattern.** Adapted from "Draft and localize product listings" ([n8n](https://n8n.io/workflows/13673-generate-e-commerce-product-descriptions-from-a-form-with-google-gemini/)); workflow template.
+**Pilot.** Baseline the current weekly cleanup hours, incorrect merges, and unresolved records; the planning operations owner is accountable; scale when cleanup time falls materially and the validated dataset is accepted for planning with no material increase in bad merges.
 
-**Source evidence.** Template generates listings from product form data and optionally translates them. Publisher-reported; this does not establish the same outcome for this company.
+### 2. Reduce warehouse travel after the move
 
-**What has to be in place**
+**Process step:** Warehouse teams receive inbound goods and put stock away after the warehouse move · **Approach:** redesign then automate · **Lever:** lower cost per unit · **Human role:** No regrets (AI runs it)
 
-- A current product master with verified ingredients, pack sizes, images, pricing, and country-specific legal fields
-- A brand and claims rulebook for food copy and translations
-- A publication approval owner in ecommerce or product marketing
-- GDPR and EU AI Act review if any customer or employee data appears in the workflow
+**Change the process first.** Re-map the put-away process around the new warehouse layout, remove unnecessary walking paths and ad hoc placement rules, and define fixed storage zones before using AI. Then let AI analyze movement patterns and propose a better layout and put-away sequence.
 
-**Pilot.** Baseline: average hours from product sign-off to live listing and correction rate in today’s publishing process. Success measure: approved listings per hour and correction rate from the card’s pilot metrics. Owner: Head of E-commerce. Scale when drafts are consistently accurate, approvals stay fast, and no prohibited claims slip through in the pilot sample.
+**How the work runs afterwards.** After each inbound wave, movement and location data are captured automatically. AI proposes better storage assignments and route changes; warehouse leads approve the layout or routing changes and supervisors implement them on the floor.
 
-### 2. Interpret inbound B2B requests and route them into the quote/order flow
+**Money effect.** If the move created even 30–60 minutes of extra walking per shift for 2–3 shifts/day (assumption), a better layout could save about 1.5–3 labor hours/day, or roughly 500–1,000 hours/year.
 
-**Process step:** Customer orders are captured through the online shop and routed to operations · **Approach:** redesign then automate · **Lever:** lower cost per unit · **Human role:** Quality control (AI produces, a person verifies)
+**Reference.** Adapted from "Improve picking routes and warehouse layout" ([Plattform Lernende Systeme / META-Regalbau](https://www.plattform-lernende-systeme.de/booklet-include-elemente.html)); customer case study.
 
-**Change the process first.** Define one intake path for inbound B2B email requests and standardize the minimum fields required before any quote or order is created; remove re-typing into multiple systems.
+**Pilot.** Record current travel time per pick and throughput before changes; the warehouse operations owner is accountable; scale when travel time falls and throughput improves without raising mis-picks or put-away errors.
 
-**How the work runs afterwards.** A B2B request or dealer email becomes the trigger. AI extracts customer, SKU, quantity, delivery, and pricing details, then creates a draft ERP action or quote for review. An exception owner checks price, product availability, and any customer-specific terms before the order is released.
+### 3. Draft and localize product listings for new SKUs
 
-**Money effect.** This reduces manual order-entry time and errors in the B2B channel, lowering processing cost per order and improving speed to quote.
+**Process step:** Customers browse and place orders in the online shop or through retail/B2B channels · **Approach:** quick win · **Lever:** more units sold · **Human role:** Creative catalyst (AI proposes, a person chooses)
 
-**Why it fits.** KoRo is expanding B2B while still operating with a lot of operational complexity, so the biggest gain is not end-to-end automation but eliminating re-keying and exception chasing. The knowledge is explicit in catalogs, prices, and order fields, but the financial error cost is high enough to keep a human reviewer. This is a better fit than broad forecasting because it attacks a visible bottleneck in the order path.
+**Change the process first.** Standardize the product brief so every new SKU has the same minimum attributes, approved claims, and brand rules before drafting starts. Then let AI generate listing drafts and translations, while a product owner chooses the best version and checks factual and food-related claims.
 
-**Reference pattern.** Adapted from "Interpret emailed orders and quotation requests" ([Google Cloud / Danfoss](https://cloud.google.com/customers/danfoss?hl=zh-TW)); customer case study.
+**How the work runs afterwards.** When a new product brief is complete, AI creates listing copy and localized variants from verified attributes. A merchandiser or product owner reviews the options, rejects unsafe or noncompliant claims, and publishes the final version.
 
-**Source evidence.** Danfoss reports 50% less processing time and about five minutes saved per order. Publisher-reported; this does not establish the same outcome for this company.
+**Money effect.** If KoRo launches or refreshes 10–20 listings per week (assumption) and each currently takes 45–60 minutes of drafting plus translation work (assumption), this could save about 8–20 hours/week and speed time-to-shelf.
 
-**What has to be in place**
+**Reference.** Adapted from "Draft and localize product listings" ([n8n](https://n8n.io/workflows/13673-generate-e-commerce-product-descriptions-from-a-form-with-google-gemini/)); workflow template.
 
-- A current product catalog with B2B prices, pack sizes, and availability rules
-- An ERP or CRM integration that can create draft orders or quotes
-- A named exception owner for price, product, and customer-term exceptions
-- GDPR and EU AI Act review if customer contact details or personal data are processed
+**Pilot.** Baseline current approved listings per hour and correction rate; the product content owner is accountable; scale when approved listings rise and correction rate stays below the agreed threshold.
 
-**Pilot.** Baseline: minutes per B2B request and erroneous order entries in the current manual process. Success measure: minutes per order and erroneous order entries from the card’s pilot metrics. Owner: B2B Sales Operations Lead. Scale when draft extraction is reliable, exception handling is stable, and the review team can process requests faster than today without more errors.
+## 3. Redesign the work, then apply AI
 
-### 3. Reduce pick-route waste by redesigning warehouse movement and slotting
+Do not automate the process as found — redesign it first. AI on yesterday’s workflow usually speeds up waste: retyping, handoffs, and approvals that should not exist. Break the work into tasks, cut or relocate what nobody needs, then decide what AI drafts or proposes and what a named person still owns. Ask which process to clean up first, and which human capabilities should get stronger afterward — not merely what can be automated.
 
-**Process step:** Warehouse team receives and stores inbound goods · **Approach:** redesign then automate · **Lever:** lower cost per unit · **Human role:** Quality control (AI produces, a person verifies)
+Redesign pays when it moves unit economics, not when it saves a few clicks. Remove double entry and cycle time falls; standardize intake and errors fall; give specialists AI-prepared options and they spend time on judgment and customers. People stay accountable for money, legal, and customer outcomes; AI removes low-value motion around them. That is how AI becomes a complement instead of a faster broken process.
 
-**Change the process first.** Measure actual movement paths, identify the longest travel patterns, and redesign slotting and put-away rules before automating recommendations.
+There are two ways to use AI in that redesign:
 
-**How the work runs afterwards.** The trigger is a recurring warehouse review cycle or a change in demand mix. AI analyzes movement and storage patterns to propose better slotting, put-away, and flow changes. Warehouse supervisors validate the proposal, apply the revised layout or rule set, and monitor whether travel time and throughput improve.
+- **Option A — Automate / substitute.** AI copies what people already do and takes over those tasks. Machines become substitutes for labor. Output can get cheaper, but people become more replaceable and more of the upside goes to whoever owns the system.
+- **Option B — Augment / complement.** AI enables people to do things they could not do before. Humans and machines are complements. Augmentation also tends to create new products, services, and tasks — not only cheaper versions of old ones.
 
-**Money effect.** Shorter travel paths and better slotting lower labor time per received or picked unit and improve warehouse throughput, which matters at KoRo’s current order scale.
+This brief’s speculative redesign below is written as **Option B**.
 
-**Why it fits.** KoRo’s current pressure is operational scale after the warehouse move, so warehouse movement is one of the few places where process redesign can directly cut unit cost. This is not a no-regrets automation task because the right answer depends on local layout and worker behavior, which need human validation. The process should be redesigned first so AI is improving a better warehouse flow rather than speeding up a bad one.
+**How we redesign with AI**
 
-**Reference pattern.** Adapted from "Improve picking routes and warehouse layout" ([Plattform Lernende Systeme / META-Regalbau](https://www.plattform-lernende-systeme.de/booklet-include-elemente.html)); customer case study.
+**Pattern we use in every brief**
 
-**Source evidence.** META-Regalbau reports about EUR 22000 annual savings from layout and logistics improvements. Publisher-reported; this does not establish the same outcome for this company.
+| Step | Question | AI role | Human role |
+|------|----------|---------|------------|
+| 1. Purpose | What business outcome is this step for? | — | Name the lever (volume, price, unit cost, risk) |
+| 2. Eliminate | What can disappear? | Flag duplicate/low-value steps from logs or samples | Cut re-entry, status theatre, unused approvals |
+| 3. Standardize | One path in? | Enforce fields / classify intake | One exception owner |
+| 4. Redesign flow | What is the new happy path? | Draft, retrieve, propose | Decide, commit money/customer/legal outcomes |
+| 5. Pilot | Did a metric move? | Run on one queue/team | Baseline → compare → scale or stop |
 
-**What has to be in place**
+**Business-value test.** Ship the redesign only if a named owner can point to a unit-economics lever and a baseline number to improve in the first meeting.
 
-- Movement or scan data that shows travel paths, put-away locations, and activity times
-- A current warehouse layout map and slotting rules
-- Worker and shift-lead involvement in the redesign process
-- A warehouse owner who can approve layout and rule changes
+### Speculative case (Option B — augment / complement)
 
-**Pilot.** Baseline: travel time per pick and current throughput in the target zone. Success measure: travel time per pick and throughput from the card’s pilot metrics. Owner: Warehouse Operations Manager. Scale when the pilot zone shows sustained movement savings, no increase in errors, and workers adopt the new slotting rules.
+**AI-assisted assortment sensing for B2B expansion**
 
-## 3. Questions for the first meeting
+*Speculation for the meeting — not one of the three library-backed use cases above.*
 
-### 1. Draft and localize product listings from verified product data
+**Today.** KoRo is expanding through B2B and supermarket channels, but assortment decisions and account conversations likely rely on fragmented sales signals, manual reviews, and commercial intuition across countries.
 
-**Assumptions to test**
+**Redesigned with AI.** Create a cross-channel signal desk where AI combines retailer sell-through, web demand, stock pressure, and regional seasonality into opportunity briefs. Commercial and category managers use those briefs to decide which packs, sizes, and localized assortments to push in each market, rather than only reacting to orders after the fact.
 
-- New SKUs currently wait for manual copywriting and translation before they can be published.
-- Product attributes are already available in a structured source rather than only in scattered emails or PDFs.
-- A human reviewer will remain responsible for food claims, allergens, and country-specific wording.
+**New capability.** KoRo could proactively design retailer-specific assortment offers and identify regional demand gaps earlier, giving the team a new decision capability rather than just faster admin.
 
-**Do you have this?**
+**Business value if true.** If the signal desk improves B2B close rate or assortment productivity by even a small amount, it could raise revenue per commercial head and reduce failed listings or slow-moving stock across countries.
 
-- Do you have a single product master with the attributes needed for shop copy in each market?
-- Do you have a named approver who can sign off listing text before publication?
-- Do you have a maintained brand and claims guide for D2C and B2B product pages?
+## 4. Questions for the first meeting
 
-**To decide whether this is the right use case**
+### How to approach the conversation
 
-- How many listings per week are delayed by copy or translation work today?
-- How long does a product page take from approved data to live in the shop?
-- Who owns final approval when a claim, allergen, or localization issue appears?
+As an AI consultant, start from the business, not from the tool: what the company wants to achieve, what blocks that, and which knowledge it can put to work — how it earns money, where cost and errors pile up, how work really runs, and where useful data and experience live (systems, files, or people’s heads). Only then ask where AI can connect information, create options, or take on steps — and which measurable result would prove the change was worth it.
 
-### 2. Interpret inbound B2B requests and route them into the quote/order flow
+### General questions
 
-**Assumptions to test**
+- What would “success in 12 months” look like in one sentence?
+- Where do cost, delays, rework or complaints hurt most — and who owns that?
+- Where does critical know-how live today, and how hard is it to find and trust?
+- Who would own a first pilot, and which one metric would convince leadership?
 
-- Inbound B2B requests still arrive as emails or attachments rather than already being entered cleanly in a portal.
-- Product and price data are sufficiently standardized that the AI can map requests to valid SKUs.
-- A named person can resolve exceptions quickly instead of the system needing full autonomy.
+### Use-case questions
 
-**Do you have this?**
+Ordered by: without an answer, there is no pilot.
 
-- Do you have a shared B2B inbox or intake channel for these requests?
-- Do you have ERP or CRM access that can receive draft quotes or draft orders?
-- Do you have a clear owner for exceptions on pricing, substitutions, and credit or delivery terms?
-
-**To decide whether this is the right use case**
-
-- How many B2B requests arrive per day or week, and what share need manual re-entry?
-- What is the current average time from request receipt to usable draft quote or order?
-- Where do errors hurt most today: pricing, wrong SKU, missing address, or delayed response?
-
-### 3. Reduce pick-route waste by redesigning warehouse movement and slotting
-
-**Assumptions to test**
-
-- The warehouse system records enough movement or scan data to identify route waste.
-- Current slotting and put-away rules are not already optimized for the new warehouse layout.
-- Front-line supervisors will adopt revised rules rather than working around them.
-
-**Do you have this?**
-
-- Do you have usable WMS scan or movement data for put-away and pick paths?
-- Do you have a current warehouse layout and slotting logic documented?
-- Do you have a supervisor or process owner who can test and enforce new slotting rules?
-
-**To decide whether this is the right use case**
-
-- How much travel time or waiting time is currently spent per pick or put-away?
-- What throughput problem hurts most today: congestion, mis-slotting, or long walking distances?
-- Who owns layout and slotting decisions in the warehouse today?
+- Who owns the single source of truth for planning exports, and where does that file live today after the warehouse move?
+- How many planning exports or master-data cleanup cycles do you run per week, and about how many minutes does each one take now?
+- What are the current warehouse travel-time or put-away delays since the move, and which shifts or zones are the worst affected?
+- How many inbound put-away workers and shifts are in scope, so we can turn travel-time changes into labor-hour savings?
 
 ### Numbers to ask for
 
-- Gross margin / contribution margin per order
-- Average order value
-- Average basket size in units or kilograms
-- Fulfillment cost per order
-- Share of revenue from D2C vs B2B vs offline retail
-- Return / spoilage / write-off rates
-- Warehouse capacity and inventory turnover
-- Carrier cost and on-time delivery performance
+- Revenue was not stated in the sources.
+- Gross margin was not stated in the sources.
+- Average order value was not stated in the sources.
+- Fulfillment cost per order was not stated in the sources.
+- Unit sales volumes by channel were not stated in the sources.
+- 20–40 recurring exports per week
 
 ### Gaps in the public research
 
 - Job postings come from web search, not from the company's own careers page.
+- Use-case selection still breaks rules after one retry: 'Draft and localize product listings for new SKUs' sits on 'Customers browse and place orders in the online shop or through retail/B2B channels', which is also listed under leave_alone.
 
-## 4. How these use cases were chosen
+## 5. How these use cases were chosen
 
-Every process step was rated against a rubric drawn from public frameworks: the money lever it touches, error cost and type of knowledge (HBR), whether the task is repetitive, a bottleneck, or ambiguous (OpenAI, Taylor Radey), the full cost including human review (MIT Sloan), and feasibility in data, systems, and know-how (appliedAI). The most promising steps were matched against a curated library of customer cases, documented solutions, and workflow templates, and three were adapted to this company.
+Every process step was rated against a rubric (money lever, HBR human role, opportunity type, full cost, feasibility, redesign-before-AI, augment vs substitute). The strongest steps were matched to a curated library via retrieval and company-fit reranking; three cards were adapted to this company.
 
 - [APQC, How Can Organizations Identify And Prioritize Valuable AI Use Cases?](https://www.apqc.org/How-Can-Organizations-Identify-And-Prioritize-Valuable-AI-Use-Cases)
 - [AWS, Taxonomy of agentic primitives in Amazon Quick (2026)](https://aws.amazon.com/blogs/machine-learning/taxonomy-of-agentic-primitives-in-amazon-quick/)
@@ -217,15 +178,18 @@ Every process step was rated against a rubric drawn from public frameworks: the 
 - [appliedAI, How to find and prioritize AI use cases (2020)](https://www.appliedai.de/uploads/files/Whitepapers/appliedAI-Whitepaper-Applying-AI-How-to-find-and-prioritize-AI-use-cases-2020-EN.pdf)
 - [MIT Sloan, How to find the right business use cases for generative AI (2025)](https://mitsloan.mit.edu/ideas-made-to-matter/how-to-find-right-business-use-cases-generative-ai)
 - [Taylor Radey, Finding AI use cases: one helpful framework to try (2025)](https://www.taylorradey.com/post/finding-ai-use-cases-framework)
+- [MIT Sloan, Want AI-Driven Productivity? Redesign Work](https://sloanreview.mit.edu/article/want-ai-driven-productivity-redesign-work/)
+- [MIT Sloan, Don’t Let Artificial Intelligence Supercharge Bad Processes](https://sloanreview.mit.edu/article/dont-let-artificial-intelligence-supercharge-bad-processes/)
+- [HBR, The Secret to Successful AI-Driven Process Redesign (2025)](https://hbr.org/2025/01/the-secret-to-successful-ai-driven-process-redesign)
+- [HBR, Stop Automating Old Processes. Design New Ones Instead. (2026)](https://hbr.org/2026/09/stop-automating-old-processes-design-new-ones-instead)
+- [Randstad, Before you automate, AI-vate or agent-icate](https://www.randstadenterprise.com/insights/randstad-enterprise-insights/before-you-automate-ai-vate-or-agent-icate/)
+- [Brynjolfsson, The Turing Trap, Stanford Digital Economy Lab (2022)](https://digitaleconomy.stanford.edu/news/the-turing-trap-the-promise-peril-of-human-like-artificial-intelligence/)
 
-## 5. Sources
+## 6. Sources
 
 - [KoRo Online Shop: Top-Qualität in Großpackungen | KoRo](https://www.korodrogerie.de)
 - [Lieferverzögerungen nach Lagerumzug: Alle Infos & Lieferzeiten](https://www.korodrogerie.de/b/lieferverzoegerungen-nach-lagerumzug)
 - [KoRo Jobs & Karriere: Dein Platz im Team! | KoRo](https://www.korodrogerie.de/career)
-- Job posting: [Talent Acquisition Manager (m/w/d) @ KoRo | Partech Job Board](https://portfoliojobs.partechpartners.com/companies/koro/jobs/45595998-talent-acquisition-manager-m-w-d)
-- Job posting: [KoRo: Jobs](https://www.linkedin.com/company/koro-offical/jobs)
-- Job posting: [Offene Stellen bei KoRo Handels GmbH | XING](https://www.xing.com/pages/korohandelsgmbh/jobs)
+- Job posting: [Remote & Homeoffice Jobs bei KoRo Handels GmbH | remotely.de](https://www.remotely.de/firma/koro-handels-gmbh)
 - News: [KoRo Handels scales to 15,000 orders a day with Dynamics 365 Business Central | Microsoft Customer Stories](https://www.microsoft.com/en/customers/story/27081-koro-handels-dynamics-365-business-central)
-- Register: [Koro Handels GmbH – Wikipedia](https://de.wikipedia.org/wiki/Koro_Handels_GmbH)
-- Register: [KoRo Handels GmbH, Berlin, Amtsgericht Charlottenburg (Berlin) HRB 156598 B: Netzwerk, Wirtschaftsinfos](https://www.northdata.de/KoRo%20Handels%20GmbH,%20Berlin/Amtsgericht%20Charlottenburg%20(Berlin)%20HRB%20156598%20B)
+- Company record: [KoRo Handels GmbH, Berlin, Amtsgericht Charlottenburg (Berlin) HRB 156598 B: Netzwerk, Wirtschaftsinfos](https://www.northdata.de/KoRo%20Handels%20GmbH,%20Berlin/Amtsgericht%20Charlottenburg%20(Berlin)%20HRB%20156598%20B)

@@ -28,19 +28,24 @@ class Claim(BaseModel):
 
 
 class ProcessStep(BaseModel):
-    name: str
-    data_input: str
-    data_output: str
-    likely_system: str = Field(description="System the step most likely runs in, or 'unknown'")
+    name: str = Field(description="Observable work at this company, e.g. 'Dealers place reorders by email'")
+    data_input: str = Field(description="What enters the step")
+    data_output: str = Field(description="What leaves the step")
+    likely_system: str = Field(
+        description="Observable channel or light system guess: email, dealer portal, shop cart, ERP, WMS, "
+        "spreadsheets, unknown. Prefer the channel people actually use when sources show it."
+    )
     status: Status
     evidence: str = Field(description=EVIDENCE_HELP)
 
 
 class BusinessModel(BaseModel):
     company_type: str = Field(description="One line: what kind of company this is")
-    business_model: list[Claim] = Field(description="Who pays, for what, through which channel")
-    unit_economics: list[Claim] = Field(description="The earning unit and what drives its margin")
-    process_map: list[ProcessStep]
+    business_model: list[Claim] = Field(description="Who pays, for what, through which channel; at most 4 items")
+    unit_economics: list[Claim] = Field(description="The earning unit and what drives its margin; at most 4 items")
+    process_map: list[ProcessStep] = Field(
+        description="As few steps as needed for this company's operating chain; typically 6 to 8, never pad"
+    )
     open_numbers: list[str] = Field(description="Numbers that matter for the unit economics but were not found")
 
 
@@ -70,14 +75,26 @@ class UseCase(BaseModel):
     process_change: str = Field(description="What to change, remove, or standardize in the process itself, before or alongside AI")
     what_changes: str = Field(description="How the work runs afterwards: trigger, what AI does, what people do")
     money_lever: MoneyLever
-    money_effect: str = Field(description="How it moves this company's unit economics")
+    money_effect: str = Field(
+        description="Concrete unit-economics effect with rough volumes or times. Mark unknown figures as assumptions, "
+        "e.g. 'At ~80 dealer emails/day and ~4 minutes sorting (assumption), this frees ~5 hours/day'."
+    )
     source_card: str = Field(description="The id of the library card this is adapted from")
     framework_reasoning: str = Field(description="Two or three sentences applying the rubric to this step at this company")
     prerequisites: list[str] = Field(description="Statements of what must exist, not questions")
     pilot: str = Field(description="Baseline to record, success measure, accountable owner, and the condition for scaling")
-    questions_assumptions: list[str] = Field(description="Assumptions to test, riskiest first")
-    questions_prerequisites: list[str] = Field(description="'Do you have ...?' questions specific to this company")
-    questions_decision: list[str] = Field(description="What to learn to decide if this is the right use case")
+
+
+class SpeculativeAugmentation(BaseModel):
+    title: str = Field(description="Short name of the speculative redesigned process")
+    process_today: str = Field(description="How the work roughly runs today at this company")
+    redesigned_with_ai: str = Field(
+        description="How the process would be redesigned so AI and people work as complements, not as a job replacement"
+    )
+    new_capability: str = Field(
+        description="What people could do afterward that they could not do before (new product, service, decision, or reach)"
+    )
+    business_value: str = Field(description="Concrete unit-economics upside if the speculation holds")
 
 
 class UseCasePicks(BaseModel):
@@ -87,6 +104,17 @@ class UseCasePicks(BaseModel):
     )
     leave_alone: list[str] = Field(description="Steps not worth automating now, each with a short reason")
     use_cases: list[UseCase]
+    meeting_questions: list[str] = Field(
+        description="Exactly 4 questions for the three use cases, ordered by: without an answer there is no pilot. "
+        "Mix assumptions to test, 'do you have X?', and the volumes or times needed for the money estimates."
+    )
+    numbers_to_ask: list[str] = Field(
+        description="At most 6 unknown volumes, times, costs, or rates used as assumptions in the money_effect texts"
+    )
+    speculative_augmentation: SpeculativeAugmentation = Field(
+        description="One speculative Option-B case: redesign a process with AI so humans gain a capability they did not have, "
+        "not a case that only replaces existing labor"
+    )
 
 
 class RunState(BaseModel):

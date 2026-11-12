@@ -34,7 +34,7 @@ Every source gets an id (S1, S2, and so on) before the model sees it. The model 
 ## Grounding: two layers
 
 - **How to think.** `corpus/frameworks/rubric.md` holds nine short sections written in our own words from public HBR, OpenAI, appliedAI, MIT Sloan, and Taylor Radey material, each with a check question and a link. It goes into the prompt whole on every run.
-- **What others already do.** `corpus/use_cases/*.yaml` holds the use-case cards. `python -m app.library` embeds each card with OpenAI and upserts it to Pinecone. At run time, the five most promising process steps each retrieve their three nearest cards. The model may only adapt a retrieved card, and code checks this.
+- **What others already do.** `corpus/use_cases/*.yaml` holds the use-case cards. `python -m app.library` embeds each card with OpenAI and upserts it to Pinecone. At run time, the five most promising process steps each retrieve the eight nearest cards; an LLM reranks them by company fit (70%) and similarity (30%) and keeps the top three. The model may only adapt a retrieved-and-reranked card, and code checks this.
 
 ## Tools
 

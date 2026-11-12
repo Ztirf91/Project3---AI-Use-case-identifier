@@ -1,0 +1,625 @@
+# Curated SME extensions, researched 12 November 2026.
+# Source descriptions are paraphrased; SME workflow designs and pilot metrics are editorial adaptations.
+# verified means the cited description was checked, not that a template was run or vendor results independently audited.
+# Multiple tools for the same task belong in additional_sources rather than duplicate cards.
+
+- id: operational-dashboard
+  title: Maintain an operational dashboard from approved exports
+  source_name: OpenAI / ChatGPT use cases
+  source_url: https://learn.chatgpt.com/use-cases/analyze-data-export
+  source_type: workflow guide
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Guide builds a private dashboard from spreadsheets and checks approved sources on a schedule.
+  pattern: Sales, stock or service figures are manually copied into recurring reports.
+  ai_does: Checks data freshness and reconciles totals, refreshes agreed KPIs and flags exceptions for the owner.
+  process_types:
+  - management
+  - controlling
+  - operations
+  needs:
+  - approved exports
+  - KPI definitions
+  - refresh schedule and owner
+  sme_fit: High after metric definitions and source ownership are settled.
+  money_lever: unit_cost
+  typical_effect: null
+  approach: redesign then automate
+  pilot_metrics:
+  - Reporting hours
+  - reconciliation error
+  - source freshness
+  human_role: The process owner validates evidence and approves consequential actions.
+  task_scope: Monitors agreed operating metrics; does not create a separate forecasting or feedback-analysis case.
+  limitations: A scheduled check must run in an available execution environment; refreshed data does not guarantee
+    correct metric definitions.
+- id: tabular-data-cleaning
+  title: Clean inconsistent spreadsheet and master-data exports
+  source_name: OpenAI / ChatGPT use cases
+  source_url: https://learn.chatgpt.com/use-cases/clean-messy-data
+  source_type: workflow guide
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Guide cleans tabular copies while preserving originals and documenting uncertain changes.
+  pattern: Mixed dates, duplicate records and inconsistent categories block imports and analysis.
+  ai_does: Normalizes formats, proposes duplicate handling and writes a change log without inventing missing values.
+  process_types:
+  - data management
+  - back office
+  - IT
+  needs:
+  - source exports
+  - field definitions
+  - approved merge rules
+  sme_fit: High for recurring CSV cleanup; validate identifiers before importing.
+  money_lever: unit_cost
+  typical_effect: null
+  approach: quick win
+  pilot_metrics:
+  - Cleanup hours
+  - incorrect merges
+  - unresolved records
+  human_role: The process owner validates evidence and approves consequential actions.
+  task_scope: Produces a validated reusable dataset; does not interpret business trends or process invoice documents.
+- id: cash-flow-forecast
+  title: Build a rolling liquidity forecast with scenarios
+  source_name: OpenAI / ChatGPT use cases
+  source_url: https://learn.chatgpt.com/use-cases/cash-flow-forecast
+  source_type: workflow guide
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Guide builds an editable forecast showing cash low points, assumptions and safety-balance breaches.
+  pattern: Management cannot readily see when upcoming receipts and payments create a cash shortfall.
+  ai_does: Builds formula-based cash scenarios and explains timing assumptions for finance review.
+  process_types:
+  - finance
+  - treasury
+  - management
+  needs:
+  - opening cash
+  - receivables and payables
+  - payroll and payment timing
+  sme_fit: Medium; finance must validate completeness and timing.
+  money_lever: risk
+  typical_effect: null
+  approach: redesign then automate
+  pilot_metrics:
+  - Preparation hours
+  - cash forecast error
+  - missed liquidity alerts
+  human_role: The process owner validates evidence and approves consequential actions.
+  task_scope: Estimates future cash availability; separate from historical budget variance and product demand forecasts.
+- id: budget-variance-review
+  title: Reconcile budget and actuals and draft variance commentary
+  source_name: OpenAI / ChatGPT use cases
+  source_url: https://learn.chatgpt.com/use-cases/budget-vs-actuals-review
+  source_type: workflow guide
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Guide maps actuals to budget, checks reconciliation and separates evidence-backed explanations
+    from questions.
+  pattern: Month-end staff manually map accounts and explain spend deviations.
+  ai_does: Calculates variances with formulas, flags unmatched accounts and drafts commentary from supplied close
+    notes.
+  process_types:
+  - finance
+  - controlling
+  needs:
+  - budget
+  - actuals export
+  - account mapping and close notes
+  sme_fit: High with stable accounts and finance sign-off.
+  money_lever: unit_cost
+  typical_effect: null
+  approach: quick win
+  pilot_metrics:
+  - Close preparation hours
+  - unmapped balance
+  - unsupported explanations
+  human_role: The process owner validates evidence and approves consequential actions.
+  task_scope: Explains past actual-versus-plan performance; does not predict liquidity or replace the live dashboard.
+- id: presentation-preparation
+  title: Prepare customer and training presentations from approved material
+  source_name: OpenAI / ChatGPT use cases
+  source_url: https://learn.chatgpt.com/use-cases/generate-slide-decks
+  source_type: workflow guide
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Guide creates or revises editable presentations from source material and reference decks.
+  pattern: Sales and operations repeatedly assemble slides from existing documents and figures.
+  ai_does: Drafts a narrative and slides in the company template; staff verify figures and final layout.
+  process_types:
+  - sales
+  - training
+  - management
+  needs:
+  - approved source material
+  - slide template
+  - named reviewer
+  sme_fit: High when source material already exists.
+  money_lever: unit_cost
+  typical_effect: null
+  approach: quick win
+  pilot_metrics:
+  - Preparation hours
+  - factual corrections
+  - approved decks
+  human_role: The process owner validates evidence and approves consequential actions.
+  task_scope: Creates presentation deliverables; separate from ad copy and social content distribution.
+- id: lost-deal-analysis
+  title: Analyze reasons for lost sales opportunities
+  source_name: Make / Lost Deals Analysis Agent
+  source_url: https://we.make.com/public/shared-scenario/iHSvOkZbwQE/lost-deals-analysis-agent
+  source_type: workflow template
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Make lists an agent that analyzes lost Salesforce deals and related companies for recurring loss
+    patterns.
+  pattern: Closed-lost CRM notes are rarely compared across accounts.
+  ai_does: Groups recorded loss reasons and evidence gaps for a sales-manager review.
+  process_types:
+  - sales
+  - account management
+  needs:
+  - CRM loss history
+  - consistent close reasons
+  - sales review owner
+  sme_fit: Medium to high with enough well-documented lost deals.
+  money_lever: volume
+  typical_effect: null
+  approach: quick win
+  pilot_metrics:
+  - Analysis time
+  - evidence-backed loss reasons
+  - actions adopted
+  human_role: The process owner validates evidence and approves consequential actions.
+  task_scope: Analyzes completed lost deals; separate from qualifying new leads or coaching individual calls.
+  verification_scope: Description and linked scenario checked in the Make library; scenario internals require interactive
+    access and were not tested.
+  additional_sources:
+  - name: Make library description
+    url: https://www.make.com/ai-agents-library
+    source_type: template listing
+    summary: The named entry describes this task and links to the specific scenario.
+    verified_on: '2026-11-12'
+- id: inbound-lead-qualification
+  title: Prioritize incoming leads against a defined customer profile
+  source_name: Make / Lead Qualification Agent
+  source_url: https://we.make.com/public/shared-scenario/LEsubqrg0cA/lead-qualification-agent
+  source_type: workflow template
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Make lists an agent that researches inbound leads and assesses fit to an ideal customer profile.
+  pattern: Sales spends equal effort on suitable and unsuitable incoming prospects.
+  ai_does: Checks lead information against explicit fit criteria and prepares a reviewable priority queue.
+  process_types:
+  - sales
+  - lead management
+  needs:
+  - inbound lead records
+  - ideal customer criteria
+  - CRM and sales owner
+  sme_fit: High for regular B2B lead flow; staff review uncertain classifications.
+  money_lever: volume
+  typical_effect: null
+  approach: quick win
+  pilot_metrics:
+  - Qualification minutes
+  - qualified meeting rate
+  - false rejection rate
+  human_role: The process owner validates evidence and approves consequential actions.
+  task_scope: Prioritizes newly received leads; does not duplicate pre-meeting account research or send outreach.
+  verification_scope: Description and linked scenario checked in the Make library; scenario internals require interactive
+    access and were not tested.
+  additional_sources:
+  - name: Make library description
+    url: https://www.make.com/ai-agents-library
+    source_type: template listing
+    summary: The named entry describes this task and links to the specific scenario.
+    verified_on: '2026-11-12'
+- id: sales-call-coaching
+  title: Review sales conversations against a coaching checklist
+  source_name: Make / Sales Coach Agent
+  source_url: https://we.make.com/public/shared-scenario/Je9BiroxeMv/sales-coach-agent
+  source_type: workflow template
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Make lists an agent that reviews sales calls against team standards and suggests coaching points.
+  pattern: Managers cannot consistently review calls for objection handling and discovery quality.
+  ai_does: Links observations to transcript passages and suggests practice points for a human coach.
+  process_types:
+  - sales
+  - training
+  needs:
+  - lawfully obtained transcripts
+  - coaching checklist
+  - staff data and access rules
+  sme_fit: Medium; define employee involvement and use for coaching before deployment.
+  money_lever: volume
+  typical_effect: null
+  approach: redesign then automate
+  pilot_metrics:
+  - Manager review time
+  - evidence accuracy
+  - agreed skill improvements
+  human_role: The process owner validates evidence and approves consequential actions.
+  task_scope: Evaluates conversation technique; separate from recording meeting actions or analyzing lost-deal patterns.
+  verification_scope: Description and linked scenario checked in the Make library; scenario internals require interactive
+    access and were not tested.
+  additional_sources:
+  - name: Make library description
+    url: https://www.make.com/ai-agents-library
+    source_type: template listing
+    summary: The named entry describes this task and links to the specific scenario.
+    verified_on: '2026-11-12'
+- id: website-seo-audit
+  title: Audit existing pages against search and content criteria
+  source_name: Make / SEO Optimization Agent
+  source_url: https://we.make.com/public/shared-scenario/89q0H01J9qY/seo-optimization-agent
+  source_type: workflow template
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Make lists an agent that audits webpages against chosen keywords and SEO criteria.
+  pattern: Small marketing teams cannot routinely check every important landing page.
+  ai_does: Identifies content gaps and prioritizes proposed edits for an editor to validate.
+  process_types:
+  - marketing
+  - e-commerce
+  - website management
+  needs:
+  - page URLs
+  - target keywords
+  - editorial criteria and reviewer
+  sme_fit: High for shops and service firms; traffic gains require measurement.
+  money_lever: volume
+  typical_effect: null
+  approach: quick win
+  pilot_metrics:
+  - Audit hours
+  - accepted findings
+  - organic conversions
+  human_role: The process owner validates evidence and approves consequential actions.
+  task_scope: Diagnoses existing pages; does not generate product listings or campaign advertisements.
+  verification_scope: Description and linked scenario checked in the Make library; scenario internals require interactive
+    access and were not tested.
+  additional_sources:
+  - name: Make library description
+    url: https://www.make.com/ai-agents-library
+    source_type: template listing
+    summary: The named entry describes this task and links to the specific scenario.
+    verified_on: '2026-11-12'
+- id: engineering-drawing-retrieval
+  title: Find installation-specific engineering drawings for repairs
+  source_name: OpenAI / Kuken Industries
+  source_url: https://openai.com/index/kuken/
+  source_type: customer case study
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Kuken reports finding a replacement-part drawing in 4.5 minutes instead of nearly an hour; annual
+    savings remain projected.
+  pattern: Engineers need the correct legacy drawing before ordering or designing a replacement.
+  ai_does: Reads part numbers or drawing screenshots, retrieves candidates and leaves installation compatibility
+    to an engineer.
+  process_types:
+  - engineering
+  - technical service
+  - after-sales
+  needs:
+  - digitized drawings
+  - installation and revision metadata
+  - qualified engineer
+  sme_fit: Medium for manufacturers with extensive installed-base archives.
+  money_lever: unit_cost
+  typical_effect: 'Publisher-reported drawing retrieval time: 4.5 minutes versus nearly one hour. The 90% annual
+    search-hours reduction is a projection.'
+  approach: redesign then automate
+  pilot_metrics:
+  - Drawing search time
+  - correct revision rate
+  - compatibility errors
+  human_role: The process owner validates evidence and approves consequential actions.
+  task_scope: Retrieves installation-specific drawing records; not general document Q&A or identifying a physical
+    part from a photograph.
+- id: software-change-review
+  title: Review software changes for defects before release
+  source_name: OpenAI / CodeRabbit
+  source_url: https://openai.com/index/coderabbit-codex-daybreak/
+  source_type: customer case study
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: CodeRabbit describes using OpenAI reasoning models for code review and evaluating them against
+    known issues.
+  pattern: Small development teams have limited time to review shop, integration and internal-app changes.
+  ai_does: Inspects changes and surrounding code, proposes findings and lets a developer validate fixes before merging.
+  process_types:
+  - software development
+  - IT
+  - e-commerce technology
+  needs:
+  - version-controlled repository
+  - tests
+  - developer review and code access controls
+  sme_fit: Medium; relevant only with maintained code and technical ownership.
+  money_lever: risk
+  typical_effect: null
+  approach: redesign then automate
+  pilot_metrics:
+  - Confirmed defects found
+  - false positives
+  - reviewer time
+  human_role: The process owner validates evidence and approves consequential actions.
+  task_scope: Pre-release defect review; separate from generic coding assistance and production incident handling.
+  limitations: The source reports company-wide coding throughput; that figure is not evidence of a code-review-only
+    productivity gain.
+- id: candidate-profile-drafting
+  title: Create factual candidate profiles from interview records
+  source_name: Microsoft / Rau Consultants
+  source_url: https://www.microsoft.com/de-de/customers/story/24690-rau-foodrecruitment-gmbh-microsoft-365-business-premium
+  source_type: customer case study
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Rau Consultants reports faster, more consistent candidate-profile drafts from interview transcripts
+    with Microsoft 365 Copilot.
+  pattern: Recruiters spend time turning interviews into a standard candidate dossier.
+  ai_does: Drafts profiles with source references and missing facts; recruiters verify every claim and make all
+    hiring decisions.
+  process_types:
+  - HR
+  - recruiting
+  - professional services
+  needs:
+  - permitted interview records
+  - profile template
+  - HR access and review rules
+  sme_fit: Medium; licenses, data handling and applicable hiring-AI requirements need review.
+  money_lever: unit_cost
+  typical_effect: null
+  approach: redesign then automate
+  pilot_metrics:
+  - Profile preparation time
+  - factual corrections
+  - missing facts
+  human_role: The process owner validates evidence and approves consequential actions.
+  task_scope: Produces a factual candidate dossier; excludes applicant scoring and differs from job-ad creation
+    and sales meeting notes.
+  limitations: No automated candidate ranking or emotional inference. HR must assess data protection and applicable
+    employment-AI requirements before use.
+- id: supplier-quote-comparison
+  title: Compare supplier quotations before purchasing
+  source_name: Microsoft / Dynamics 365 ERP guidance
+  source_url: https://learn.microsoft.com/de-de/dynamics365/fin-ops-core/fin-ops/copilot/use-copilot-cowork-erp
+  source_type: workflow guide
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Microsoft documents extracting RFQ offer details, evaluating them against criteria and seeking
+    approval before an order.
+  pattern: Purchasing manually compares prices, terms and specification differences across offers.
+  ai_does: Normalizes offer terms, flags non-comparable items and drafts a comparison for the buyer.
+  process_types:
+  - procurement
+  - purchasing
+  needs:
+  - supplier offers
+  - RFQ specifications
+  - comparison criteria and buyer approval
+  sme_fit: Medium; Microsoft example requires compatible ERP, connectors, roles and licenses.
+  money_lever: unit_cost
+  typical_effect: null
+  approach: redesign then automate
+  pilot_metrics:
+  - Comparison hours
+  - missed term differences
+  - total purchasing cost
+  human_role: The process owner validates evidence and approves consequential actions.
+  task_scope: Evaluates incoming supplier offers; not sales quoting, invoice capture, contract review or purchase-policy
+    checks.
+- id: content-repurposing
+  title: Repurpose approved long-form content for several channels
+  source_name: Zapier / Blog content repurposing
+  source_url: https://zapier.com/templates/details/repurpose-blog-content-across-channels
+  source_type: workflow template
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Template reads a blog and brand guidance, drafts channel-specific social posts and prepares an
+    email digest.
+  pattern: An approved article is underused because each channel needs separate editing and scheduling.
+  ai_does: Adapts an existing article into social and newsletter drafts for editor approval before scheduling.
+  process_types:
+  - marketing
+  - communications
+  needs:
+  - approved article
+  - brand guide
+  - channel connections and editorial approval
+  sme_fit: High for firms already publishing useful long-form material.
+  money_lever: unit_cost
+  typical_effect: null
+  approach: quick win
+  pilot_metrics:
+  - Distribution preparation time
+  - approved adaptations
+  - referral conversions
+  human_role: The process owner validates evidence and approves consequential actions.
+  task_scope: Transforms existing editorial material for distribution; separate from original ad-copy generation
+    and product descriptions.
+- id: employee-onboarding-coordination
+  title: Coordinate new-hire welcomes and milestone check-ins
+  source_name: Zapier / New Hire Onboarding Orchestrator
+  source_url: https://zapier.com/templates/details/new-hire-onboarding-orchestrator-personalized-welcome-and-check-in-scheduling
+  source_type: workflow template
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Template uses a new BambooHR record to personalize a Slack welcome and schedule milestone check-ins.
+  pattern: HR repeatedly coordinates welcomes and managers forget onboarding follow-ups.
+  ai_does: Prepares a role-specific welcome and schedules agreed check-ins under HR rules.
+  process_types:
+  - HR
+  - onboarding
+  - operations
+  needs:
+  - employee start records
+  - onboarding policy
+  - calendar and messaging permissions
+  sme_fit: High for recurring hires; fixed scheduling can use ordinary automation.
+  money_lever: unit_cost
+  typical_effect: null
+  approach: quick win
+  pilot_metrics:
+  - HR coordination time
+  - missed check-ins
+  - onboarding completion
+  human_role: The process owner validates evidence and approves consequential actions.
+  task_scope: Coordinates onboarding actions after hiring; not an internal knowledge assistant or a candidate evaluation
+    tool.
+  limitations: Use ordinary rules for fixed date calculations; AI is useful only for individualized wording or variable
+    task guidance.
+- id: technical-document-translation
+  title: Translate technical and operating documents with terminology review
+  source_name: Dify / File Translation
+  source_url: https://marketplace.dify.ai/template/langgenius/f9392e33-23f9-4bca-84f9-83d851b62321?language=en-US&theme=light
+  source_type: workflow template
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Dify template extracts uploaded document text and translates it, with follow-up terminology and
+    style instructions.
+  pattern: Service teams and suppliers need multilingual manuals and operating instructions.
+  ai_does: Drafts a translation using an approved glossary; a qualified reviewer validates safety-critical language.
+  process_types:
+  - technical service
+  - procurement
+  - operations
+  needs:
+  - source documents
+  - terminology glossary
+  - qualified language and technical reviewers
+  sme_fit: Medium; layout, model hosting and data handling need checking separately.
+  money_lever: unit_cost
+  typical_effect: null
+  approach: quick win
+  pilot_metrics:
+  - Translation time
+  - terminology errors
+  - reviewer corrections
+  human_role: The process owner validates evidence and approves consequential actions.
+  task_scope: Translates existing technical documents; not product listing localization or creating new marketing
+    copy.
+  limitations: A translation template is not proof of GDPR compliance; review hosting, model provider, contracts,
+    access and retention for the intended deployment.
+- id: spare-part-image-identification
+  title: Match customer part photographs to catalogue items
+  source_name: Plattform Lernende Systeme / Nico Fahrzeugteile
+  source_url: https://www.plattform-lernende-systeme.de/booklet-include-elemente.html
+  source_type: customer case study
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Nico Fahrzeugteile developed image matching for customer photographs and shop articles.
+  pattern: Customers request replacement parts without a readable serial or item number.
+  ai_does: Ranks catalogue matches from photographs and requests missing views; staff confirm compatibility before
+    supply.
+  process_types:
+  - after-sales
+  - spare parts
+  - dealer support
+  needs:
+  - labelled catalogue images
+  - part compatibility data
+  - technical reviewer
+  sme_fit: Medium for manufacturers and parts dealers; requires representative images.
+  money_lever: volume
+  typical_effect: null
+  approach: strategic bet
+  pilot_metrics:
+  - Identification time
+  - correct top matches
+  - wrong-part returns
+  human_role: The process owner validates evidence and approves consequential actions.
+  task_scope: Identifies a physical part from its photo; not drawing-archive retrieval or a surface-defect inspection.
+- id: competitor-price-monitoring
+  title: Match competitor listings and monitor market prices
+  source_name: Plattform Lernende Systeme / Tatonka
+  source_url: https://www.plattform-lernende-systeme.de/booklet-include-elemente.html
+  source_type: customer case study
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Tatonka uses market intelligence with text and image product matching to track prices across online
+    channels.
+  pattern: Product teams manually compare listings that use inconsistent names and images.
+  ai_does: Matches equivalent products, flags uncertain matches and summarizes price movements for commercial review.
+  process_types:
+  - e-commerce
+  - pricing
+  - product management
+  needs:
+  - permitted market data
+  - product identifiers
+  - pricing owner and matching rules
+  sme_fit: Medium with reliable product matching; managers retain pricing decisions.
+  money_lever: price
+  typical_effect: null
+  approach: redesign then automate
+  pilot_metrics:
+  - Monitoring hours
+  - match accuracy
+  - gross margin
+  human_role: The process owner validates evidence and approves consequential actions.
+  task_scope: Monitors comparable external product prices; not generating listings, forecasting demand or analyzing
+    customer opinions.
+- id: public-tender-discovery
+  title: Find relevant German public tenders against a company profile
+  source_name: Microsoft Marketplace / qune Vergabe
+  source_url: https://marketplace.microsoft.com/en-us/product/quneughaftungsbeschrnkt1686828023948.vergabe-m365-copilot
+  source_type: documented solution
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Marketplace listing describes semantic search and company-profile matching over German public
+    procurement notices.
+  pattern: B2B teams spend time searching portals and filtering unsuitable tenders.
+  ai_does: Prepares a shortlist with notice links, eligibility questions and closing dates for a bid owner.
+  process_types:
+  - sales
+  - business development
+  - public procurement
+  needs:
+  - company capability profile
+  - tender feed
+  - bid owner and eligibility criteria
+  sme_fit: High for firms selling to public bodies; confirm current connector and subscription requirements.
+  money_lever: volume
+  typical_effect: null
+  approach: quick win
+  pilot_metrics:
+  - Search hours
+  - eligible opportunities found
+  - missed deadlines
+  human_role: The process owner validates evidence and approves consequential actions.
+  task_scope: Finds open public tenders; not scoring individual inbound sales leads or comparing supplier quotations.
+  verification_scope: Product listing checked; no customer deployment or performance result established.
+- id: software-purchase-policy-review
+  title: Check software purchase requests against approved tools
+  source_name: Zapier / Software Purchase Request Reviewer
+  source_url: https://zapier.com/templates/details/software-purchase-request-reviewer-check-approved-tools-before-buying-anything-new
+  source_type: workflow template
+  verified: true
+  verified_on: '2026-11-12'
+  source_summary: Template checks new software requests against approved tools before a new purchase is considered.
+  pattern: Teams buy overlapping subscriptions without checking existing licensed alternatives.
+  ai_does: Compares requested capabilities with the approved inventory and drafts a recommendation for IT and procurement.
+  process_types:
+  - IT
+  - procurement
+  - finance
+  needs:
+  - software inventory
+  - purchase policy
+  - request form and approval owner
+  sme_fit: High when subscription ownership and inventory are maintained.
+  money_lever: unit_cost
+  typical_effect: null
+  approach: quick win
+  pilot_metrics:
+  - Review time
+  - duplicate purchases avoided
+  - incorrect recommendations
+  human_role: The process owner validates evidence and approves consequential actions.
+  task_scope: Checks necessity and policy before buying software; not invoice processing, expense classification
+    or supplier price comparisons.

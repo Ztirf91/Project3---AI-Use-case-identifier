@@ -57,11 +57,11 @@ Source: appliedAI (2020), link above
 
 ## 7. Fix the process before automating it
 
-AI can support an existing process or replace it with a better one. Automating a poor process only makes the waste faster. Where a step is a workaround (re-typing, chasing information, duplicate checks), the better move is often to remove or redesign the step and then let AI handle what remains.
+AI can support an existing process or replace it with a better one. Automating a poor process only makes the waste faster. Where a step is a workaround (re-typing, chasing information, duplicate checks), the better move is often to remove or redesign the step and then let AI handle what remains. Full stance and sources: [process_redesign.md](process_redesign.md).
 
 Check: Should this step exist in its current form, or should it be redesigned first?
 
-Sources: appliedAI (2020), link above ; HBR (2025), link above
+Sources: see [process_redesign.md](process_redesign.md)
 
 ## 8. Prioritize: quick wins first, but not only
 

@@ -17,21 +17,23 @@ Do not contradict the sources. If a source shows sales through dealers, do not c
 Sources marked [estimate] come from data aggregators. Quote their figures only as estimates, e.g. "around 300 employees (aggregator estimate)".
 Use the news: market exits, new plants, product launches, and restructuring change the business model and priorities.
 
-Business model: who pays, for what, through which channels, in which markets.
-Unit economics: name the unit that earns money and what drives its margin: price, volume, cost per unit, risk.
-Use numbers only when a source states them. List the numbers that matter but were not found under open_numbers.
+Business model: who pays, for what, through which channels, in which markets. At most 4 bullets.
+Unit economics: name the unit that earns money and what drives its margin: price, volume, cost per unit, risk. At most 4 bullets.
+Use numbers only when a source states them. List the numbers that matter but were not found under open_numbers (at most 6).
 
-Process map: the operational value chain, as many steps as the business really has (usually 8 to 12), one line each.
-Cover the whole chain where it applies: product development, procurement, production or service delivery,
-sales and channel management, order handling, logistics, after-sales and warranty, marketing, and support functions.
-Name each step as an activity with an actor and an object, for example "Purchasing orders components from suppliers"
-or "Service team processes warranty claims from dealers". Never a bare department name like "Procurement" or "Logistics".
-Each step has a data input, a data output, and the system it most likely runs in.
-likely_system is a system category (ERP, CRM, PLM, WMS, shop system, ticketing, spreadsheets) as a reasonable guess.
-Name a specific product or channel (a portal, email, a software brand) only if a source shows it.
+Process map: the operating chain for THIS company, as few steps as needed, typically 6 to 8. Never pad.
+Skip support functions that are not central (generic HR/finance) unless sources show they matter for AI now.
+Name each step as observable work at this company, not a department label.
+Good: "Dealers place bike reorders and configuration requests by email"
+Good: "Warehouse team puts away inbound food after the warehouse move"
+Bad: "Procurement" / "Logistics" / "Product management designs premium e-bikes" as a generic PLM step
+Each step has a data input, a data output, and likely_system.
+For likely_system prefer the channel people actually use when sources show it (email, dealer portal, shop cart,
+shared inbox). Use a light system category (ERP, WMS, spreadsheets, ticketing) only as a guess otherwise.
+Do not invent software brands. Avoid stuffing every map with PLM/MES/QMS/CRM unless a source supports that step.
 For every step, go through the sources and check whether one shows that this step exists at this company.
-A job posting for a warehouse, assembly, marketing, or service role proves the matching step. A website statement
-such as "we assemble in Germany" proves production. In those cases the step is "belegt" with that source id.
+A job posting for warehouse, assembly, dealer support, or order management proves the matching step.
+A website statement such as "we assemble in Germany" proves production. Those steps are "belegt" with that source id.
 Only steps that no source mentions are "abgeleitet".
 Write in English."""
 

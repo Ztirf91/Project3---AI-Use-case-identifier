@@ -16,11 +16,13 @@
 
 {% for c in m.unit_economics %}- {{ c.text }} {{ tag(c) }}
 {% endfor %}
-### Current process map
+### Preliminary process overview
 
-| # | Step | Data in | Data out | Likely system | Basis |
-|---|------|---------|----------|---------------|-------|
-{% for p in m.process_map %}| {{ loop.index }} | {{ cell(p.name) }} | {{ cell(p.data_input) }} | {{ cell(p.data_output) }} | {{ cell(p.likely_system) }} | {{ tag(p) }} |
+Working hypothesis from public sources; validate with the company.
+
+{% if process_image %}![Process map for {{ s.company_name }}]({{ process_image }})
+
+{% endif %}{% for p in m.process_map %}- **{{ loop.index }}. {{ p.name }}** · {{ p.likely_system }} · {{ tag(p) }}
 {% endfor %}
 {% else %}_The business could not be modeled from the available research._
 {% endif %}
@@ -46,61 +48,81 @@
 
 **Money effect.** {{ u.money_effect }}
 
-**Why it fits.** {{ u.framework_reasoning }}
+{% if card %}**Reference.** Adapted from "{{ card.title }}" ([{{ card.source_name }}]({{ card.source_url }})); {{ card.source_type | default('generic pattern') }}.{% endif %}
 
-{% if card %}**Reference pattern.** Adapted from "{{ card.title }}" ([{{ card.source_name }}]({{ card.source_url }})); {{ card.source_type | default('generic pattern') }}.{% if not card.verified %} Source not yet checked.{% endif %}
-{% if card.get('source_summary') %}
-**Source evidence.** {{ card.source_summary }} Publisher-reported; this does not establish the same outcome for this company.
-{% endif %}
-{% if card.get('blueprint_url') %}
-**How it could be built.** [Reference architecture]({{ card.blueprint_url }})
-{% if card.get('blueprint_note') %}{{ card.blueprint_note }}{% endif %}
-{% endif %}{% endif %}
-**What has to be in place**
-
-{% for p in u.prerequisites %}- {{ p }}
-{% endfor %}
 **Pilot.** {{ u.pilot }}
 
 {% endfor %}
-## 3. Questions for the first meeting
+## 3. Redesign the work, then apply AI
 
-{% for u in picks.use_cases %}### {{ loop.index }}. {{ u.title }}
+{% for p in redesign_paragraphs %}{{ p }}
 
-**Assumptions to test**
-
-{% for q in u.questions_assumptions %}- {{ q }}
 {% endfor %}
-**Do you have this?**
+There are two ways to use AI in that redesign:
 
-{% for q in u.questions_prerequisites %}- {{ q }}
-{% endfor %}
-**To decide whether this is the right use case**
+- **{{ ai_paths.a_title }}.** {{ ai_paths.a_text }}
+- **{{ ai_paths.b_title }}.** {{ ai_paths.b_text }}
 
-{% for q in u.questions_decision %}- {{ q }}
-{% endfor %}
-{% endfor %}{% else %}
+This brief’s speculative redesign below is written as **Option B**.
+
+{% if redesign_proposal %}**How we redesign with AI**
+
+{{ redesign_proposal }}
+
+{% endif %}{% if picks.speculative_augmentation %}### Speculative case (Option B — augment / complement)
+
+**{{ picks.speculative_augmentation.title }}**
+
+*Speculation for the meeting — not one of the three library-backed use cases above.*
+
+**Today.** {{ picks.speculative_augmentation.process_today }}
+
+**Redesigned with AI.** {{ picks.speculative_augmentation.redesigned_with_ai }}
+
+**New capability.** {{ picks.speculative_augmentation.new_capability }}
+
+**Business value if true.** {{ picks.speculative_augmentation.business_value }}
+{% endif %}
+{% else %}
 _No use cases could be selected. See the research gaps below._
 {% endif %}
-{% if m and m.open_numbers %}### Numbers to ask for
+## 4. Questions for the first meeting
 
-{% for n in m.open_numbers %}- {{ n }}
+### How to approach the conversation
+
+{{ discovery_intro }}
+
+### General questions
+
+{% for q in discovery_questions %}- {{ q }}
+{% endfor %}
+
+{% if picks and picks.meeting_questions %}### Use-case questions
+
+Ordered by: without an answer, there is no pilot.
+
+{% for q in picks.meeting_questions %}- {{ q }}
+{% endfor %}
+{% endif %}
+{% if numbers %}### Numbers to ask for
+
+{% for n in numbers[:6] %}- {{ n }}
 {% endfor %}{% endif %}
 {% if s.notes %}### Gaps in the public research
 
 {% for n in s.notes %}- {{ n }}
 {% endfor %}{% endif %}
 
-## 4. How these use cases were chosen
+## 5. How these use cases were chosen
 
-Every process step was rated against a rubric drawn from public frameworks: the money lever it touches, error cost and type of knowledge (HBR), whether the task is repetitive, a bottleneck, or ambiguous (OpenAI, Taylor Radey), the full cost including human review (MIT Sloan), and feasibility in data, systems, and know-how (appliedAI). The most promising steps were matched against a curated library of customer cases, documented solutions, and workflow templates, and three were adapted to this company.
+Every process step was rated against a rubric (money lever, HBR human role, opportunity type, full cost, feasibility, redesign-before-AI, augment vs substitute). The strongest steps were matched to a curated library via retrieval and company-fit reranking; three cards were adapted to this company.
 
 {% for f in frameworks %}- [{{ f.name }}]({{ f.url }})
 {% endfor %}
-## 5. Sources
+## 6. Sources
 
 {% for p in s.site_pages %}- [{{ p.title }}]({{ p.url }})
 {% endfor %}{% for j in s.job_postings %}- Job posting: [{{ j.title }}]({{ j.url }})
 {% endfor %}{% for n in s.news %}- News: [{{ n.title }}]({{ n.url }})
-{% endfor %}{% for r in s.register_hits %}- Register: [{{ r.title }}]({{ r.url }})
+{% endfor %}{% for r in s.register_hits %}- Company record: [{{ r.title }}]({{ r.url }})
 {% endfor %}

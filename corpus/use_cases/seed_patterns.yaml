@@ -29,6 +29,13 @@
   - Minutes per message
   - routing accuracy
   human_role: A named process owner validates outputs and approves consequential actions.
+  additional_sources:
+  - name: 'OpenAI / ChatGPT: Get your email to inbox zero'
+    url: https://learn.chatgpt.com/use-cases/manage-your-inbox
+    source_type: workflow guide
+    summary: Guide prioritizes messages and drafts replies; sending and cleanup actions require approval.
+    verified_on: '2026-11-12'
+  task_scope: Organizes incoming mail and drafts responses; policy-grounded support answers remain customer-support-assistant.
 - id: invoice-and-document-processing
   title: Extract supplier invoices into a review ledger
   source_name: n8n
@@ -370,8 +377,9 @@
   verified: true
   verified_on: '2026-11-12'
   source_summary: Panasonic describes translation and analysis of app reviews across more than seventy countries.
-  pattern: Reviews accumulate without a consistent product feedback loop.
-  ai_does: Translates and groups feedback for product owners to validate and prioritize.
+  pattern: Reviews, support tickets and surveys accumulate without a consistent product feedback loop.
+  ai_does: Translates where needed, groups feedback across approved sources and links themes to evidence for product-owner
+    review.
   process_types:
   - product management
   - quality
@@ -389,6 +397,15 @@
   - theme accuracy
   - issues acted on
   human_role: A named process owner validates outputs and approves consequential actions.
+  additional_sources:
+  - name: 'OpenAI / ChatGPT: Analyze product feedback across tools'
+    url: https://learn.chatgpt.com/use-cases/feedback-synthesis
+    source_type: workflow guide
+    summary: Guide groups feedback from support, surveys and other tools into themes with supporting evidence and
+      follow-ups.
+    verified_on: '2026-11-12'
+  task_scope: Finds repeated customer problems and product requests; broader source coverage is one pattern, not
+    another card.
 - id: internal-knowledge-assistant
   title: Search internal knowledge while preserving access rights
   source_name: Google Cloud / Glean
@@ -443,6 +460,13 @@
   - Unplanned downtime
   - false alarms
   human_role: A named process owner validates outputs and approves consequential actions.
+  additional_sources:
+  - name: 'Mittelstand-Digital Zentrum Ilmenau: Green.AI Thueringen'
+    url: https://www.zentrum-ilmenau.digital/green-ai-thueringen-nachhaltige-ki-fuer-den-mittelstand/
+    source_type: demonstrator
+    summary: Regional demonstrator shows sensor-based anomaly detection on fans; no measured customer savings are
+      stated.
+    verified_on: '2026-11-12'
 - id: warehouse-picking-optimization
   title: Improve picking routes and warehouse layout
   source_name: Plattform Lernende Systeme / META-Regalbau

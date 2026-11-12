@@ -6,201 +6,172 @@
 
 ## 1. The company
 
-**Premium e-bike and cargo bike manufacturer selling through dealers and serving B2C and B2B customers.**
+**Premium e-bike and e-cargo bike manufacturer selling mainly through specialist dealers, with an added connected-service and business/fleet offering.**
 
 ### Business model
 
-- Customers pay for premium e-bikes, cargo bikes, accessories, and related services such as warranty, insurance, and connected-bike features. *([documented](https://www.r-m.de/de/))*
-- B2C buyers are served mainly through a dealer network for advice, test rides, handover, and maintenance rather than through a direct web shop. *([documented](https://www.r-m.de/de/))*
-- B2B customers buy fleet and sharing solutions through Riese & Müller Business. *([documented](https://www.r-m.de/de/))*
-- Employers and employees pay for job bike leasing offerings coordinated via the company’s leasing proposition. *([documented](https://www.r-m.de/de/))*
-- The company focuses on European core markets and its dealer network after exiting the US market. *([documented](https://www.bicycleretailer.com/industry-news/2026/04/20/riese-m%C3%BCller-will-leave-us-market-july))*
+- Customers pay for premium e-bikes, e-cargo bikes, accessories, services, and connected-bike features through the specialist dealer channel and the company website’s dealer locator / service pages. *([documented](https://www.r-m.de/de/))*
+- Dealers are the main sales and service channel: they advise customers, arrange test rides, and handle maintenance/in-service support. *([documented](https://www.r-m.de/de/))*
+- The company also sells to business customers with premium bikes for fleet and sharing use cases. *([documented](https://www.r-m.de/de/))*
+- In the US, the company is exiting the market, so revenue focus shifts further toward European core markets and the dealer network there. *([documented](https://www.bicycleretailer.com/industry-news/2026/04/20/riese-m%C3%BCller-will-leave-us-market-july))*
+- It monetizes connected-bike services through RX Connect, including features such as trip tracking, location, insurance, and theft protection; some models include this in the first year. *([documented](https://www.r-m.de/de/ueber-uns/))*
 
 ### Unit economics
 
-- The earning unit is a premium bicycle or cargo bike, with margin driven by product price, configuration options, and component quality. *([documented](https://www.r-m.de/de/ueber-uns/))*
-- Margin is also influenced by manufacturing efficiency because the company assembles in Germany and runs a series-production operation. *([documented](https://www.r-m.de/de/ueber-uns/))*
-- Connected-bike and after-sales services such as RX Connect, warranty extension, and insurance add recurring or attach revenue potential around the bike sale. *([documented](https://www.r-m.de/de/ueber-uns/))*
-- Dealer-led sales and service shift some customer support and maintenance costs to the retailer network, supporting a lower direct-service burden for the manufacturer. *(assumption)*
+- The earning unit is a configured premium bicycle or cargo bike sold through dealers; margin is driven by premium pricing, configuration mix, and component quality. *([documented](https://www.r-m.de/de/))*
+- Service and connected-bike add-ons increase lifetime value beyond the initial bike sale, especially through registration, insurance, and digital features. *([documented](https://www.r-m.de/de/ueber-uns/))*
+- Because the company assembles in Germany and emphasizes quality standards, margin is likely sensitive to labor, component cost, and manufacturing efficiency. *([documented](https://www.r-m.de/de/ueber-uns/))*
+- Dealer network reach and market focus affect volume and demand generation; the US exit indicates that market economics can change the profitable mix by region. *([documented](https://www.bicycleretailer.com/industry-news/2026/04/20/riese-m%C3%BCller-will-leave-us-market-july))*
 
-### Current process map
+### Preliminary process overview
 
-| # | Step | Data in | Data out | Likely system | Basis |
-|---|------|---------|----------|---------------|-------|
-| 1 | Product management designs premium e-bikes and cargo bikes | Market feedback, design requirements, component options | Bike concepts and specifications | PLM | *([documented](https://www.r-m.de/de/ueber-uns/))* |
-| 2 | Purchasing sources components from global partners | Specifications, bills of materials, supplier offers | Purchased parts and components | ERP | *([documented](https://www.r-m.de/de/ueber-uns/))* |
-| 3 | Production team assembles bikes in Germany | Components, work orders, assembly instructions | Finished premium bikes | MES | *([documented](https://www.r-m.de/de/ueber-uns/))* |
-| 4 | Quality team checks products against ISO standards | Finished units, test results, quality criteria | Quality approvals and nonconformance records | QMS | *([documented](https://www.r-m.de/de/ueber-uns/))* |
-| 5 | Warehouse team receives and stores inbound goods | Incoming parts, delivery notes | Put-away inventory and stock records | WMS | *([documented](https://jobs.r-m.de/job/M%C3%BChltal-Sch%C3%BClerpraktikant-%28mwd%29/963222555/))* |
-| 6 | Logistics team picks and stages parts for production | Stock locations, production demand | Picked kits and line-side supply | WMS | *([documented](https://jobs.r-m.de/job/M%C3%BChltal-Sch%C3%BClerpraktikant-%28mwd%29/963222555/))* |
-| 7 | Sales team and dealers sell bikes to customers | Product portfolio, dealer inquiries, customer demand | Customer orders and dealer allocations | CRM | *([documented](https://www.r-m.de/de/))* |
-| 8 | Order management processes production and delivery status | Orders, delivery milestones, customer emails | Status updates and delivery confirmations | ERP | *([documented](https://www.r-m.de/de/))* |
-| 9 | Customer support handles questions, help-center requests, and warranty topics | Customer inquiries, warranty claims, service issues | Resolved cases and support responses | ticketing | *([documented](https://www.r-m.de/de/))* |
-| 10 | Marketing team runs international paid media and brand campaigns | Media budgets, audience data, funnel metrics | Leads, traffic, conversions, campaign reports | CRM | *([documented](https://jobs.r-m.de/job/M%C3%BChltal-Senior-Manager-Paid-Media-&-Performance-Marketing-%28mwd%29/1362995955/))* |
-| 11 | After-sales team manages connected-bike, insurance, and registration services | Bike registrations, connected-device data, insurance enrollment | Activated services and customer records | ticketing | *([documented](https://www.r-m.de/de/ueber-uns/))* |
+Working hypothesis from public sources; validate with the company.
+
+![Process map for Riese & Müller](riese-mueller-process-map.png)
+
+- **1. Customers discover bikes, accessories, and business offers via the website and dealer network** · website / dealer locator · *([documented](https://www.r-m.de/de/))*
+- **2. Specialist dealers advise, demo, and help customers choose a configuration** · dealer channel · *([documented](https://www.r-m.de/de/))*
+- **3. Orders are accepted and routed through the dealer sales network in Europe** · dealer portal / email · *([documented](https://www.r-m.de/de/))*
+- **4. Bikes are designed and assembled in Germany to company quality standards** · ERP / production systems · *([documented](https://www.r-m.de/de/ueber-uns/))*
+- **5. Finished bikes are handed over through dealers and can be registered in the customer’s Mein Bike account** · dealer process / customer account · *([documented](https://www.r-m.de/de/))*
+- **6. RX Connect digital services activate tracking, location, insurance, and theft protection for eligible models** · app / connected service platform · *([documented](https://www.r-m.de/de/ueber-uns/))*
+- **7. Dealers provide aftersales maintenance and in-service support** · dealer workshop / service ticketing · *([documented](https://www.r-m.de/de/))*
+- **8. Marketing and paid media generate international demand and leads** · ad platforms / analytics · *([documented](https://jobs.r-m.de/job/M%C3%BChltal-Senior-Manager-Paid-Media-&-Performance-Marketing-%28mwd%29/1362995955/))*
 
 ### Where AI fits in this business
 
-Riese & Müller should use AI first where it reduces service and order-handling cost without touching the core product promise. With the US exit and a sharper focus on European core markets, the priority is to make dealer-facing operations leaner and more reliable, not to automate high-risk design or quality decisions end to end. The best near-term wins are in structured, repetitive flows that already pass through ERP, CRM, WMS, and ticketing systems: dealer request intake, inbox routing, and warehouse movement analysis. These can lower unit cost and free staff time while preserving the human review that fits a premium, dealer-led brand. More strategic forecasting or product-design bets should wait until the company has cleaner demand and installed-base data across its core markets.
+Riese & Müller should use AI to remove friction in the dealer-facing core, not to replace the dealer-led premium selling model. The near-term priority is to protect margin and volume in Europe after the U.S. exit by making order intake, service activation, and marketing operations cheaper and faster. That fits a business where revenue depends on premium configuration quality, dealer throughput, and add-on lifetime value. The company already has structured processes and digital touchpoints, so the best first move is to redesign narrow workflow steps and let AI draft, extract, or classify where the data is explicit. Human-led steps with tacit judgment—dealer advice, assembly, and aftersales diagnosis—should stay human-led for now because the error cost is high and the premium brand depends on trust and quality.
 
 **Leave alone for now**
 
-- Product management designs premium e-bikes and cargo bikes — design choices are tacit and high-stakes, so AI should not own concept decisions.
-- Quality team checks products against ISO standards — error cost is high and the step is already control-oriented; keep humans leading inspections.
-- After-sales team manages connected-bike, insurance, and registration services — this is customer-sensitive and high-error-cost work, so automate only small assistive pieces later.
+- Specialist dealers advise, demo, and help customers choose a configuration — high error cost and tacit product-fit judgment make this a human-led premium-selling step.
+- Bikes are designed and assembled in Germany to company quality standards — quality and safety risk are too high for end-to-end AI automation.
+- Dealers provide aftersales maintenance and in-service support — fault diagnosis and customer trust rely on tacit expertise, so AI should only assist later if at all.
 
 ## 2. Three use cases
 
-### 1. Triage dealer and customer emails into order, service, and exception queues
+### 1. Triage dealer order emails into structured order drafts
 
-**Process step:** Sales team and dealers sell bikes to customers · **Approach:** quick win · **Lever:** lower cost per unit · **Human role:** Quality control (AI produces, a person verifies)
+**Process step:** Orders are accepted and routed through the dealer sales network in Europe · **Approach:** redesign then automate · **Lever:** more units sold · **Human role:** Quality control (AI produces, a person verifies)
 
-**Change the process first.** Standardize a small set of intake categories for dealer emails and require every request to arrive in the shared inbox or portal with dealer ID, model, and country. Remove free-form retyping into CRM by routing the original message and extracted fields into one review queue.
+**Change the process first.** Define one intake owner, standardize the required order fields, and remove free-form back-and-forth for incomplete dealer requests before AI touches the process. Then let AI extract order data from emails and attachments into a draft order that the team verifies.
 
-**How the work runs afterwards.** Each incoming dealer or customer message triggers classification in the shared inbox. AI labels the request type, drafts the reply or next action, and extracts the key fields; a named sales operations owner reviews exceptions and approves outbound messages that affect pricing, allocation, or commitments.
+**How the work runs afterwards.** A dealer order email or PDF triggers extraction into a structured draft. AI pulls bike model, options, quantities, dealer details, and missing fields; the order team checks exceptions, pricing, and availability before submission to ERP or the dealer portal.
 
-**Money effect.** Cuts manual sorting and retyping time in dealer-facing sales operations, which matters now as the company refocuses on European dealer throughput after the US exit. Faster routing also reduces missed or delayed dealer responses, supporting volume without adding headcount.
+**Money effect.** At ~40 dealer order requests/day and ~5 minutes saved per request from the card pattern (assumption), this saves about 3.3 hours/day, or roughly 850 hours/year at 260 working days. If the real volume is higher, the savings scale directly with order count.
 
-**Why it fits.** This is repetitive, high-volume work with explicit categories, so it fits a quick win. The error cost is moderate to high because wrong routing can delay orders or promises, so the human must verify consequential replies. The company already works through dealer and service inboxes, so the process change is realistic without changing the business model.
+**Reference.** Adapted from "Interpret emailed orders and quotation requests" ([Google Cloud / Danfoss](https://cloud.google.com/customers/danfoss?hl=zh-TW)); customer case study.
 
-**Reference pattern.** Adapted from "Shared inbox classification and routing" ([n8n](https://n8n.io/workflows/9157-ai-powered-email-triage-and-auto-response-system-with-openai-agents-and-gmail/)); workflow template.
+**Pilot.** Baseline: current minutes per order and error rate in dealer order intake. Success measure: minutes per order and erroneous order entries, using the card’s pilot metrics. Owner: dealer sales operations lead. Scale when structured drafts are accepted reliably and exception rates stay below the current manual baseline.
 
-**Source evidence.** Template classifies incoming mail and routes it to specialist agents. Publisher-reported; this does not establish the same outcome for this company.
+### 2. Automate RX Connect activation checks and exception handling
 
-**What has to be in place**
+**Process step:** RX Connect digital services activate tracking, location, insurance, and theft protection for eligible models · **Approach:** quick win · **Lever:** lower cost per unit · **Human role:** Quality control (AI produces, a person verifies)
 
-- A shared dealer inbox or ticket queue with stable message categories
-- Named owners for sales, service, and order exceptions
-- GDPR-compliant handling of personal data in customer and dealer messages
+**Change the process first.** Keep activation exceptions out of the main flow by standardizing the activation checklist and naming an owner for missing serial numbers, consent flags, or service eligibility. Then use AI to validate incoming activation records, classify issues, and prepare the activation packet for human approval.
 
-**Pilot.** Baseline: current minutes spent per message and routing error rate in the dealer sales inbox. Success measure: lower minutes per message and higher routing accuracy against the current baseline. Accountable owner: Head of Sales Operations. Scale when the pilot shows reliable category accuracy, fewer handoff delays, and no increase in missed or incorrect dealer commitments.
+**How the work runs afterwards.** When a bike is sold or registered, the activation request enters a monitored queue. AI checks whether the serial number, model eligibility, and activation data are complete, flags gaps, and drafts the activation outcome; the service team only handles exceptions or approves edge cases.
 
-### 2. Convert inbound dealer order emails into ERP-ready quote and order drafts
+**Money effect.** If the company processes ~120 connected-service activations/day (assumption) and AI saves ~2 minutes of manual checking per activation, that frees about 4 hours/day, or roughly 1,000 hours/year at 250 working days. The value is lower rework and lower handling cost for a repetitive post-sale task.
 
-**Process step:** Order management processes production and delivery status · **Approach:** redesign then automate · **Lever:** lower cost per unit · **Human role:** Quality control (AI produces, a person verifies)
+**Reference.** Adapted from "Maintain an operational dashboard from approved exports" ([OpenAI / ChatGPT use cases](https://learn.chatgpt.com/use-cases/analyze-data-export)); workflow guide.
 
-**Change the process first.** Stop retyping dealer order content from email into ERP as a fully manual step. Require a single order template or structured attachment for the first intake step, and define one exception rule for price, configuration, or availability mismatches.
+**Pilot.** Baseline: current activation handling time and exception rate. Success measure: source freshness is not the main KPI here; use handling time and incorrect recommendations from the card’s metrics. Owner: connected services operations lead. Scale when the exception rate stays stable or drops and the verification workload is clearly lower than today.
 
-**How the work runs afterwards.** When an order email or attachment arrives, AI extracts the order details, matches them to the product catalog and dealer record, and creates a draft ERP order or quote. An order management specialist checks exceptions, confirms delivery milestones, and releases only clean cases into ERP.
+### 3. Draft and localize campaign variants for European demand generation
 
-**Money effect.** Reduces time spent converting messy dealer requests into usable orders and lowers entry errors that can trigger rework, returns, or delayed production planning. That matters more now because the company is concentrating on core European dealer operations and needs a tighter, lower-cost order flow.
+**Process step:** Marketing and paid media generate international demand and leads · **Approach:** quick win · **Lever:** more units sold · **Human role:** Creative catalyst (AI proposes, a person chooses)
 
-**Why it fits.** The step is document-heavy and explicit, which makes extraction feasible, but the consequences of a wrong order are financially material, so human verification is required. This is a redesign because the current process contains a retyping workaround that should be removed before automation. It fits the company’s dealer-led model because the AI supports the back office without changing who sells to customers.
+**Change the process first.** Narrow the workflow to approved product facts and a single campaign brief per region, then standardize the input format so AI does not have to infer claims or positioning. Let AI generate ad copy variants and calls to action; a marketer chooses the best ones and sends them into test and approval.
 
-**Reference pattern.** Adapted from "Interpret emailed orders and quotation requests" ([Google Cloud / Danfoss](https://cloud.google.com/customers/danfoss?hl=zh-TW)); customer case study.
+**How the work runs afterwards.** A campaign brief or product launch triggers copy generation. AI produces multiple ad variants, headline options, and CTA drafts in the brand voice; the marketing manager reviews, selects, and adapts them for the target market before launch.
 
-**Source evidence.** Danfoss reports 50% less processing time and about five minutes saved per order. Publisher-reported; this does not establish the same outcome for this company.
+**Money effect.** If the team currently needs ~30 minutes to draft and adapt one paid-media variant and AI cuts that to ~10 minutes, then each variant saves ~20 minutes. At ~25 variants/week (assumption), that is about 8.3 hours/week, or roughly 430 hours/year.
 
-**What has to be in place**
+**Reference.** Adapted from "Generate ad copy and calls to action" ([n8n](https://n8n.io/workflows/4372-generate-product-ad-copy-and-ctas-with-gpt-4-for-slack-and-airtable/)); workflow template.
 
-- A current product catalog with dealer prices, configurations, and country rules
-- ERP access for creating draft orders and quotes
-- A named exception owner for price, availability, and configuration mismatches
-- GDPR-compliant processing for dealer contact data and order documents
+**Pilot.** Baseline: current hours to produce approved variants and current conversion in controlled tests. Success measure: approved variants per hour and conversion in controlled tests, per the card. Owner: performance marketing lead. Scale when the team can produce more approved variants without increasing correction rate or lowering lead quality.
 
-**Pilot.** Baseline: current minutes per order and the rate of erroneous order entries. Success measure: lower minutes per order and fewer erroneous entries versus the baseline. Accountable owner: Head of Order Management. Scale when draft accuracy is consistently high, exception handling is stable, and ERP rework drops without increasing delivery promises made to dealers.
+## 3. Redesign the work, then apply AI
 
-### 3. Analyze warehouse movement data to redesign picking routes and staging layout
+Do not automate the process as found — redesign it first. AI on yesterday’s workflow usually speeds up waste: retyping, handoffs, and approvals that should not exist. Break the work into tasks, cut or relocate what nobody needs, then decide what AI drafts or proposes and what a named person still owns. Ask which process to clean up first, and which human capabilities should get stronger afterward — not merely what can be automated.
 
-**Process step:** Logistics team picks and stages parts for production · **Approach:** redesign then automate · **Lever:** lower cost per unit · **Human role:** Quality control (AI produces, a person verifies)
+Redesign pays when it moves unit economics, not when it saves a few clicks. Remove double entry and cycle time falls; standardize intake and errors fall; give specialists AI-prepared options and they spend time on judgment and customers. People stay accountable for money, legal, and customer outcomes; AI removes low-value motion around them. That is how AI becomes a complement instead of a faster broken process.
 
-**Change the process first.** Measure travel paths and waiting time before changing the layout or pick sequence. Standardize location data and define a fixed process owner who approves any relocation of fast-moving parts or line-side staging points.
+There are two ways to use AI in that redesign:
 
-**How the work runs afterwards.** The warehouse system or sensor data feeds AI analysis on travel distance, congestion, and staging delays. AI proposes a new pick sequence and slotting layout; the warehouse manager and team leads test the changes, keep the ones that reduce travel time, and reject changes that slow line feeding.
+- **Option A — Automate / substitute.** AI copies what people already do and takes over those tasks. Machines become substitutes for labor. Output can get cheaper, but people become more replaceable and more of the upside goes to whoever owns the system.
+- **Option B — Augment / complement.** AI enables people to do things they could not do before. Humans and machines are complements. Augmentation also tends to create new products, services, and tasks — not only cheaper versions of old ones.
 
-**Money effect.** Cuts non-value-added walking and waiting in internal logistics, which lowers labor cost per bike assembled in Germany. Because the company’s margin is tied to efficient serial production, even small time savings matter across a premium product mix.
+This brief’s speculative redesign below is written as **Option B**.
 
-**Why it fits.** Picking and staging are repetitive and data-rich, so this is a good fit for process redesign plus analysis. The error cost is not legal or customer-facing, but a bad layout change can hurt throughput, so a human owner must approve consequential moves. The company’s focus on manufacturing efficiency makes this more relevant than broader forecasting at this stage.
+**How we redesign with AI**
 
-**Reference pattern.** Adapted from "Improve picking routes and warehouse layout" ([Plattform Lernende Systeme / META-Regalbau](https://www.plattform-lernende-systeme.de/booklet-include-elemente.html)); customer case study.
+**Pattern we use in every brief**
 
-**Source evidence.** META-Regalbau reports about EUR 22000 annual savings from layout and logistics improvements. Publisher-reported; this does not establish the same outcome for this company.
+| Step | Question | AI role | Human role |
+|------|----------|---------|------------|
+| 1. Purpose | What business outcome is this step for? | — | Name the lever (volume, price, unit cost, risk) |
+| 2. Eliminate | What can disappear? | Flag duplicate/low-value steps from logs or samples | Cut re-entry, status theatre, unused approvals |
+| 3. Standardize | One path in? | Enforce fields / classify intake | One exception owner |
+| 4. Redesign flow | What is the new happy path? | Draft, retrieve, propose | Decide, commit money/customer/legal outcomes |
+| 5. Pilot | Did a metric move? | Run on one queue/team | Baseline → compare → scale or stop |
 
-**What has to be in place**
+**Business-value test.** Ship the redesign only if a named owner can point to a unit-economics lever and a baseline number to improve in the first meeting.
 
-- Movement or scan data for warehouse picks and staging
-- An up-to-date warehouse layout and location master data
-- A warehouse owner who can approve slotting and routing changes
-- GDPR and works-council review if worker movement data is used
+### Speculative case (Option B — augment / complement)
 
-**Pilot.** Baseline: current travel time per pick and line-side throughput. Success measure: lower travel time per pick and improved throughput versus the baseline. Accountable owner: Warehouse Manager. Scale when the pilot improves travel time without causing stock errors, congestion, or complaints from the team.
+**Dealer demand cockpit for premium Europe**
 
-## 3. Questions for the first meeting
+*Speculation for the meeting — not one of the three library-backed use cases above.*
 
-### 1. Triage dealer and customer emails into order, service, and exception queues
+**Today.** Marketing, dealer feedback, and order signals are likely reviewed in separate tools and meetings, so teams can see what happened but not easily turn it into a live regional opportunity picture.
 
-**Assumptions to test**
+**Redesigned with AI.** Combine dealer inquiries, campaign performance, web interest, and order signals into an AI-assisted demand cockpit that suggests which region, bike category, and message to prioritize next. Humans would use it to choose launches, allocate dealer support, and spot weak regions earlier than before.
 
-- Dealers still send most reorders and questions by email rather than through a structured portal.
-- The inbox volume is high enough and categories stable enough to benefit from automated triage.
-- Sales operations can own a review queue and enforce one standard intake path.
+**New capability.** The company could make faster regional demand decisions and create a new premium dealer-support service: a shared, insight-driven planning view for the European network.
 
-**Do you have this?**
+**Business value if true.** If better regional allocation lifts conversion or reduces wasted media by even 1-2% on European demand spend, it could improve volume while protecting margin after the U.S. exit. The bigger upside is earlier detection of weak demand pockets and better dealer support decisions, not labor replacement.
 
-- Do you have one shared inbox or ticketing queue for dealer sales requests today?
-- Do you have a CRM field structure for dealer ID, country, product line, and request type?
-- Do you have named people who can approve pricing, allocation, and exception replies?
+## 4. Questions for the first meeting
 
-**To decide whether this is the right use case**
+### How to approach the conversation
 
-- How many dealer or customer messages arrive per day or week, and how much time is spent sorting them now?
-- What is the current routing or response error rate, and which mistakes hurt most: late replies, wrong allocation, or pricing errors?
-- Who owns the inbox today, and where do messages most often get stuck?
+As an AI consultant, start from the business, not from the tool: what the company wants to achieve, what blocks that, and which knowledge it can put to work — how it earns money, where cost and errors pile up, how work really runs, and where useful data and experience live (systems, files, or people’s heads). Only then ask where AI can connect information, create options, or take on steps — and which measurable result would prove the change was worth it.
 
-### 2. Convert inbound dealer order emails into ERP-ready quote and order drafts
+### General questions
 
-**Assumptions to test**
+- What would “success in 12 months” look like in one sentence?
+- Where do cost, delays, rework or complaints hurt most — and who owns that?
+- Where does critical know-how live today, and how hard is it to find and trust?
+- Who would own a first pilot, and which one metric would convince leadership?
 
-- Dealers still send many orders as unstructured email text or attachments rather than through a clean portal.
-- The product catalog and dealer price list are current enough to match requests automatically.
-- Order management can define one standard exception path instead of ad hoc back-and-forth.
+### Use-case questions
 
-**Do you have this?**
+Ordered by: without an answer, there is no pilot.
 
-- Do you have a maintained product catalog with dealer pricing, options, and availability by market?
-- Do you have an ERP integration point for creating draft quotes or orders from external inputs?
-- Do you have a person or team that owns order exceptions and final release to production planning?
-
-**To decide whether this is the right use case**
-
-- How many inbound dealer orders or quote requests do you process each week, and how many require manual retyping?
-- What is the current error rate in order entry, and how often do errors create downstream production or delivery issues?
-- Who spends the most time on this step today: order management, sales ops, or dealer support?
-
-### 3. Analyze warehouse movement data to redesign picking routes and staging layout
-
-**Assumptions to test**
-
-- The warehouse has enough scan or movement data to show where time is lost.
-- Fast-moving parts and staging points can be rearranged without disrupting production.
-- Warehouse staff will follow a revised pick route if the change is clearly better.
-
-**Do you have this?**
-
-- Do you have location-level warehouse data and pick scans for the main part families?
-- Do you have a current layout map and material flow rules for the warehouse?
-- Do you have a warehouse lead who can test and approve layout changes?
-
-**To decide whether this is the right use case**
-
-- How long does a typical pick or staging cycle take today, and where is the biggest delay?
-- How much of warehouse time is spent walking versus handling parts?
-- Who owns the layout decisions, and what is the current pain: labor cost, throughput, or missed line supply?
+- How many dealer order requests and RX Connect activations do you handle per day or week in Europe, and through which channels do they arrive today?
+- Who owns exceptions today for dealer order intake and for connected-service activation issues, and where do those decisions get made?
+- What exact fields are required to accept a dealer order, and how often are requests missing one or more of those fields?
+- How many minutes does a person currently spend on one order intake case and one RX Connect activation case, including follow-up for missing information?
 
 ### Numbers to ask for
 
-- Revenue, gross margin, and ASP per bike were not found.
-- Installed base or annual unit volume were not found.
-- Dealer count is given as about 1,400 on the company website, but channel split by region was not found.
-- Employee count is given as more than 700 on the company website; a more current audited number was not found.
+- Exact annual revenue
+- Bike units sold per year
+- Share of sales by Germany vs other European markets
+- Share of revenue from accessories, services, and RX Connect
+- Dealer count by country beyond the stated total of around 1,400
+- Employee count trend beyond more than 700 employees
 
 ### Gaps in the public research
 
+- Dropped 1 job posting(s) without a clear process signal.
 - No register or size information found.
 
-## 4. How these use cases were chosen
+## 5. How these use cases were chosen
 
-Every process step was rated against a rubric drawn from public frameworks: the money lever it touches, error cost and type of knowledge (HBR), whether the task is repetitive, a bottleneck, or ambiguous (OpenAI, Taylor Radey), the full cost including human review (MIT Sloan), and feasibility in data, systems, and know-how (appliedAI). The most promising steps were matched against a curated library of customer cases, documented solutions, and workflow templates, and three were adapted to this company.
+Every process step was rated against a rubric (money lever, HBR human role, opportunity type, full cost, feasibility, redesign-before-AI, augment vs substitute). The strongest steps were matched to a curated library via retrieval and company-fit reranking; three cards were adapted to this company.
 
 - [APQC, How Can Organizations Identify And Prioritize Valuable AI Use Cases?](https://www.apqc.org/How-Can-Organizations-Identify-And-Prioritize-Valuable-AI-Use-Cases)
 - [AWS, Taxonomy of agentic primitives in Amazon Quick (2026)](https://aws.amazon.com/blogs/machine-learning/taxonomy-of-agentic-primitives-in-amazon-quick/)
@@ -209,19 +180,22 @@ Every process step was rated against a rubric drawn from public frameworks: the 
 - [appliedAI, How to find and prioritize AI use cases (2020)](https://www.appliedai.de/uploads/files/Whitepapers/appliedAI-Whitepaper-Applying-AI-How-to-find-and-prioritize-AI-use-cases-2020-EN.pdf)
 - [MIT Sloan, How to find the right business use cases for generative AI (2025)](https://mitsloan.mit.edu/ideas-made-to-matter/how-to-find-right-business-use-cases-generative-ai)
 - [Taylor Radey, Finding AI use cases: one helpful framework to try (2025)](https://www.taylorradey.com/post/finding-ai-use-cases-framework)
+- [MIT Sloan, Want AI-Driven Productivity? Redesign Work](https://sloanreview.mit.edu/article/want-ai-driven-productivity-redesign-work/)
+- [MIT Sloan, Don’t Let Artificial Intelligence Supercharge Bad Processes](https://sloanreview.mit.edu/article/dont-let-artificial-intelligence-supercharge-bad-processes/)
+- [HBR, The Secret to Successful AI-Driven Process Redesign (2025)](https://hbr.org/2025/01/the-secret-to-successful-ai-driven-process-redesign)
+- [HBR, Stop Automating Old Processes. Design New Ones Instead. (2026)](https://hbr.org/2026/09/stop-automating-old-processes-design-new-ones-instead)
+- [Randstad, Before you automate, AI-vate or agent-icate](https://www.randstadenterprise.com/insights/randstad-enterprise-insights/before-you-automate-ai-vate-or-agent-icate/)
+- [Brynjolfsson, The Turing Trap, Stanford Digital Economy Lab (2022)](https://digitaleconomy.stanford.edu/news/the-turing-trap-the-promise-peril-of-human-like-artificial-intelligence/)
 
-## 5. Sources
+## 6. Sources
 
 - [Riese & Müller | Premium Bikes](https://www.r-m.de/de/)
 - [Über uns | Riese & Müller](https://www.r-m.de/de/ueber-uns/)
 - [Riese & Müller | Jobs](https://www.r-m.de/de/jobs/)
 - Job posting: [Ausbildungsplatz als Fachkraft für Lagerlogistik (m/w/d) - Start 2027](https://jobs.r-m.de/job/M%C3%BChltal-Ausbildungsplatz-als-Fachkraft-f%C3%BCr-Lagerlogistik-%28mwd%29-Start-2027/1371327755/)
 - Job posting: [Ausbildungsplatz als Fahrradmonteur (m/w/d) - Start 2027](https://jobs.r-m.de/job/M%C3%BChltal-Ausbildungsplatz-als-Fahrradmonteur-%28mwd%29-Start-2027/1371311955/)
-- Job posting: [Schülerpraktikant (m/w/d)](https://jobs.r-m.de/job/M%C3%BChltal-Sch%C3%BClerpraktikant-%28mwd%29/963222555/)
 - Job posting: [Senior Manager Paid Media & Performance Marketing (m/w/d)](https://jobs.r-m.de/job/M%C3%BChltal-Senior-Manager-Paid-Media-&-Performance-Marketing-%28mwd%29/1362995955/)
-- News: [Riese & Müller GmbH](https://tavily.com/knowledge/company/pd6f6kBV1oRW)
 - News: [Riese & Müller will leave US market in July | Bicycle Retailer and Industry News](https://www.bicycleretailer.com/industry-news/2026/04/20/riese-m%C3%BCller-will-leave-us-market-july)
 - News: [Riese & Müller Superdelite5 in Review: The Best SUV eBike Of 2026 With Everything You Need? | E-MOUNTAINBIKE Magazine](https://ebike-mtb.com/en/the-best-suv-trekking-e-bike-review/riese-mueller-superdelite5)
 - News: ["Persistently challenging and increasingly volatile market conditions" – premium ebike brand withdraws from US market despite tariff relief  | BikeRadar](https://www.bikeradar.com/news/riese-and-muller-us-market-withdrawl)
 - News: [Riese & Müller news for 2027: cargo bike updates and a brand-new urban bike - urbanbike.news](https://urbanbike.news/en/riese-muller-news-2027-cargo-bike-updates-new-urban-bike)
-- News: [EXEC: Riese & Müller Hires CFO | SGB Media Online](https://sgbonline.com/exec-riese-muller-hires-cfo)
