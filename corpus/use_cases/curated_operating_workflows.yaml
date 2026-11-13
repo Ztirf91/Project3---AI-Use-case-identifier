@@ -1,0 +1,267 @@
+# Curated 13 November 2026. Source descriptions checked; deployments not independently audited.
+# SME adaptations, controls and pilot metrics are editorial proposals, not vendor results.
+# verified refers to the source description only; templates were not executed.
+
+- id: creative-performance-learning
+  title: Connect advertising creative characteristics to campaign results
+  source_name: Make / TripleTen
+  source_url: https://www.make.com/success-stories/make-helps-tripleten-reduce-ad-setup-time
+  source_type: customer case study
+  verified: true
+  verified_on: '2026-11-13'
+  source_summary: TripleTen uses connected Make scenarios to label advertising assets, join those labels to campaign metrics and streamline uploads. The story describes comparisons by format, audience and message.
+  verification_scope: Vendor-published customer account; results not independently audited.
+  pattern: Teams can see campaign totals but cannot readily compare which creative approaches deserve the next test.
+  ai_does: Tags approved creatives against a consistent taxonomy, joins labels to reconciled performance exports and proposes evidence-linked hypotheses for the next campaign test. Deterministic calculations supply rates and costs.
+  process_types: [marketing, campaign analytics, strategic business development]
+  needs: [creative IDs and assets, campaign and conversion exports, attribution definitions, minimum sample rules, marketing owner]
+  sme_fit: Medium for SMEs running repeated paid campaigns; start with one platform and a small taxonomy.
+  money_lever: volume
+  typical_effect: null
+  approach: redesign then automate
+  pilot_metrics: [Time to prepare creative review, tagging agreement, unmatched asset IDs, contribution after advertising costs in controlled tests]
+  human_role: Marketing approves hypotheses, experiments and spending; finance validates cost and contribution definitions.
+  task_scope: Learns from creative attributes and commercial results to plan tests; distinct from refreshing dashboards or writing ad copy.
+  limitations: Observed ROAS differences do not prove causal lift. The source's 5-7x ad-setup speedup is not evidence of a sales increase or an SME ROI forecast.
+
+- id: campaign-visual-generation
+  title: Generate campaign and social-media image concepts from a reviewed brief
+  source_name: Zapier / AI Image Generator Template
+  source_url: https://zapier.com/templates/details/ai-image-generator
+  source_type: workflow template
+  verified: true
+  verified_on: '2026-11-13'
+  source_summary: A customizable form sends image prompts to OpenAI and stores generated image links and input details in a table for team access.
+  verification_scope: Published template description checked; template not executed.
+  pattern: A small marketing team lacks enough visual concepts to test campaign directions across social channels.
+  ai_does: Turns an approved brief into alternative visual concepts and records inputs and outputs in a review queue. Staff select and edit assets before publication.
+  process_types: [marketing, social media, creative production]
+  needs: [approved campaign brief, brand guidelines, image generation service, asset storage, visual review owner]
+  sme_fit: High for concept exploration and illustrative posts; product-accurate imagery needs additional review and suitable reference support.
+  money_lever: unit_cost
+  typical_effect: null
+  approach: quick win
+  pilot_metrics: [Cost per approved asset, revision time, brand acceptance rate, product representation errors]
+  human_role: A marketer or designer approves factual accuracy, brand fit and usage rights before publication.
+  task_scope: Creates raster image concepts; existing campaign-assets and content-repurposing cards concern text and reuse of approved material.
+  limitations: The source demonstrates image generation, not faithful product photography, video generation or increased conversion. Store durable copies rather than relying on expiring image links.
+
+- id: capacity-constrained-production-scheduling
+  title: Compare feasible production schedules under changing capacity constraints
+  source_name: Microsoft / Sight Machine
+  source_url: https://www.microsoft.com/en/customers/story/26648-sight-machine-microsoft-foundry
+  source_type: customer case study
+  verified: true
+  verified_on: '2026-11-13'
+  source_summary: Sight Machine combines plant data, language-model-generated mathematical formulations and optimization software to revise a beverage manufacturer's production schedules as conditions change.
+  verification_scope: Vendor-published account of a beverage-manufacturer application; some broader agent integrations are described as future work.
+  pattern: Order changes, material shortages and machine availability repeatedly invalidate the production sequence.
+  ai_does: Helps encode planner-approved constraints and explains schedule alternatives calculated by an optimization solver, including changeovers, deadlines and material availability.
+  process_types: [production planning, capacity planning, manufacturing]
+  needs: [order backlog, routing and processing times, machine calendars, changeover rules, material availability, validated optimization solver]
+  sme_fit: Medium for manufacturers with reliable planning data; begin with one work centre and compare against the current plan.
+  money_lever: unit_cost
+  typical_effect: The Microsoft story reports 75% less scheduling time for the described approach; transfer to an SME has not been established.
+  approach: strategic bet
+  pilot_metrics: [Planning hours, constraint violations, on-time completion, changeover time, planner overrides]
+  human_role: A production planner validates constraints and releases schedules; approved machine and safety procedures remain authoritative.
+  task_scope: Assigns jobs to finite resources and compares sequences; does not forecast sales demand or merely estimate one job's duration.
+  limitations: Language-model output alone is not a feasible schedule. Validate solver code, hard constraints and operational consequences before use; no direct machine control in the SME pilot.
+
+- id: manufacturing-duration-prediction
+  title: Predict processing and setup times for variable manufacturing orders
+  source_name: Mittelstand-Digital Zentrum Augsburg / Dickow Pumpen
+  source_url: https://digitalzentrum-augsburg.de/fertigungszeitprognose-mit-ki-pumpenhersteller/
+  source_type: customer case study
+  verified: true
+  verified_on: '2026-11-13'
+  source_summary: Dickow Pumpen and a KI trainer combined production records, text-derived features and regression to estimate manufacturing times. The article describes an internal user interface for new-order predictions.
+  verification_scope: Transfer-centre project account; no quantified accuracy or financial outcome is reported.
+  pattern: Historical standard times poorly represent bespoke orders and rare, lengthy operations.
+  ai_does: Extracts relevant features from job descriptions and structured records, predicts processing times and highlights uncertain or unusual orders for planner review.
+  process_types: [manufacturing, production planning, capacity planning]
+  needs: [dated production-time records, order and operation identifiers, product characteristics, reliable actual times, chronological validation split]
+  sme_fit: Medium for variant manufacturers already collecting actual operation times.
+  money_lever: unit_cost
+  typical_effect: null
+  approach: redesign then automate
+  pilot_metrics: [Time prediction error by operation, underestimation on complex orders, coverage of reliable predictions, error versus existing standard times]
+  human_role: Planners approve estimates and investigate unusual orders; estimators decide how validated times affect pricing.
+  task_scope: Estimates job duration as an input to planning; distinct from geometric quantity calculation, demand forecasting and schedule optimization.
+  limitations: Sparse bespoke work and unreliable actuals can defeat the model. Assess rare complex jobs separately and abstain when outside the training range.
+
+- id: replenishment-under-lead-time-uncertainty
+  title: Recommend replenishment quantities using uncertain demand and supplier lead times
+  source_name: Mittelstand-Digital Zentrum Augsburg / Thorlabs
+  source_url: https://digitalzentrum-augsburg.de/lieferfaehigkeit-mit-ki-optimieren/
+  source_type: customer case study
+  verified: true
+  verified_on: '2026-11-13'
+  source_summary: A Thorlabs project combines unusual-order detection, demand and delivery-delay models with mathematical ordering optimization. Proposed orders were simulated against historical purchasing.
+  verification_scope: Documented project and historical simulation; no verified live financial result is supplied.
+  pattern: Fixed lead times and one-off large orders lead to excessive safety stock or missed availability targets.
+  ai_does: Separates exceptional orders, estimates delivery delays and uncertainty, and supplies forecasts to an optimizer that proposes order quantities against agreed service and holding-cost targets.
+  process_types: [purchasing, inventory planning, supply chain]
+  needs: [order and stock histories, purchase and receipt dates, supplier and SKU identifiers, holding and shortage costs, service-level targets]
+  sme_fit: Medium for repeat-stock businesses with usable purchasing histories; start with a stable product group.
+  money_lever: unit_cost
+  typical_effect: null
+  approach: strategic bet
+  pilot_metrics: [Stock availability, inventory value, shortage and holding cost, delivery-delay prediction error, buyer overrides]
+  human_role: Buyers approve orders, investigate outliers and decide supplier follow-up; no autonomous purchases in the pilot.
+  task_scope: Converts demand and supplier uncertainty into replenishment decisions; extends beyond the existing perishable-demand forecast without duplicating it.
+  limitations: Backtesting must use information available at each historical decision date and include stock-outs. Simulated improvements are not realized savings.
+
+- id: supplier-emissions-evidence-review
+  title: Check supplier emissions submissions for missing and inconsistent evidence
+  source_name: Microsoft / Procurement Sustainability
+  source_url: https://www.microsoft.com/en/customers/story/26164-microsoft-microsoft-power-platform
+  source_type: customer case study
+  verified: true
+  verified_on: '2026-11-13'
+  source_summary: Microsoft extracts emissions data from supplier documents into surveys, uses human review and flags omissions through a supplier portal with activity logs.
+  verification_scope: Microsoft's account of its own deployment; reported time savings are not independently audited.
+  pattern: Procurement repeatedly checks supplier sustainability documents and requests missing information.
+  ai_does: Prefills a defined evidence checklist with source references, flags missing periods, units and fields, and drafts clarification requests after reviewer approval.
+  process_types: [purchasing, supplier management, sustainability, compliance]
+  needs: [supplier submissions, approved reporting schema, calculation and unit rules, evidence access, named sustainability reviewer]
+  sme_fit: Medium for SMEs that already collect such evidence for customers; adapt the checklist rather than copying an enterprise platform.
+  money_lever: unit_cost
+  typical_effect: Microsoft reports submission review falling from about 35 minutes to under two minutes in its own system; this is not a forecast for a smaller deployment.
+  approach: redesign then automate
+  pilot_metrics: [Review minutes per submission, extraction error, missed missing fields, clarification turnaround, traceable evidence coverage]
+  human_role: Suppliers verify submitted figures and the responsible specialist approves completeness and any external reporting.
+  task_scope: Reviews supplier environmental evidence; does not compare prices, approve software purchases or provide a general compliance certification.
+  limitations: Completeness does not establish that supplier figures are true. AI must not invent emissions factors, certify compliance or silently replace calculation rules.
+
+- id: production-instruction-change-impact
+  title: Trace approved requirement changes across production instructions
+  source_name: Microsoft / Koerber Pharma
+  source_url: https://www.microsoft.com/en/customers/story/26966-koerber-azure
+  source_type: customer case study
+  verified: true
+  verified_on: '2026-11-13'
+  source_summary: Koerber describes structuring legacy manufacturing recipes and locating regulatory impacts across recipe libraries, with version traceability and human review in its pharmaceutical MES platform.
+  verification_scope: Vendor-published platform and pilot account in pharmaceuticals; adaptation to other SME documentation is proposed, not documented in this source.
+  pattern: A changed approved specification requires manual searches across many work instructions and product variants.
+  ai_does: Compares an approved change against controlled documents, identifies potentially affected passages with citations and drafts a versioned review list. Exact quantities and settings are checked deterministically.
+  process_types: [quality management, compliance, manufacturing documentation, change management]
+  needs: [controlled document versions, approved requirements, product-to-process links, change owner, validation and sign-off workflow]
+  sme_fit: Medium for document-heavy manufacturers with controlled instructions; begin with one specification change and a known reference set.
+  money_lever: risk
+  typical_effect: null
+  approach: strategic bet
+  pilot_metrics: [Missed affected documents, false impact flags, reviewer time, source and version traceability]
+  human_role: Quality and domain specialists determine applicability, approve every instruction change and authorize release.
+  task_scope: Assesses change impact across operational documents; distinct from contract review, generic knowledge search and invoice extraction.
+  limitations: The pharmaceutical reference does not validate food-label or health-claim checking. Its digitization savings do not measure this impact-review subtask. No automatic instruction release or compliance assurance.
+
+- id: production-incident-cause-investigation
+  title: Investigate production downtime using linked operational records
+  source_name: Microsoft / Schaeffler
+  source_url: https://www.microsoft.com/en/customers/story/20385-schaeffler-microsoft-fabric
+  source_type: customer case study
+  verified: true
+  verified_on: '2026-11-13'
+  source_summary: Schaeffler piloted a Fabric data foundation and Azure AI agent that connects ERP, MES and machine data to investigate downtime and suggest possible remedies.
+  verification_scope: Customer pilot account; broader scaling ambitions are not treated as completed deployment.
+  pattern: Engineers spend hours reconciling event logs and production records after an interruption.
+  ai_does: Builds a timestamped incident timeline, retrieves related operating records and ranks possible explanations with supporting and conflicting evidence for engineers to test.
+  process_types: [manufacturing, continuous improvement, operations engineering]
+  needs: [aligned timestamps and equipment IDs, downtime logs, MES or ERP records, operating context, incident reference cases]
+  sme_fit: Medium where downtime is costly and records can be linked; start with one recurrent incident class.
+  money_lever: unit_cost
+  typical_effect: null
+  approach: strategic bet
+  pilot_metrics: [Investigation hours, evidence completeness, engineer-confirmed hypotheses, repeat incident rate, unsupported recommendations]
+  human_role: Engineers establish causes, approve remedies and follow established safety and machine procedures.
+  task_scope: Investigates an incident that already occurred; distinct from predictive maintenance, visual surface inspection and routine KPI reporting.
+  limitations: Correlation does not establish root cause. Incomplete logs can conceal causes; no automatic machine setting changes or restart decisions.
+
+- id: technical-service-troubleshooting
+  title: Help technicians narrow faults using model-specific maintenance instructions
+  source_name: Microsoft / Textron Aviation
+  source_url: https://www.microsoft.com/en/customers/story/23024-textron-aviation-azure-open-ai-service
+  source_type: customer case study
+  verified: true
+  verified_on: '2026-11-13'
+  source_summary: Textron's deployed TAMI assistant gives maintenance technicians natural-language access to a large technical-document collection to support troubleshooting.
+  verification_scope: Vendor-published customer account; aviation results are not a validated estimate for SME service teams.
+  pattern: Service staff cannot quickly locate the applicable fault guidance for a particular product model and symptom.
+  ai_does: Asks for missing model and symptom details, locates applicable approved troubleshooting passages and presents the documented next checks with citations and escalation conditions.
+  process_types: [after sales, technical service, repair, dealer support]
+  needs: [versioned maintenance manuals, product configuration and serial identifiers, approved diagnostic procedures, escalation rules, qualified service owner]
+  sme_fit: Medium for manufacturers and dealer networks with stable technical documentation; begin with one product family and known faults.
+  money_lever: unit_cost
+  typical_effect: Textron reports troubleshooting that previously took up to 20 minutes taking one to two minutes with TAMI; SME performance requires a separate pilot.
+  approach: redesign then automate
+  pilot_metrics: [Time to correct applicable guidance, citation accuracy, fault-resolution rate, unnecessary escalations, unsafe or inapplicable suggestions]
+  human_role: Qualified technicians perform checks and determine repairs; the assistant escalates missing or conflicting instructions.
+  task_scope: Supports symptom-driven fault investigation; distinct from retrieving drawings, identifying spare parts by photo or drafting customer FAQ responses.
+  limitations: No invented repair instructions, safety override, acceptance certification or inference that a generic answer fits a specific configuration.
+
+- id: field-service-work-report
+  title: Turn completed service-job records into customer-ready work reports
+  source_name: Microsoft / Siemens Smart Infrastructure
+  source_url: https://www.microsoft.com/en/customers/story/19736-siemens-ag-germany-dynamics-365-field-service
+  source_type: customer case study
+  verified: true
+  verified_on: '2026-11-13'
+  source_summary: Siemens developed and piloted a Dynamics 365 Copilot application to help field technicians produce clearer, more consistent reports of completed work.
+  verification_scope: The dated story describes pilot testing and intended rollout; it does not establish subsequent rollout or quantified time savings.
+  pattern: Short technician notes leave customers and back-office staff unclear about what was done and what remains open.
+  ai_does: Drafts a structured customer report from recorded work, observations and materials, marks missing details and separates completed actions from recommended follow-up.
+  process_types: [field service, after sales, maintenance administration]
+  needs: [work-order identifiers, technician notes, completed-task records, approved report structure, customer and equipment details]
+  sme_fit: High for service businesses already recording jobs; begin with technician-triggered drafts.
+  money_lever: unit_cost
+  typical_effect: null
+  approach: quick win
+  pilot_metrics: [Report preparation minutes, factual correction rate, missing required fields, customer clarification requests]
+  human_role: The attending technician confirms performed work and approves the report before sending it.
+  task_scope: Documents a completed physical service job; distinct from meeting notes, warranty eligibility decisions and technical fault diagnosis.
+  limitations: Do not infer tests, measurements, replaced parts or certifications that were not recorded. The source's licensing situation is not a general licensing promise.
+
+- id: technology-options-research
+  title: Compare technical options for a defined product or process-development decision
+  source_name: OpenAI / ENEOS Materials
+  source_url: https://openai.com/index/eneos-materials/
+  source_type: customer case study
+  verified: true
+  verified_on: '2026-11-13'
+  source_summary: ENEOS Materials describes using deep research across languages to investigate technologies for process development and engineering.
+  verification_scope: Vendor-published enterprise customer account; its qualitative speed claims are not independently audited.
+  pattern: Product and process teams lack time to investigate unfamiliar technologies and compare options against company constraints.
+  ai_does: Searches permitted technical sources in several languages, produces an evidence-linked option comparison against approved criteria and identifies uncertainties and practical validation steps.
+  process_types: [research and development, strategic business development, process engineering]
+  needs: [defined decision question, technical and commercial constraints, permitted sources, source evaluation criteria, domain expert]
+  sme_fit: High for a bounded research sprint; decisions still require expert validation and, where appropriate, testing.
+  money_lever: unit_cost
+  typical_effect: null
+  approach: quick win
+  pilot_metrics: [Research hours, citation validity, expert acceptance of findings, critical omissions, options taken to validation]
+  human_role: A domain expert validates sources and feasibility; management chooses investments after technical and commercial checks.
+  task_scope: Explores external technology alternatives for a development decision; distinct from translating existing documents, retrieving internal knowledge or monitoring competitor prices.
+  limitations: Published findings are not proof of suitability or an engineering approval. Protect proprietary inputs and verify critical calculations, specifications and source dates separately.
+
+- id: conversational-inventory-transactions
+  title: Capture stock movements through confirmed team-chat requests
+  source_name: Make / Update inventory from chat requests
+  source_url: https://www.make.com/workflows/update-inventory-from-chat-requests
+  source_type: workflow template
+  verified: true
+  verified_on: '2026-11-13'
+  source_summary: Make publishes a workflow in which an agent interprets chat requests, reads or updates logistics spreadsheet rows and asks for clarification when a request is ambiguous.
+  verification_scope: Published ready-made workflow description checked; not executed or independently validated.
+  pattern: Staff mention stock movements in chat but omit the matching inventory update, creating avoidable record differences.
+  ai_does: Converts an authorized user's message into a proposed SKU, location and quantity transaction, asks about ambiguity and records an approved movement with an audit trail.
+  process_types: [inventory management, warehousing, logistics]
+  needs: [canonical SKU and location IDs, authoritative stock ledger, role permissions, transaction validation, duplicate and concurrency controls]
+  sme_fit: Medium for modest transaction volumes; integrate with the authoritative stock system rather than creating a competing ledger.
+  money_lever: unit_cost
+  typical_effect: null
+  approach: redesign then automate
+  pilot_metrics: [Stock-record discrepancy, entry time, incorrect transactions, duplicate writes, audit-trail completeness]
+  human_role: Authorized staff confirm writes; the stock owner reconciles physical counts and resolves exceptions.
+  task_scope: Records stock transactions; distinct from forecasting demand, proposing replenishment, producing dashboards or classifying inbox messages.
+  limitations: Confirmation, access controls and reliable transaction handling are SME design requirements, not guarantees of the template. Start read-only, then test confirmed writes; exclude purchasing commitments from the pilot.

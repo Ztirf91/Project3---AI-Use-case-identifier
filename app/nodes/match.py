@@ -16,6 +16,9 @@ SIM_WEIGHT = 0.30
 RATE_SYSTEM = """You are a senior AI consultant. Rate every process step of this company with the rubric below.
 Be strict. A step without a money lever, or with high error cost and tacit knowledge, gets a low score.
 A step marked "abgeleitet" is an assumption; you may rate it, but say so in the reasoning.
+Assess potential for safe AI assistance as well as automation. High error cost or tacit knowledge can require
+Human first or Quality control; they do not by themselves rule out useful information support.
+Never equate helping staff with records, analysis or drafts with controlling physical equipment or approving engineering.
 
 RUBRIC
 {rubric}"""
@@ -36,6 +39,9 @@ Section 2 vs section 3:
 
 Rules for the selection:
 - Three use cases on three different process steps.
+- A rating of "leave it" is a warning against automating that process, not evidence that all assistance is safe.
+  Consider only a concrete, library-backed information-support subtask under human control for such a step.
+  Explain that limited scope. Never propose autonomous machinery control, engineering approval or safety decisions.
 - Select distinct business tasks. task_scope explains boundaries between related cards; a different tool or source
   does not make the same task a new use case.
 - Each use case adapts one candidate card. source_card must be that card's id, exactly as given.
@@ -238,13 +244,20 @@ def _check(picks: UseCasePicks, allowed_ids: set[str], card_approach: dict[str, 
 
 
 def match_use_cases(state: RunState) -> dict:
+    progress = {"ratings": [], "candidates": {}, "picks": None}
     try:
-        return _match(state)
+        return _match(state, progress)
     except Exception as exc:
-        return {"notes": state.notes + [f"Use-case matching failed ({exc.__class__.__name__}: {exc})."]}
+        return {**progress, "notes": state.notes + [f"Use-case matching failed ({exc.__class__.__name__}: {exc})."]}
 
 
-def _match(state: RunState) -> dict:
+def _rank_for_retrieval(ratings: list, step_names: set[str]) -> list:
+    # Retrieval gathers evidence for possible assistance; it does not authorize automation.
+    # Filtering "leave it" here previously removed every Uhlmann step and prevented any search.
+    return sorted((r for r in ratings if r.step in step_names), key=lambda r: r.score, reverse=True)
+
+
+def _match(state: RunState, progress: dict | None = None) -> dict:
     notes = list(state.notes)
     rubric = RUBRIC_PATH.read_text(encoding="utf-8")
     model = state.model
@@ -255,10 +268,16 @@ def _match(state: RunState) -> dict:
     ratings = llm().with_structured_output(StepRatings).invoke(
         [("system", RATE_SYSTEM.format(rubric=rubric)), ("human", _model_json(state))]
     ).ratings
+    if progress is not None:
+        progress["ratings"] = ratings
 
     steps_by_name = {s.name: s for s in model.process_map}
-    ranked = sorted((r for r in ratings if r.process_quality != "leave it"), key=lambda r: r.score, reverse=True)
+    ranked = _rank_for_retrieval(ratings, set(steps_by_name))
+    if not ranked:
+        raise ValueError("Process rating returned no entries matching the company's process steps.")
     candidates: dict[str, list[dict]] = {}
+    if progress is not None:
+        progress["candidates"] = candidates
     for rating in ranked[:TOP_STEPS]:
         step = steps_by_name.get(rating.step)
         query = rating.step
