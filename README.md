@@ -93,7 +93,7 @@ python -m app.library
 
 - **Live demo:** run the CLI (or open a saved sample if APIs are slow). Backup report: [samples/ankerstein.md](samples/ankerstein.md).
 - **Recording:** _add an unlisted Loom / YouTube / Drive link here before submission_ (must open without login).
-- **Slides:** [presentation/project3_slides.pdf](presentation/project3_slides.pdf) (also `.pptx` in the same folder).
+- **Slides:** [Demo Day PDF](<presentation/AI Use Case Identifier – Demo Day.pdf>) and [PowerPoint](<presentation/AI Use Case Identifier – Demo Day.pptx>).
 
 ## Limits
 
