@@ -19,7 +19,7 @@ def main() -> None:
     parser.add_argument("--city")
     args = parser.parse_args()
 
-    missing = [k for k in ("OPENAI_API_KEY", "TAVILY_API_KEY", "PINECONE_API_KEY") if not os.getenv(k)]
+    missing = [k for k in ("OPENAI_KEY2", "TAVILY_API_KEY", "PINECONE_API_KEY") if not os.getenv(k, "").strip()]
     if missing:
         sys.exit(f"Missing in .env: {', '.join(missing)}")
 

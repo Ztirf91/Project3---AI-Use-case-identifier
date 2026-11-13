@@ -69,11 +69,17 @@ HbrZone = Literal["No regrets", "Creative catalyst", "Quality control", "Human f
 
 class UseCase(BaseModel):
     title: str
-    process_step: str
+    process_step: str = Field(
+        description="Name of the process step, in plain language a non-specialist can follow"
+    )
     approach: Literal["quick win", "redesign then automate", "strategic bet"]
     hbr_zone: HbrZone = Field(description="From error cost and type of knowledge; must match the human's role")
-    process_change: str = Field(description="What to change, remove, or standardize in the process itself, before or alongside AI")
-    what_changes: str = Field(description="How the work runs afterwards: trigger, what AI does, what people do")
+    what_changes: str = Field(
+        description="How AI supports today's process: what triggers it, what AI does, what people still do. "
+        "When AI lets people do something they could not do before (new speed, coverage, insight, or offer), "
+        "say that briefly in the same paragraph — do not invent a separate heading. "
+        "Do not require a process redesign here; that belongs in section 3."
+    )
     money_lever: MoneyLever
     money_effect: str = Field(
         description="Concrete unit-economics effect with rough volumes or times. Mark unknown figures as assumptions, "
@@ -99,8 +105,8 @@ class SpeculativeAugmentation(BaseModel):
 
 class UseCasePicks(BaseModel):
     ai_approach: str = Field(
-        description="Four to six sentences: the right AI approach for this company now, tied to its business model, "
-        "unit economics, and current situation in the news"
+        description="Three to four sentences: wave-one AI supports existing processes; deeper redesign is later. "
+        "Tie to business model, unit economics, and current situation in the news"
     )
     leave_alone: list[str] = Field(description="Steps not worth automating now, each with a short reason")
     use_cases: list[UseCase]

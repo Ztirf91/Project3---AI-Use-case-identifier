@@ -24,15 +24,25 @@ PICK_SYSTEM = """You are a senior AI consultant preparing a first meeting with a
 Using the rubric, the company model, the step ratings, and ONLY the candidate library cards listed,
 choose exactly three use cases for this company.
 
+Clarity (the reader may not know this industry):
+- Write so a smart generalist can follow: name who does the work, what they handle, and why it matters for money.
+- Avoid unexplained jargon. If a term is needed (e.g. WMS, dealer portal), add a short plain gloss once.
+- process_step must be understandable without industry tenure. Prefer the company's own step wording from the model.
+
+Section 2 vs section 3:
+- The three use cases SUPPORT THE PROCESS AS IT RUNS TODAY. AI assists, drafts, classifies, proposes, or routes
+  inside the existing workflow. Do NOT require "change the process first" or a redesign as a precondition.
+- Deeper process redesign belongs only in speculative_augmentation (section 3). Do not pre-empt that here.
+
 Rules for the selection:
 - Three use cases on three different process steps.
 - Select distinct business tasks. task_scope explains boundaries between related cards; a different tool or source
   does not make the same task a new use case.
 - Each use case adapts one candidate card. source_card must be that card's id, exactly as given.
-- approach normally follows the card's approach. You may label a "redesign then automate" card as a "quick win" only
-  if you scope it down to a narrow first step, and process_change must say what that narrow step is.
-  A "strategic bet" card is never a quick win. Among the three, at least one "quick win" and at least one
-  "redesign then automate".
+- Prefer "quick win" when AI can assist the current flow with little organizational change.
+  You may label a "redesign then automate" card as a "quick win" when you scope it to supporting today's process
+  (AI assist without forcing a redesign). A "strategic bet" card is never a quick win.
+  Among the three, at least one must be a "quick win". You do NOT need a "redesign then automate" among the three.
 - Among the three hbr_zone values, at least one must be "Creative catalyst" or "Human first".
   Do not label all three "Quality control" unless the rubric truly forces that; usually at least one step is
   proposal work (Creative catalyst) or expert-led work with AI assist (Human first).
@@ -43,10 +53,10 @@ Rules for each use case:
 - hbr_zone follows from error cost and type of knowledge for this step at this company, and must match the human's role:
   No regrets = AI runs it; Creative catalyst = AI proposes, a person chooses; Quality control = AI produces, a person
   verifies; Human first = a person leads, AI assists with parts. Never propose end-to-end automation in Human first.
-- process_change says what to change in the process itself before AI: eliminate waste, standardize intake, name an
-  owner. Sequence: purpose → eliminate → standardize → then let AI draft/classify/propose. Never automate a broken
-  process as-is; redesign so AI creates unit-economics value (cost, volume, price, or risk), not just fewer clicks.
-- what_changes describes how the work runs afterwards: what triggers it, what the AI does, what people still do.
+- what_changes: how AI supports today's process — trigger, what AI does, what people still do. One short paragraph.
+  When this use case genuinely enables people to do something they could not (or could not afford to) do before —
+  e.g. cover more cases, spot patterns, draft options at a volume that was impractical — say that briefly in the
+  same paragraph. Do not invent a separate heading. Do not invent enablement if the case is only faster of the same.
 - money_effect must be concrete. Include a rough volume or time math for THIS company.
   If the figure is not in the sources, mark it clearly as an assumption, for example:
   "At ~80 dealer emails/day and ~4 minutes sorting each (assumption), this frees ~5 hours/day."
@@ -70,13 +80,13 @@ Rules for the meeting section:
 - leave_alone must not contain a step that one of the three use cases sits on.
 
 Overall:
-- ai_approach: the right AI approach for this company now, in three to four sentences, tied to its business model,
-  unit economics, and current situation.
+- ai_approach: three to four sentences. Wave one = support existing processes with AI where judgment stays with people;
+  say that larger redesign is a later conversation (section 3). Tie to business model, unit economics, and news.
 - leave_alone: at most three steps that should not be automated now, each with a short reason.
-- speculative_augmentation: ONE speculative case (not one of the three library use cases) that redesigns a process
-  with AI as Option B — augmentation / complement. Humans must gain a capability they did not have before
-  (new insight, new offer, new reach, better decisions). Do NOT propose pure labor substitution. Mark it clearly
-  as speculation for the meeting. Tie it to this company's model and situation.
+- speculative_augmentation: ONE speculative case (not one of the three library use cases) that REDESIGNS a process
+  with AI as Option B — augmentation / complement. This is where "redesign the work" is shown in practice.
+  Humans must gain a capability they did not have before (new insight, new offer, new reach, better decisions).
+  Do NOT propose pure labor substitution. Mark it clearly as speculation for the meeting. Tie it to this company.
 - Keep every field concise. Prefer short paragraphs over lists of caveats.
 Write in English.
 
@@ -212,8 +222,6 @@ def _check(picks: UseCasePicks, allowed_ids: set[str], card_approach: dict[str, 
     approaches = {u.approach for u in picks.use_cases}
     if "quick win" not in approaches:
         problems.append("No quick win among the three.")
-    if "redesign then automate" not in approaches:
-        problems.append("No 'redesign then automate' use case among the three.")
     zones = {u.hbr_zone for u in picks.use_cases}
     if zones.isdisjoint({"Creative catalyst", "Human first"}):
         problems.append("At least one use case must be 'Creative catalyst' or 'Human first'.")

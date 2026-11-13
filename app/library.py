@@ -8,7 +8,7 @@ import yaml
 from langchain_openai import OpenAIEmbeddings
 from pinecone import Pinecone, ServerlessSpec
 
-from app.config import EMBEDDING_DIMENSION, EMBEDDING_MODEL, PINECONE_INDEX, PINECONE_NAMESPACE, USE_CASES_DIR
+from app.config import EMBEDDING_DIMENSION, EMBEDDING_MODEL, PINECONE_INDEX, PINECONE_NAMESPACE, USE_CASES_DIR, openai_key
 
 REQUIRED = ("id", "title", "source_url", "pattern", "ai_does")
 
@@ -45,7 +45,7 @@ def card_text(card: dict) -> str:
 
 
 def _embeddings() -> OpenAIEmbeddings:
-    return OpenAIEmbeddings(model=EMBEDDING_MODEL)
+    return OpenAIEmbeddings(model=EMBEDDING_MODEL, api_key=openai_key())
 
 
 def _index(create: bool = False):

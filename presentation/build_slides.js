@@ -97,7 +97,7 @@ async function main() {
         });
       }
     });
-    s.addText("python -m app.run --company \"KoRo\" --url \"https://www.korodrogerie.de\"", {
+    s.addText("python -m app.run --company \"Ankerstein\" --url \"https://www.ankerstein.de\"", {
       x: 0.8, y: 5.0, w: 11.5, h: 0.5, fontSize: 16, color: C.light, margin: 0, isTextBox: true,
     });
   }
@@ -112,8 +112,8 @@ async function main() {
     });
     const items = [
       { t: "Company + process map", d: "Documented vs assumption, unit economics" },
-      { t: "Three use cases", d: "Change process first → AI assist → pilot" },
-      { t: "Redesign + Option B", d: "Augment people, speculative bigger bet" },
+      { t: "Three use cases", d: "Support today's process with AI → pilot" },
+      { t: "Redesign + Option B", d: "Speculative bigger bet" },
       { t: "Meeting questions", d: "General discovery + case-specific checks" },
     ];
     items.forEach((item, i) => {
@@ -190,7 +190,7 @@ async function main() {
       x: 0.8, y: 1.8, w: 11.5, h: 0.7,
       fontSize: 36, bold: true, color: C.text, margin: 0, isTextBox: true,
     });
-    s.addText("Live: python -m app.run …\nBackup: samples/koro.md + process-map.png\nGitHub: Ztirf91/Project3---AI-Use-case-identifier", {
+    s.addText("Live: python -m app.run …\nBackup: samples/ankerstein.md + process-map.png\nGitHub: Ztirf91/Project3---AI-Use-case-identifier", {
       x: 0.8, y: 2.8, w: 11.5, h: 2.0,
       fontSize: 20, color: C.muted, margin: 0, isTextBox: true,
     });

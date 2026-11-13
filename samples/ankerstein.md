@@ -1,26 +1,25 @@
 # AI Use Case Brief: Ankerstein
 
-13 November 2026 · [https://anker-bausteine.de](https://anker-bausteine.de)
+13 November 2026 · [https://www.ankerstein.de](https://www.ankerstein.de)
 
 > Prepared from public sources before a first conversation. Statements marked *documented* link to their source. Statements marked *assumption* describe what companies of this kind usually do. They are hypotheses for the meeting, not facts about Ankerstein.
 
 ## 1. The company
 
-**German manufacturer and online seller of handcrafted natural-material building toys and educational model kits.**
+**Inclusive manufacturer of Anker building stones in Rudolstadt, serving customers worldwide (S1).**
 
 ### Business model
 
-- Customers pay for physical Ankerbausteine, starter sets, themed play sets, architecture models, and accessories sold on the company website. *([documented](https://anker-bausteine.de))*
-- The company also monetizes special products such as limited editions and custom or made-to-order stones, which are excluded from withdrawal rights. *([documented](https://anker-bausteine.de/zeiss-planetarium-jena-anker-sonderbaukasten/0058952))*
-- Revenue is generated through direct-to-consumer e-commerce, with orders shipped within Germany and free-shipping promotions above a stated basket threshold. *([documented](https://anker-bausteine.de))*
-- The company additionally offers paid or value-adding services around the products, including workshops for educators, factory tours, and lending stones for events. *([documented](https://anker-bausteine.de/staunen/ueber-uns/))*
+- Ankerstein manufactures building toys for customers worldwide. The supplied source does not identify who buys directly, the sales channels, or individual export markets. *([documented](https://www.spielwarenmesse.de/en/mag/toy-lab/building-the-future-with-ankersteinen-for-140-years))*
+- Revenue is likely earned from selling building-stone sets and related products; the supplied source does not disclose the product mix or commercial terms. *(assumption)*
+- Arbeiterwohlfahrt Rudolstadt took over production in 2017 after threatened closure and subsequently operated Ankerstein GmbH as an inclusive business. The article reports ten employees. *([documented](https://www.spielwarenmesse.de/en/mag/toy-lab/building-the-future-with-ankersteinen-for-140-years))*
+- The article reports a planned move to Rudolstadt's historic post office, requiring considerable renovation. The supplied excerpt does not establish whether the move was completed. *([documented](https://www.spielwarenmesse.de/en/mag/toy-lab/building-the-future-with-ankersteinen-for-140-years))*
 
 ### Unit economics
 
-- The earning unit is a sold set or special kit; margin depends mainly on selling price versus handcrafted production cost in Rudolstadt. *(assumption)*
-- Margin is supported by product mix: higher-priced architecture sets, bundles, and special editions can carry better contribution than starter sets. *([documented](https://anker-bausteine.de))*
-- Cost per unit is driven by natural raw materials, manual fabrication, precise quality requirements, and packaging/shipping. *([documented](https://anker-bausteine.de/staunen/ueber-uns/))*
-- Risk is tied to inventory and made-to-order products, since custom items are excluded from withdrawal and likely need tighter planning. *([documented](https://anker-bausteine.de/en/revocation))*
+- The likely earning unit is a building-stone set sold. Its contribution depends on the realized selling price and the cost of materials, manufacturing labor, packaging, and fulfillment. *(assumption)*
+- Production volume and saleable yield likely drive manufacturing cost per set: unused capacity, rejected stones, and rework spread costs over fewer saleable products. *(assumption)*
+- Channel mix and shipping arrangements likely affect retained margin through intermediary discounts, delivery costs, and responsibility for international fulfillment. *(assumption)*
 
 ### Preliminary process overview
 
@@ -28,59 +27,56 @@ Working hypothesis from public sources; validate with the company.
 
 ![Process map for Ankerstein](ankerstein-process-map.png)
 
+[Process details and evidence in the appendix](#appendix-process-details).
+
 ### Where AI fits in this business
 
-For Anker Bausteine, AI should be used first where the company already has explicit, repeatable information and where small speed gains can support sales or reduce labor per order. Because the business sells physical sets direct-to-consumer and also runs workshops and special products, the near-term prize is not full automation of the handcrafted core, but tighter support work around marketing, order intake, and warehouse operations. The current news points to product updates and newsletter activity, so improving content throughput can directly support demand generation without changing the product itself. In operations, AI should help standardize and surface exceptions, not replace tacit decisions in production or event delivery.
+Wave one should help Ankerstein's staff interpret orders, prepare material information and inspect stones within today's workflow, with people retaining consequential decisions. For the reported ten-person inclusive manufacturer, the aim is more capacity from existing staff and fewer defective products—not replacing craft work. The supplied article describes a substantial planned relocation, but its completion is unconfirmed and no current news is supplied; start with small pilots that avoid major systems changes. Larger process redesign is a later conversation, illustrated in section 3.
 
 **Leave alone for now**
 
-- Production team makes handcrafted Ankerbausteine in Rudolstadt — tacit craft knowledge and high defect cost make it a poor automation target now.
-- Team runs factory tours, educator workshops, and event lending of stones — this is relationship-heavy, custom, and high judgment work; AI should stay assistive only.
-- Quality control checks dimensional accuracy and compatibility — the error cost is high, so keep human verification rather than automating the decision.
+- The Rudolstadt manufactory produces Anker building stones — preserve the established manufacturing work; the evidence does not identify a suitable AI task here.
+- Dispatch staff prepare outgoing orders for customers worldwide — retain human control of shipping commitments and destination-specific requirements until the actual channels and error costs are understood.
 
 ## 2. Three use cases
 
-### 1. Draft newsletter and promo variants from approved product updates
+These three cases support the process as it runs today. Deeper redesign of the work is introduced in section 3.
 
-**Process step:** Marketing publishes newsletters, promotions, and product updates · **Approach:** quick win · **Lever:** more units sold · **Human role:** Creative catalyst (AI proposes, a person chooses)
+### 1. Draft production requirements from incoming orders
 
-**Change the process first.** Define one owner for each campaign, use a short approved source pack (product facts, offer rules, brand tone), and remove ad hoc rewriting from scratch before AI drafts variants.
+**Process step:** Order-handling staff turn incoming orders into production and delivery requirements · **Approach:** quick win · **Lever:** lower cost per unit · **Human role:** Human first (a person leads, AI assists)
 
-**How the work runs afterwards.** When a product update, offer, or seasonal theme is approved, AI drafts newsletter copy and a few subject-line/options from the source pack; the marketer chooses the best angle, edits claims, and sends for approval before scheduling.
+**How the work runs with AI.** When staff receive an order, they submit its text and attachments to AI, which extracts products, quantities and destinations into a draft matching the existing order record and highlights ambiguities. The order handler resolves product substitutions, delivery promises and missing details before recording anything. Start with copy-and-review support, not automatic system updates; this covers order interpretation, not inbox sorting or customer FAQ replies.
 
-**Money effect.** At roughly 4 campaigns/month and about 45 minutes of drafting and rework each today (assumption), this can save about 3 hours/month per marketer and let the team publish more timely promos.
+**Money effect.** Assuming 30 orders/week and 3 minutes net saved per order after review, this releases 90 minutes/week for order handling or customer follow-up. These are Ankerstein pilot assumptions, not the supplier case's results; released time is capacity, not automatically a payroll saving.
 
-**Reference.** Adapted from "Repurpose approved long-form content for several channels" ([Zapier / Blog content repurposing](https://zapier.com/templates/details/repurpose-blog-content-across-channels)); workflow template.
+**Reference.** Adapted from "Interpret emailed orders and quotation requests" ([Google Cloud / Danfoss](https://cloud.google.com/customers/danfoss?hl=zh-TW)); customer case study.
 
-**Pilot.** Baseline: current campaign prep time and approval cycle. Success measure: preparation hours per campaign, approved adaptations, and click or referral conversion. Owner: marketing lead. Scale when the team can produce on-brand drafts with no factual corrections and unchanged or better engagement.
+**Pilot.** The order-handling lead owns a pilot on representative orders. Record baseline minutes per order and erroneous order entries; compare both with AI assistance, including review and correction time. Scale only if net handling time falls without increased consequential errors and staff can reliably resolve flagged exceptions.
 
-### 2. Turn webshop support emails into draft replies
+### 2. Prepare the existing material-status summary
 
-**Process step:** Customers browse themed sets and place orders on the webshop · **Approach:** quick win · **Lever:** lower cost per unit · **Human role:** Quality control (AI produces, a person verifies)
+**Process step:** Production staff arrange materials needed to make building stones · **Approach:** quick win · **Lever:** lower cost per unit · **Human role:** Quality control (AI produces, a person verifies)
 
-**Change the process first.** Separate simple, recurring webshop questions from exceptions, maintain a small approved FAQ set, and assign one owner for review so AI only handles the standard cases first.
+**How the work runs with AI.** At the current material-review point, production staff provide approved order and stock exports. AI refreshes the existing material-status summary, checks source dates and reconciles totals using agreed calculations, then flags discrepancies. Staff verify the summary and decide what to procure; AI neither forecasts demand nor places purchases. Begin with staff-triggered runs rather than a new scheduled system.
 
-**How the work runs afterwards.** A webshop or mailbox trigger sends routine questions about shipping, availability, or product basics to AI; it drafts a reply from approved answers, and staff verify anything about orders, returns, or special products before sending.
+**Money effect.** Assuming staff currently spend 2 hours/week assembling this summary and AI reduces that effort by 50%, including verification, the saving is 1 hour/week. The pilot must also account for maintaining exports and correcting mismatches before treating this as a recurring reduction in administrative cost.
 
-**Money effect.** At about 15 support emails/day and 4 minutes to triage and draft each reply today (assumption), this frees roughly 1 hour/day and reduces time spent on repetitive customer questions.
+**Reference.** Adapted from "Maintain an operational dashboard from approved exports" ([OpenAI / ChatGPT use cases](https://learn.chatgpt.com/use-cases/analyze-data-export)); workflow guide.
 
-**Reference.** Adapted from "Draft FAQ answers from approved support content" ([n8n](https://n8n.io/workflows/4279-automated-email-sorting-and-drafting-for-customer-support-with-ai/)); workflow template.
+**Pilot.** The production planning lead owns the pilot. Record baseline reporting hours, reconciliation errors and source freshness; measure the same indicators with AI assistance. Scale only if total preparation and checking effort falls, totals reconcile and stale sources are consistently flagged; otherwise park the case rather than redesign records as a pilot precondition.
 
-**Pilot.** Baseline: current handling time and correction rate for support emails. Success measure: minutes per reply, factual accuracy, and share of messages resolved on first pass. Owner: customer service lead. Scale when standard questions are answered correctly with faster turnaround and no rise in complaint rate.
+### 3. Give quality staff a second look at stone surfaces
 
-### 3. Rebalance packing work and layout from measured movement data
+**Process step:** Production staff check stones and pack saleable products · **Approach:** strategic bet · **Lever:** less risk per unit · **Human role:** Human first (a person leads, AI assists)
 
-**Process step:** Packing team assembles boxes, inserts leaflets, and prepares recyclable packaging · **Approach:** redesign then automate · **Lever:** lower cost per unit · **Human role:** Quality control (AI produces, a person verifies)
+**How the work runs with AI.** At the existing inspection point, a controlled camera captures stone surfaces and AI highlights suspected visible defects for the inspector. Quality staff still inspect, interpret natural variation and decide whether each stone is saleable; packing and package-content checks remain unchanged. The added image check could reveal small flaws staff otherwise overlook, but cannot certify hidden defects or toy safety.
 
-**Change the process first.** Map the packing flow first, remove unnecessary walking and double-handling, standardize the sequence of inserts and packing materials, and then use AI to propose layout and task routing changes.
+**Money effect.** Assuming 1,000 stones inspected/week and a reduction of 2 escaped visible defects per 1,000 stones, the benefit would be 2 fewer defective stones reaching packing each week. This is a risk-reduction hypothesis, not a proven result; camera, labeling and review costs must be justified against avoided rework or complaints.
 
-**How the work runs afterwards.** After a time-and-motion baseline is captured, AI analyzes packing movements and suggests a better station layout or picking sequence; supervisors test the change, and packers keep verifying that the box contents and leaflet set are correct.
+**Reference.** Adapted from "Inspect manufactured surfaces with computer vision" ([Plattform Lernende Systeme / elunic](https://www.plattform-lernende-systeme.de/best-practice.html?AID=959)); documented solution.
 
-**Money effect.** If packing and internal movement consume even 2 staff hours/day now (assumption), a layout change that cuts travel and waiting by 15-20% could save about 6-8 hours/month and raise throughput in peak periods.
-
-**Reference.** Adapted from "Improve picking routes and warehouse layout" ([Plattform Lernende Systeme / META-Regalbau](https://www.plattform-lernende-systeme.de/booklet-include-elemente.html)); customer case study.
-
-**Pilot.** Baseline: travel time per pack and orders packed per hour. Success measure: reduced travel time, stable error rate, and higher throughput. Owner: warehouse/picking supervisor. Scale when the new layout improves flow without increasing packing mistakes or delays.
+**Pilot.** The quality lead owns a shadow-mode pilot with no automatic rejection. Record baseline missed-defect rate, false rejects and inspection time using expert-reviewed samples. Scale only if testing on separate representative samples shows fewer missed visible defects without unacceptable false rejects or inspection delays, and the full operating cost is justified.
 
 ## 3. Redesign the work, then apply AI
 
@@ -111,17 +107,17 @@ This brief’s speculative redesign below is written as **Option B**.
 
 ### Speculative case (Option B — augment / complement)
 
-**Personalized build-play guidance from orders and age groups**
+**Section 3 — Speculation: a build-design service using existing stones**
 
 *Speculation for the meeting — not one of the three library-backed use cases above.*
 
-**Today.** The webshop sells themed sets and age-based products, but customers largely choose from static pages and generic newsletters. The company has workshops and educator-facing products, yet those offers are not turned into individualized guidance at scale.
+**Today.** The supplied model describes producing stones and fulfilling product orders; it does not establish that Ankerstein offers customer-specific building designs.
 
-**Redesigned with AI.** Use AI to combine browsing behavior, age stage, and product families into a guided play advisor that suggests the next set, a classroom use idea, or a themed bundle. A human team would define the pedagogy and product rules, while AI generates tailored recommendations and short explanations for each visitor or educator segment.
+**Redesigned with AI.** Option B for discussion: redesign selected customer engagements around a desired model rather than only a product order. AI and geometry-checking tools would propose constructions using the verified stone catalog; Ankerstein's experienced staff would refine feasibility, test builds and approve instructions before offering a design with the required sets.
 
-**New capability.** The company could offer a more personal buying and learning experience: not just a catalog, but a guided selection service that helps parents and educators choose the right stone set for a child, classroom, or event.
+**New capability.** Staff could explore many more construction alternatives and help customers turn an idea into a buildable model—potentially a new design service rather than faster order administration.
 
-**Business value if true.** Higher basket value and better repeat purchase rates from more relevant bundles, plus a clearer bridge from products to paid workshops and educator services.
+**Business value if true.** If customers value the service, it could increase sets sold per project or support a paid design offer. Validate willingness to pay and contribution after design, testing and support costs before investing.
 
 ## 4. Questions for the first meeting
 
@@ -140,27 +136,28 @@ As an AI consultant, start from the business, not from the tool: what the compan
 
 Ordered by: without an answer, there is no pilot.
 
-- How many newsletter or promo campaigns do you actually send in a typical month, and who is the single approver for claims, pricing, and tone?
-- Roughly how many webshop support emails do you get per day, and what share are simple shipping or availability questions versus exceptions?
-- For packing, do you already track time spent walking or waiting between stations, or would we need a one-week baseline before changing the layout?
-- What is the current average time per campaign draft, support reply, and packed order so we can test whether the pilot saves enough hours to matter?
+- Who at Ankerstein will own order review and material-summary approval, and can they provide representative orders, a current catalog, stock exports and the material summary actually used today?
+- Can the quality lead define acceptable stone variation and supply confirmed defect examples, and can a product-only camera operate at the current inspection point without obstructing staff?
+- How many orders does Ankerstein handle weekly, what net time could extraction save after review, and how much weekly material-reporting time could realistically be removed after verification?
+- How many stones are inspected weekly, and what evidence from rechecks, packing or complaints establishes the present escaped-visible-defect rate and a plausible reduction?
 
 ### Numbers to ask for
 
-- Exact annual output or sales volume
-- Share of revenue from webshop versus workshops/tours/lending
-- Average order value and repeat purchase rate
-- Gross margin by product family
-- Share of made-to-order versus stocked items
-- Export share outside Germany
+- Annual revenue and number of sets or stones sold
+- Average realized selling price and gross margin by product
+- Sales share and discounts by channel and destination market
+- Material, labor, and packaging cost per saleable set
+- Production capacity, utilization, and reject rate
+- Relocation investment, remaining expenditure, and expected production downtime
 
 ### Gaps in the public research
 
-- No register or size information found.
+- Homepage could not be read (ConnectError). Research relies on search only.
+- No recent news found.
 
 ## 5. How these use cases were chosen
 
-Every process step was rated against a rubric (money lever, HBR human role, opportunity type, full cost, feasibility, redesign-before-AI, augment vs substitute). The strongest steps were matched to a curated library via retrieval and company-fit reranking; three cards were adapted to this company.
+Every process step was rated against a rubric (money lever, HBR human role, opportunity type, full cost, feasibility, redesign-before-AI, augment vs substitute). The strongest steps were matched to a curated library via retrieval and company-fit reranking; three cards were adapted to support today's process. Deeper redesign appears only in section 3 (speculative Option B).
 
 - [APQC, How Can Organizations Identify And Prioritize Valuable AI Use Cases?](https://www.apqc.org/How-Can-Organizations-Identify-And-Prioritize-Valuable-AI-Use-Cases)
 - [AWS, Taxonomy of agentic primitives in Amazon Quick (2026)](https://aws.amazon.com/blogs/machine-learning/taxonomy-of-agentic-primitives-in-amazon-quick/)
@@ -178,7 +175,18 @@ Every process step was rated against a rubric (money lever, HBR human role, oppo
 
 ## 6. Sources
 
-- [Ankerstein Bausteine | Nachhaltige Bau- und Lernspielzeuge made in Germany | Ankerstein GmbH](https://anker-bausteine.de)
-- [Ankerstein GmbH – Traditionelles Spielzeug aus Rudolstadt seit 1880 | Ankerstein GmbH](https://anker-bausteine.de/staunen/ueber-uns/)
-- [Zeiss-Planetarium Jena aus Ankerbausteinen | Jubiläumsedition | Ankerstein](https://anker-bausteine.de/zeiss-planetarium-jena-anker-sonderbaukasten/0058952)
-- News: [Anker Bausteine |](https://anker-bausteine.de/en/revocation)
+- Company record: [Spielwarenmesse - Spirit of Play | Building the future: with Ankersteinen for 140 years](https://www.spielwarenmesse.de/en/mag/toy-lab/building-the-future-with-ankersteinen-for-140-years)
+
+## Appendix: Process details
+
+Working hypothesis from public sources; validate the sequence, handoffs and systems with the company.
+Evidence labels refer to the individual steps, not a verified end-to-end workflow.
+
+| # | Step | What moves | Channel | Basis |
+|---|------|------------|---------|-------|
+| 1 | Order-handling staff turn incoming orders into production and delivery requirements | in: Requests or orders specifying products, quantities, and delivery destinations → out: Recorded orders and quantities needed for production or dispatch | Order records or spreadsheets (inferred; actual sales channel unknown) | *(assumption)* |
+| 2 | Production staff arrange materials needed to make building stones | in: Required product quantities and available material stock → out: Material requirements and materials available for production | Spreadsheets or inventory records (inferred) | *(assumption)* |
+| 3 | The Rudolstadt manufactory produces Anker building stones | in: Materials and instructions identifying the stones to be made → out: Manufactured building stones | Unknown; production records are not described | *([documented](https://www.spielwarenmesse.de/en/mag/toy-lab/building-the-future-with-ankersteinen-for-140-years))* |
+| 4 | Production staff check stones and pack saleable products | in: Manufactured stones and required package contents → out: Checked, packed products and records of rejects or missing pieces | Manual checklists or spreadsheets (inferred) | *(assumption)* |
+| 5 | Dispatch staff prepare outgoing orders for customers worldwide | in: Packed products, order quantities, and delivery addresses → out: Dispatched orders and shipment details | Shipping records or carrier booking tools (inferred) | *(assumption)* |
+

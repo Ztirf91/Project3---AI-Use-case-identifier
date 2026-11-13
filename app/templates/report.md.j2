@@ -22,7 +22,9 @@ Working hypothesis from public sources; validate with the company.
 
 {% if process_image %}![Process map for {{ s.company_name }}]({{ process_image }})
 
-{% elif m.process_map %}_Process map image missing; steps are in the research state only._
+{% elif m.process_map %}_Process map image unavailable. See the process details in the appendix._
+{% endif %}
+{% if m.process_map %}[Process details and evidence in the appendix](#appendix-process-details).
 {% endif %}
 {% else %}_The business could not be modeled from the available research._
 {% endif %}
@@ -37,14 +39,14 @@ Working hypothesis from public sources; validate with the company.
 
 ## 2. Three use cases
 
+These three cases support the process as it runs today. Deeper redesign of the work is introduced in section 3.
+
 {% for u in picks.use_cases %}{% set card = cards.get(u.source_card) %}
 ### {{ loop.index }}. {{ u.title }}
 
 **Process step:** {{ u.process_step }} · **Approach:** {{ u.approach }} · **Lever:** {{ levers[u.money_lever] }} · **Human role:** {{ u.hbr_zone }} ({{ zones[u.hbr_zone] }})
 
-**Change the process first.** {{ u.process_change }}
-
-**How the work runs afterwards.** {{ u.what_changes }}
+**How the work runs with AI.** {{ u.what_changes }}
 
 **Money effect.** {{ u.money_effect }}
 
@@ -53,6 +55,7 @@ Working hypothesis from public sources; validate with the company.
 **Pilot.** {{ u.pilot }}
 
 {% endfor %}
+
 ## 3. Redesign the work, then apply AI
 
 {% for p in redesign_paragraphs %}{{ p }}
@@ -115,7 +118,7 @@ Ordered by: without an answer, there is no pilot.
 
 ## 5. How these use cases were chosen
 
-Every process step was rated against a rubric (money lever, HBR human role, opportunity type, full cost, feasibility, redesign-before-AI, augment vs substitute). The strongest steps were matched to a curated library via retrieval and company-fit reranking; three cards were adapted to this company.
+Every process step was rated against a rubric (money lever, HBR human role, opportunity type, full cost, feasibility, redesign-before-AI, augment vs substitute). The strongest steps were matched to a curated library via retrieval and company-fit reranking; three cards were adapted to support today's process. Deeper redesign appears only in section 3 (speculative Option B).
 
 {% for f in frameworks %}- [{{ f.name }}]({{ f.url }})
 {% endfor %}
@@ -126,3 +129,15 @@ Every process step was rated against a rubric (money lever, HBR human role, oppo
 {% endfor %}{% for n in s.news %}- News: [{{ n.title }}]({{ n.url }})
 {% endfor %}{% for r in s.register_hits %}- Company record: [{{ r.title }}]({{ r.url }})
 {% endfor %}
+
+{% if m and m.process_map %}
+## Appendix: Process details
+
+Working hypothesis from public sources; validate the sequence, handoffs and systems with the company.
+Evidence labels refer to the individual steps, not a verified end-to-end workflow.
+
+| # | Step | What moves | Channel | Basis |
+|---|------|------------|---------|-------|
+{% for p in m.process_map %}| {{ loop.index }} | {{ cell(p.name) }} | in: {{ cell(p.data_input) }} → out: {{ cell(p.data_output) }} | {{ cell(p.likely_system) }} | {{ tag(p) }} |
+{% endfor %}
+{% endif %}

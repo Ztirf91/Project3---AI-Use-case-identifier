@@ -8,12 +8,12 @@ An autonomous research agent for AI consulting with small and mid-sized companie
 
 1. **The company:** business model, unit economics, and a process-map image from public research. Claims are marked *documented* or *assumption*.
 2. **Where AI fits:** overall approach for this company, and steps to leave alone for now.
-3. **Three use cases:** process step, process change before AI, how work runs afterwards, money effect, reference pattern, and pilot.
-4. **Redesign the work, then apply AI:** redesign-before-automation stance, Option A (substitute) vs Option B (augment), plus one speculative Option-B case.
+3. **Three use cases:** support today's process with AI — how work runs with AI (including new capability when relevant), money effect, reference pattern, and pilot.
+4. **Redesign the work, then apply AI:** redesign-before-automation stance, Option A (substitute) vs Option B (augment), plus one speculative Option-B case that shows redesign in practice.
 5. **Questions for the first meeting:** how to approach the conversation, general discovery questions, use-case questions, and numbers to ask for.
 6. **Sources.**
 
-Sample reports are in [samples/](samples/) (`riese-mueller`, `koro`, `ankerstein`), each with a matching `*-process-map.png`.
+Sample reports are in [samples/](samples/) (`ankerstein`, and others as added), each with a matching `*-process-map.png`.
 
 ## How it works
 
@@ -48,8 +48,7 @@ Keys in `.env`:
 
 | Key | Where to get it |
 |---|---|
-| `OPENAI_API_KEY` | platform.openai.com (research, modeling, matching) |
-| `OPENAI_KEY2` | Separate OpenAI key with image-model access (process-map PNG only) |
+| `OPENAI_KEY2` | OpenAI key for all text models, embeddings and process-map images |
 | `TAVILY_API_KEY` | tavily.com (free tier) |
 | `PINECONE_API_KEY` | app.pinecone.io (free starter tier) |
 
@@ -64,7 +63,7 @@ Optional: `MODEL`, `REASONING_MODEL`, `EMBEDDING_MODEL`, `IMAGE_MODEL`, `PINECON
 | Tavily | News, register/size, and job search |
 | Pinecone | Vector index for the use-case library (RAG) |
 
-Three core services for the autonomous path (OpenAI text, Tavily, Pinecone), plus a separate image key for the map.
+Three core services for the autonomous path (OpenAI, Tavily, Pinecone). All OpenAI text, embedding and image requests use OPENAI_KEY2.
 
 Build the use-case index once, and again after adding or changing cards:
 
@@ -75,7 +74,7 @@ python -m app.library
 ## Run
 
 ```bash
-python -m app.run --company "Riese & Müller" --url "https://www.r-m.de"
+python -m app.run --company "Ankerstein" --url "https://www.ankerstein.de"
 ```
 
 Writes `outputs/<company>/report.md`, `state.json`, and `process-map.png`. Optional `--contact-name`, `--contact-email`, and `--city` go to `lead.json` only.
@@ -92,7 +91,7 @@ python -m app.library
 
 ## Demo
 
-- **Live demo:** run the CLI (or open a saved sample if APIs are slow). Backup reports: [samples/riese-mueller.md](samples/riese-mueller.md), [samples/koro.md](samples/koro.md), [samples/ankerstein.md](samples/ankerstein.md).
+- **Live demo:** run the CLI (or open a saved sample if APIs are slow). Backup report: [samples/ankerstein.md](samples/ankerstein.md).
 - **Recording:** _add an unlisted Loom / YouTube / Drive link here before submission_ (must open without login).
 - **Slides:** [presentation/project3_slides.pdf](presentation/project3_slides.pdf) (also `.pptx` in the same folder).
 

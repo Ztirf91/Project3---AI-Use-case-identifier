@@ -24,10 +24,12 @@ Use numbers only when a source states them. List the numbers that matter but wer
 Process map: the operating chain for THIS company, as few steps as needed, typically 6 to 8. Never pad.
 Skip support functions that are not central (generic HR/finance) unless sources show they matter for AI now.
 Name each step as observable work at this company, not a department label.
+Write so a consultant who does not know this industry can follow: who does the work, what moves, why it matters.
 Good: "Dealers place bike reorders and configuration requests by email"
 Good: "Warehouse team puts away inbound food after the warehouse move"
 Bad: "Procurement" / "Logistics" / "Product management designs premium e-bikes" as a generic PLM step
 Each step has a data input, a data output, and likely_system.
+Keep data_input / data_output in plain language (what arrives, what leaves), not system jargon alone.
 For likely_system prefer the channel people actually use when sources show it (email, dealer portal, shop cart,
 shared inbox). Use a light system category (ERP, WMS, spreadsheets, ticketing) only as a guess otherwise.
 Do not invent software brands. Avoid stuffing every map with PLM/MES/QMS/CRM unless a source supports that step.

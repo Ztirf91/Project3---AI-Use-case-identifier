@@ -2,12 +2,11 @@
 
 import base64
 import json
-import os
 from pathlib import Path
 
 from openai import OpenAI
 
-from app.config import IMAGE_MODEL
+from app.config import IMAGE_MODEL, openai_key
 
 PROCESS_MAP_IMAGE = "process-map.png"
 
@@ -46,11 +45,9 @@ def process_map_prompt(company: str, steps: list) -> str:
 def generate_process_map_image(company: str, steps: list, out_path: Path) -> str | None:
     if not steps:
         return None
-    key = os.getenv("OPENAI_KEY2", "").strip()
-    if not key:
-        raise RuntimeError("OPENAI_KEY2 is required for process-map image generation")
+    key = openai_key()
     prompt = process_map_prompt(company, steps)
-    # This client deliberately uses the separate image key, not OPENAI_API_KEY.
+    # Use the same explicitly selected key as text and embedding clients.
     with OpenAI(api_key=key, timeout=180, max_retries=1) as client:
         result = client.images.generate(
             model=IMAGE_MODEL,

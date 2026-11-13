@@ -22,7 +22,14 @@ USE_CASES_DIR = CORPUS_DIR / "use_cases"
 OUTPUTS_DIR = ROOT / "outputs"
 
 
+def openai_key() -> str:
+    key = os.getenv("OPENAI_KEY2", "").strip()
+    if not key:
+        raise RuntimeError("OPENAI_KEY2 is required for all OpenAI requests")
+    return key
+
+
 def llm(temperature: float = 0.2, model: str | None = None) -> ChatOpenAI:
     name = model or MODEL
     kwargs = {"temperature": temperature} if name.startswith("gpt-4") else {}
-    return ChatOpenAI(model=name, max_retries=3, timeout=180, **kwargs)
+    return ChatOpenAI(model=name, api_key=openai_key(), max_retries=3, timeout=180, **kwargs)
